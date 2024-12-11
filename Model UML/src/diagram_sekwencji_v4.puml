@@ -1,0 +1,13 @@
+@startuml
+actor Customer as c
+participant Order as o
+participant Product as p
+
+
+' usuwanie produktu z zamowienia
+
+c -> o : removeProduct(product: Product)
+o -> p : updateQuantity(quantity: int)
+p --> o : stock updated
+o --> c : Product removed confirmation
+@enduml

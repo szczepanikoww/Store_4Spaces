@@ -1,0 +1,23 @@
+@startuml
+actor Customer as c
+participant Inventory as i
+participant Product as p
+participant Order as o
+
+' twoerzenie zamowienia
+
+c -> i : getAllProducts()
+i --> c : List<Product>
+
+c -> o : addProduct(product: Product)
+o -> p : updateQuantity(quantity: int)
+p --> o : updated
+
+c -> o : calculateTotal()
+o --> c : totalAmount
+
+c -> o : placeOrder()
+o -> i : removeProduct(product: Product)
+i --> o : updatedInventory
+
+@enduml

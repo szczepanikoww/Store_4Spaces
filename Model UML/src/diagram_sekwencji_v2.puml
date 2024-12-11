@@ -1,0 +1,11 @@
+@startuml
+actor Customer as c
+participant Order as o
+participant Invoice as i
+
+' tworzenie faktury
+
+c -> o : placeOrder()
+o -> i : generateInvoice()
+i --> c : Invoice details
+@enduml

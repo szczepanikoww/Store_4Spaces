@@ -1,0 +1,104 @@
+@startuml
+
+' Klasa bazowa dla użytkowników
+abstract class User {
+    - userID: int
+    - username: String
+    - password: String
+    + login(username: String, password: String): boolean
+}
+
+' Klasa reprezentująca admina
+class Admin extends User {
+    - inventory: Inventory
+    + addProduct(product: Product): void
+    + removeProduct(product: Product): void
+    + updateProduct(product: Product): void
+    + manageInventory(inventory: Inventory): void
+}
+
+' Klasa reprezentująca klienta
+class Customer extends User {
+    - address: Address
+    + addToCart(product: Product): void
+    + removeFromCart(product: Product): void
+    + placeOrder(): Order
+    + updateAddress(address: Address): void
+}
+
+' Klasa bazowa dla różnych rodzajów produktów
+abstract class Product {
+    - productID: int
+    - name: String
+    - price: double
+    - quantity: int
+    - brand: String
+    + getDetails(): String
+    + updateQuantity(quantity: int): void
+    + getBrand(): String
+}
+
+' Konkretne typy produktów dziedziczące po Product
+class Phone extends Product {
+    - model: String
+    - screenSize: double
+    + getModel(): String
+}
+
+class Laptop extends Product {
+    - processor: String
+    - ramSize: int
+    + getProcessor(): String
+}
+
+class Tablet extends Product {
+    - screenSize: double
+    - storage: int
+    + getStorage(): int
+}
+
+' Klasa reprezentująca zamówienie
+class Order {
+    - orderID: int
+    - customer: Customer
+    - products: List<Product>
+    - totalAmount: double
+    - date: Date
+    + addProduct(product: Product): void
+    + removeProduct(product: Product): void
+    + calculateTotal(): double
+}
+
+' Klasa reprezentująca fakturę
+class Invoice {
+    - invoiceID: int
+    - order: Order
+    - totalAmount: double
+    - date: Date
+    + generateInvoice(): String
+}
+
+' Klasa reprezentująca adres klienta
+class Address {
+    - street: String
+    - city: String
+    - postalCode: String
+    - country: String
+}
+
+' Klasa reprezentująca magazyn (Inventory)
+class Inventory {
+    - products: List<Product>
+}
+
+' Relacje
+User "1" <|-- "1" Admin : extends
+User "1" <|-- "1" Customer : extends
+Admin "1" o-- "1" Inventory : manages
+Customer "1" o-- "0..*" Order : places
+Order "1" o-- "0..*" Product : contains
+Order "1" o-- "1" Invoice : has
+Customer "1" *-- "1" Address : resides_at
+Inventory "1" o-- "0..*" Product : contains
+
+@enduml
