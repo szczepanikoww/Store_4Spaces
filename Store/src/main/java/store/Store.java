@@ -1,4 +1,54 @@
 package store;
 
+import java.util.ArrayList;
+
 public class Store {
+    private ArrayList<Admin> admins = new ArrayList<Admin>();
+    private ArrayList<Customer> customers = new ArrayList<Customer>();
+    private Inventory inventory;
+    private ArrayList<Order> orders = new ArrayList<Order>();
+    private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+    private ArrayList<Product> products = new ArrayList<Product>();
+
+
+    //Constructor
+    public Store(ArrayList<Admin> admins, ArrayList<Customer> customers, Inventory inventory, ArrayList<Order> orders, ArrayList<Invoice> invoices, ArrayList<Product> products) {
+        this.admins = admins;
+        this.customers = customers;
+        this.inventory = inventory;
+        this.orders = orders;
+        this.invoices = invoices;
+        this.products = products;
+    }
+
+    //getters
+    public ArrayList<Admin> getAdmins() {
+        return admins;
+    }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public ArrayList<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to the Store!");
+    }
+
+    //myślałem, żeby dodać to co było w projekcie z Samochodami czyli to, żeby dodać tych listenerów itp ale nie wiem czy to będzie nam potrzebne
 }

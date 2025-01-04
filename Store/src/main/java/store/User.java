@@ -1,7 +1,5 @@
 package store;
 
-import javax.print.attribute.standard.RequestingUserName;
-
 abstract class User {
     private int UserID;
     private String UserName;

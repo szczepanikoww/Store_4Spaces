@@ -2,7 +2,7 @@ package store;
 
 abstract class Product {
     private int ProductID;
-    private String ProductName;
+    private String ProductName; //można tutaj dać ProductModel zamiast ProductName
     private double ProductPrice;
     private int ProductQuantity;
     private String ProductBrand;
@@ -41,15 +41,15 @@ abstract class Product {
         return ProductName;
     }
 
-    public double getProductPrice() {
+    public double getPrice() {
         return ProductPrice;
     }
 
-    public int getProductQuantity() {
+    public int getQuantity() {
         return ProductQuantity;
     }
 
-    public String getProductBrand() {
+    public String getBrand() {
         return ProductBrand;
     }
 
@@ -61,4 +61,5 @@ abstract class Product {
     public void updateProductQuantity(int quantity) {
         ProductQuantity += quantity;
     }
+
 }

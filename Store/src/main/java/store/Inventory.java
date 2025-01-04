@@ -21,8 +21,8 @@ public class Inventory {
         for (Product p : productsList) {
             if (p.getProductID() == product.getProductID()) {
                 p.setProductName(product.getProductName());
-                p.setProductPrice(product.getProductPrice());
-                p.setProductQuantity(product.getProductQuantity());
+                p.setProductPrice(product.getPrice());
+                p.setProductQuantity(product.getQuantity());
             }
         }
     }
