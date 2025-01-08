@@ -65,4 +65,14 @@ public class Customer extends User{
     public String getPassword() {
         return this.getUserPassword();
     }
+
+    public String getDetails() {
+        return "Customer{" +
+                "CustomerName='" + CustomerName + '\'' +
+                ", CustomerSurname='" + CustomerSurname + '\'' +
+                ", CustomerEmail='" + CustomerEmail + '\'' +
+                ", CustomerPhoneNumber='" + CustomerPhoneNumber + '\'' +
+                ", CustomerAddress=" + CustomerAddress +
+                '}';
+    }
 }

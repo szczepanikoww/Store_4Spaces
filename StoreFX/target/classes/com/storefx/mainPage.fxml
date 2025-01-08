@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.mainPageController">
    <top>
-      <MenuBar prefHeight="21.0" prefWidth="600.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
+      <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="600.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false">
                <graphic>
-                  <Label text="4Spaces" textFill="#a6630f">
+                  <Label fx:id="HomeMenuButton" onMouseClicked="#onHomeMenuButton" text="4Spaces" textFill="#a6630f">
                      <font>
                         <Font name="Bauhaus 93" size="20.0" />
                      </font>
@@ -19,7 +19,7 @@
                </graphic></Menu>
           <Menu mnemonicParsing="false">
                <graphic>
-                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="83.0" text="Smartfony">
+                  <Label fx:id="SmartphonesMenuButton" alignment="CENTER" prefHeight="16.0" prefWidth="83.0" text="Smartfony">
                      <font>
                         <Font name="Unispace-Bold" size="12.0" />
                      </font>
@@ -28,7 +28,7 @@
           </Menu>
           <Menu mnemonicParsing="false">
                <graphic>
-                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="69.0" text="Tablety">
+                  <Label fx:id="TabletsMenuButton" alignment="CENTER" prefHeight="16.0" prefWidth="69.0" text="Tablety">
                      <font>
                         <Font name="Unispace-Bold" size="12.0" />
                      </font>
@@ -37,7 +37,7 @@
           </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="72.0" text="Laptopy" textAlignment="CENTER">
+                  <Label fx:id="LaptopsMenuButton" alignment="CENTER" prefHeight="16.0" prefWidth="72.0" text="Laptopy" textAlignment="CENTER">
                      <font>
                         <Font name="Unispace-Bold" size="12.0" />
                      </font>
@@ -46,18 +46,14 @@
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Label alignment="CENTER" prefHeight="16.0" prefWidth="87.0" text="Wszystkie">
+                  <Label fx:id="AllMenuButton" alignment="CENTER" prefHeight="16.0" prefWidth="87.0" text="Wszystkie">
                      <font>
                         <Font name="Unispace-Bold" size="12.0" />
                      </font>
                   </Label>
                </graphic>
             </Menu>
-            <Menu disable="true" mnemonicParsing="false" text="------------------">
-               <items>
-                  <SeparatorMenuItem mnemonicParsing="false" />
-               </items>
-            </Menu>
+            <Menu mnemonicParsing="false" text="------------------" />
             <Menu mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -74,6 +70,10 @@
                         <Font name="Bodoni MT" size="12.0" />
                      </font></Label>
                </graphic>
+               <items>
+                  <RadioMenuItem fx:id="ClientSelectButton" mnemonicParsing="false" onAction="#onClientSelectButton" text="KLIENT" />
+                  <RadioMenuItem fx:id="AdminSelectButton" mnemonicParsing="false" onAction="#onAdminSelectButton" text="ADMIN" />
+               </items>
             </Menu>
         </menus>
       </MenuBar>

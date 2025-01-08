@@ -26,8 +26,16 @@ public class LoginPageController {
 
     private List<Admin> admins = Store.getAdmins();
     private List<Customer> customers = Store.getCustomers();
+    private String userType;
 
-    public void onCancelLoginButton(ActionEvent actionEvent) {
+
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+
+    public void onLoginButton(ActionEvent actionEvent) {
         String login = LoginTextField.getText();
         String password = PasswordField.getText();
 
@@ -37,29 +45,35 @@ public class LoginPageController {
             return;
         }
 
-        //trzeba jakoś wprowadzić rozroznienie między adminem a customerem, bo logowanie będzie polegało na tym, że
-        //wpisujemy login i hasło, następnie przeszukujemy albo tablicę adminów, albo tablicę userów
-        // i sprawdzamy czy istnieje taki login i hasło, jeśli tak to logujemy, jeśli nie to nie logujemy
 
-        //na razie nie wiem jak to zrobić
+        //podczas wybierania logowania decydujemy czy logujemy admina czy usera
+        //zrobilem to w kontrolerze mainPageController
+        //w zaleznosci od wyboru, przekazujemy odpowiedni typ uzytkownika do tej klasy (userType)
 
-        for(Admin a: admins)
-        {
-            if(a.getLogin().equals(login) && a.getPassword().equals(password))
+        if ("Admin".equals(userType)){
+            for(Admin a: admins)
             {
-                //logowanie admina
-                break;
+                if(a.getLogin().equals(login) && a.getPassword().equals(password))
+                {
+                    //logowanie admina
+                    System.out.println("Zalogowano admina");
+                    break;
+                }
+            }
+        }
+        else if ("Klient".equals(userType)){
+            for(Customer c: customers)
+            {
+                if(c.getLogin().equals(login) && c.getPassword().equals(password))
+                {
+                    //logowanie usera
+                    System.out.printf("Zalogowano klienta");
+                    break;
+                }
             }
         }
 
-        for(Customer c: customers)
-        {
-            if(c.getLogin().equals(login) && c.getPassword().equals(password))
-            {
-                //logowanie usera
-                break;
-            }
-        }
+        showError("Niepoprawne dane logowania");
 
         //dodatkowo trzeba stworzyc zmienna, która bedzie mowila jaki uzytkownik sie zalogowal
     }
@@ -72,17 +86,18 @@ public class LoginPageController {
         alert.showAndWait();
     }
 
-    public void onLoginButton(ActionEvent actionEvent) {
+    public void onCancelLoginButton(ActionEvent actionEvent) {
         Stage stage = (Stage) CancelLoginButton.getScene().getWindow();
         stage.close();
     }
 
-    public void initialize() {
-        Image Logo = new Image(getClass().getResource("/images/logo.jpg").toExternalForm());
-        LoginLogoImageView.setImage(Logo);
-        LoginLogoImageView.setFitWidth(109);
-        LoginLogoImageView.setFitHeight(83);
-        LoginLogoImageView.setTranslateX(0);
-        LoginLogoImageView.setTranslateY(0);
-    }
+
+    //public void initialize() {
+      //  Image Logo = new Image(getClass().getResource("/images/logo.jpg").toExternalForm());
+       // LoginLogoImageView.setImage(Logo);
+        //LoginLogoImageView.setFitWidth(109);
+       // LoginLogoImageView.setFitHeight(83);
+       // LoginLogoImageView.setTranslateX(0);
+       // LoginLogoImageView.setTranslateY(0);
+    //}
 }

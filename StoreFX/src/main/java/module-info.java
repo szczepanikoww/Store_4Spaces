@@ -1,6 +1,7 @@
 module com.storefx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.storefx to javafx.fxml;

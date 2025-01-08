@@ -3,8 +3,8 @@ package store;
 import java.util.ArrayList;
 
 public class Store {
-    private ArrayList<Admin> admins = new ArrayList<Admin>();
-    private ArrayList<Customer> customers = new ArrayList<Customer>();
+    private static ArrayList<Admin> admins = new ArrayList<Admin>();
+    private static ArrayList<Customer> customers = new ArrayList<Customer>();
     private Inventory inventory;
     private ArrayList<Order> orders = new ArrayList<Order>();
     private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
@@ -22,11 +22,11 @@ public class Store {
     }
 
     //getters
-    public ArrayList<Admin> getAdmins() {
+    public static ArrayList<Admin> getAdmins() {
         return admins;
     }
 
-    public ArrayList<Customer> getCustomers() {
+    public static ArrayList<Customer> getCustomers() {
         return customers;
     }
 
