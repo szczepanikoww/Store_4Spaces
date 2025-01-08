@@ -13,6 +13,19 @@ abstract class User {
         this.UserPassword = userPassword;
     }
 
+    //setters
+    public void setUserID(int userID) {
+        UserID = userID;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    public void setUserPassword(String userPassword) {
+        UserPassword = userPassword;
+    }
+
     //getters
     public int getUserID() {
         return UserID;

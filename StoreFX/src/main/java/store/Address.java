@@ -8,7 +8,7 @@ public class Address {
     private int numberOnStreet;
 
     //Constructor
-    public Address(String street, String city, String postalCode, String country, int numberOnStreet) {
+    public Address( String country, String street, String city, String postalCode, int numberOnStreet) {
         this.street = street;
         this.city = city;
         this.postalCode = postalCode;
