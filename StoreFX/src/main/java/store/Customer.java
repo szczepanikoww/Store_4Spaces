@@ -48,4 +48,12 @@ public class Customer extends User{
     public Address getCustomerAddress() {
         return CustomerAddress;
     }
+
+    public String getLogin() {
+        return this.getUserName();
+    }
+
+    public String getPassword() {
+        return this.getUserPassword();
+    }
 }

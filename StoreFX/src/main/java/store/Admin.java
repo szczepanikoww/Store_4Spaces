@@ -7,6 +7,16 @@ public class Admin extends User {
         super(AdminID, AdminName, AdminPassword);
     }
 
+    //getters
+    public String getLogin(){
+        return this.getUserName();
+    }
+
+    public String getPassword(){
+        return this.getUserPassword();
+    }
+
+    //other methods
     public void addProduct(Product product) {
         inventory.addProduct(product);
     }
