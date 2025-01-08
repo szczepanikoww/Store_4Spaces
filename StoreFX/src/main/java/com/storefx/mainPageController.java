@@ -4,7 +4,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
@@ -18,13 +22,13 @@ public class mainPageController {
     public Label TabletsMenuButton;
     public Label LaptopsMenuButton;
     public Label AllMenuButton;
-    public RadioMenuItem ClientSelectButton;
-    public RadioMenuItem AdminSelectButton;
+    public MenuItem ClientSelectButton;
+    public MenuItem AdminSelectButton;
+    public AnchorPane centerPane;
+    public ImageView CartMenuButton;
 
 
-
-
-    //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy userem)
+    //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy klientem)
     public void openLoginWidow(String userType) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPage.fxml"));
@@ -43,7 +47,7 @@ public class mainPageController {
         }
     }
 
-    //wywolywanie okna logowania zaleznie od tego czy jestesmy adminem czy userem
+    //wywolywanie okna logowania zaleznie od tego czy jestesmy adminem czy klientem
 
     public void onClientSelectButton(javafx.event.ActionEvent actionEvent) {
         openLoginWidow("Klient");
@@ -52,7 +56,36 @@ public class mainPageController {
     public void onAdminSelectButton(javafx.event.ActionEvent actionEvent) {
         openLoginWidow("Admin");
     }
+
+    //ladowanie strony wewnatrz centrePane
+    public void loadPage(String fxmlFile){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Pane newPane = loader.load();
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(newPane);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void onSmartphonesMenuButton() {
+        loadPage("productsPage.fxml");
+    }
+    public void onTabletsMenuButton() {
+        loadPage("productsPage.fxml");
+    }
+    public void onLaptopsMenuButton() {
+        loadPage("productsPage.fxml");
+    }
+    public void onAllMenuButton() {
+        loadPage("productsPage.fxml");
+    }
+    public void onCartMenuButton() {
+        loadPage("cartPage.fxml");
+    }
     public void onHomeMenuButton() {
         System.out.println("Home dziala");
     }
+
 }

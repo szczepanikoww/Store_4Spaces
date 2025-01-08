@@ -48,7 +48,7 @@ public class LoginPageController {
 
         //podczas wybierania logowania decydujemy czy logujemy admina czy usera
         //zrobilem to w kontrolerze mainPageController
-        //w zaleznosci od wyboru, przekazujemy odpowiedni typ uzytkownika do tej klasy (userType)
+        //w zaleznosci od wyboru, przekazujemy odpowiedni typ uzytkownika do tej klasy (userType i metoda setUserType)
 
         if ("Admin".equals(userType)){
             for(Admin a: admins)
@@ -66,7 +66,7 @@ public class LoginPageController {
             {
                 if(c.getLogin().equals(login) && c.getPassword().equals(password))
                 {
-                    //logowanie usera
+                    //logowanie klienta
                     System.out.printf("Zalogowano klienta");
                     break;
                 }
@@ -75,7 +75,7 @@ public class LoginPageController {
 
         showError("Niepoprawne dane logowania");
 
-        //dodatkowo trzeba stworzyc zmienna, która bedzie mowila jaki uzytkownik sie zalogowal
+
     }
 
     private void showError(String message) {

@@ -30,6 +30,10 @@ public class Store {
         return customers;
     }
 
+    public static Store getInstance() {
+        return new Store(admins, customers, new Inventory(), new ArrayList<Order>(), new ArrayList<Invoice>(), new ArrayList<Product>());
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
