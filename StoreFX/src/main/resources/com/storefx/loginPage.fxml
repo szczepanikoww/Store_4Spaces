@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.storefx.LoginPageController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.LoginPageController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <AnchorPane prefHeight="89.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="227.0" layoutY="18.0" text="Zaloguj się" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView id="LoginLogoImageView" fx:id="LoginLogoImageView" fitHeight="71.0" fitWidth="135.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="238.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <PasswordField id="PasswordField"  fx:id="PasswordField" layoutX="252.0" layoutY="123.0" prefHeight="35.0" prefWidth="172.0" />
+                  <Label layoutX="173.0" layoutY="127.0" prefHeight="24.0" prefWidth="58.0" text="Hasło">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="179.0" layoutY="69.0" text="Login">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField id="LoginTextField"  fx:id="LoginTextField" layoutX="252.0" layoutY="65.0" prefHeight="35.0" prefWidth="172.0" />
+               </children>
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="93.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button id="LoginButton" fx:id="LoginButton"  onAction="#onLoginButton" layoutX="147.0" layoutY="22.0" mnemonicParsing="false" text="Zaloguj się">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button id="CancelLoginButton"  fx:id="CancelLoginButton" onAction="#onCancelLoginButton" layoutX="343.0" layoutY="22.0" mnemonicParsing="false" text="Anuluj">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+   </children>
 </AnchorPane>
