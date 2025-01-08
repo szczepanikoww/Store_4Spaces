@@ -21,7 +21,7 @@ abstract class Product {
         this.ProductName = productName;
     }
 
-    public void serProductPrice(double productPrice) {
+    public void setProductPrice(double productPrice) {
         this.ProductPrice = productPrice;
     }
 
