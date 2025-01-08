@@ -32,7 +32,7 @@ public class AddNewCustomerPageController {
                 if (userName.getText().isEmpty() || UserPassword.getText().isEmpty() || Name.getText().isEmpty() || Surname.getText().isEmpty() || Email.getText().isEmpty() || PhoneNumber.getText().isEmpty() || Country.getText().isEmpty() || City.getText().isEmpty() || Street.getText().isEmpty() || NumberOnStreet.getText().isEmpty() || PostalCode.getText().isEmpty()){
                     showError("Wszystkie pola muszą być wypełnione");
                 }else {
-                    List<Customer> customers = Store.getInstance().getCustomers();
+                    List<Customer> customers = Store.getInstance().getCustomers();  //cos mi tu jeszcze nie gra
                     for (Customer customer : customers){
                         if (customer.getUserName().equals(userName.getText())){
                             showError("Użytkownik o podanej nazwie już istnieje");
