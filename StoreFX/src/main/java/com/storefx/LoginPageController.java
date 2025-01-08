@@ -78,7 +78,7 @@ public class LoginPageController {
     }
 
     public void initialize() {
-        Image Logo = new Image(getClass().getResource("/images/car.jpg").toExternalForm());
+        Image Logo = new Image(getClass().getResource("/images/logo.jpg").toExternalForm());
         LoginLogoImageView.setImage(Logo);
         LoginLogoImageView.setFitWidth(109);
         LoginLogoImageView.setFitHeight(83);
