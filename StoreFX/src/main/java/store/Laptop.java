@@ -22,7 +22,7 @@ public class Laptop extends Product{
     }
 
     //setters
-    public void getModel() {
+    public String getModel() {
         return super.getProductName();
     }
     public void setLaptopOS(String laptopOS) {

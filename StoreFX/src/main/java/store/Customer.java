@@ -48,4 +48,13 @@ public class Customer extends User{
     public Address getCustomerAddress() {
         return CustomerAddress;
     }
+
+    public String getDetails() {
+        return "Customer{" +
+                "CustomerName='" + CustomerName + '\'' +
+                ", CustomerSurname='" + CustomerSurname + '\'' +
+                ", CustomerEmail='" + CustomerEmail + '\'' +
+                ", CustomerAddress=" + CustomerAddress +
+                '}';
+    }
 }
