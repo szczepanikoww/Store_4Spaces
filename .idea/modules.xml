@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Model UML/Model UML.iml" filepath="$PROJECT_DIR$/Model UML/Model UML.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StoreV2/StoreV2.iml" filepath="$PROJECT_DIR$/StoreV2/StoreV2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Store_4Spaces.iml" filepath="$PROJECT_DIR$/.idea/Store_4Spaces.iml" />
     </modules>
   </component>
