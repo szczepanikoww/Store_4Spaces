@@ -11,7 +11,7 @@ public class mainPageApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(mainPageApplication.class.getResource("mainPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 760,440 );
+        Scene scene = new Scene(fxmlLoader.load(), 808,518 );
         stage.setTitle("Store - 4Spaces");
         stage.setScene(scene);
         stage.show();

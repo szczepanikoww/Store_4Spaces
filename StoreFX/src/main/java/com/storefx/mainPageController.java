@@ -1,11 +1,13 @@
 package com.storefx;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -25,7 +27,7 @@ public class mainPageController {
     public MenuItem ClientSelectButton;
     public MenuItem AdminSelectButton;
     public AnchorPane centerPane;
-    public ImageView CartMenuButton;
+    public Label CartMenuButton;
 
 
     //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy klientem)
@@ -69,23 +71,36 @@ public class mainPageController {
         }
     }
 
+    //ladowanie strony ze scrollem
+    public void loadPageWithScroll(String fxmlFile){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            ScrollPane newPane = loader.load();
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(newPane);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void onSmartphonesMenuButton() {
-        loadPage("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml");
     }
     public void onTabletsMenuButton() {
-        loadPage("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml");
     }
     public void onLaptopsMenuButton() {
-        loadPage("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml");
     }
     public void onAllMenuButton() {
-        loadPage("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml");
     }
     public void onCartMenuButton() {
+        System.out.println("Cart dziala");
         loadPage("cartPage.fxml");
     }
     public void onHomeMenuButton() {
-        System.out.println("Home dziala");
+        loadPage("homePage.fxml");
     }
 
 }

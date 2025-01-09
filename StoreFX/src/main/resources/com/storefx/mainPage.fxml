@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.mainPageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="808.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.mainPageController">
    <top>
       <MenuBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="42.0" prefWidth="810.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false">
                <graphic>
-                  <Label fx:id="HomeMenuButton" onMouseClicked="#onHomeMenuButton" style="-fx-padding: 5;" text="4Spaces" textFill="#a6630f">
+                  <Label fx:id="HomeMenuButton" onMouseClicked="#onHomeMenuButton" prefHeight="34.0" prefWidth="93.0" style="-fx-padding: 5;" text="4Spaces" textFill="#a6630f">
                      <font>
                         <Font name="Bauhaus 93" size="20.0" />
                      </font>
@@ -53,25 +53,30 @@
                   </Label>
                </graphic>
             </Menu>
-            <Menu disable="true" mnemonicParsing="false" text="------------------" />
+            <Menu disable="true" mnemonicParsing="false" text="-------------" />
             <Menu mnemonicParsing="false">
                <graphic>
-                  <ImageView fx:id="CartMenuButton" fitHeight="32.0" fitWidth="30.0" onMouseClicked="#onCartMenuButton" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@shopping-bag.png" />
-                     </image>
-                  </ImageView>
+                  <Label fx:id="CartMenuButton" onMouseClicked="#onCartMenuButton" text="Koszyk">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@shopping-bag.png" />
+                           </image></ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Unispace-Bold" size="10.0" />
+                     </font></Label>
                </graphic>
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="101.0" style="-fx-padding: 5;" text="LOGOWANIE">
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" style="-fx-padding: 5;" text="LOGOWANIE">
                      <font>
                         <Font name="Bodoni MT" size="12.0" />
                      </font></Label>
                </graphic>
                <items>
-                  <MenuItem fx:id="ClientSelectButton" mnemonicParsing="false" onAction="#onClientSelectButton" text="KLIENT" />
+                  <MenuItem fx:id="ClientSelectButton" mnemonicParsing="false" onAction="#onClientSelectButton" text="KLIENT"  />
                   <MenuItem fx:id="AdminSelectButton" mnemonicParsing="false" onAction="#onAdminSelectButton" text="ADMIN" />
                </items>
             </Menu>
@@ -79,10 +84,10 @@
       </MenuBar>
    </top>
    <center>
-      <AnchorPane fx:id="centerPane" prefHeight="433.0" prefWidth="791.0" style="-fx-background-color: #F5F5F5;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="centerPane" prefHeight="489.0" prefWidth="807.0" style="-fx-background-color: #F5F5F5;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="270.0" layoutY="100.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" text="Witamy w 4Spaces!" />
-            <Label layoutX="240.0" layoutY="140.0" style="-fx-font-size: 16px; -fx-text-fill: #555;" text="Wybierz kategorię z menu powyżej." />
+            <Label contentDisplay="CENTER" layoutX="294.0" layoutY="104.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" text="Witamy w 4Spaces!" />
+            <Label layoutX="279.0" layoutY="139.0" style="-fx-font-size: 16px; -fx-text-fill: #555;" text="Wybierz kategorię z menu powyżej." />
          </children></AnchorPane>
 
    </center>
