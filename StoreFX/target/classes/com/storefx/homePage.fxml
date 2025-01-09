@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="489.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.HomePageController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="294.0" layoutY="104.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" text="Witamy w 4Spaces!" />
+      <Label layoutX="279.0" layoutY="139.0" style="-fx-font-size: 16px; -fx-text-fill: #555;" text="Wybierz kategorię z menu powyżej." />
+   </children>
+</AnchorPane>
