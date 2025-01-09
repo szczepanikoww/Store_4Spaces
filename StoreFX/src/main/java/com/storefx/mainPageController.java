@@ -4,10 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -28,6 +25,8 @@ public class mainPageController {
     public MenuItem AdminSelectButton;
     public AnchorPane centerPane;
     public Label CartMenuButton;
+    public Label loginLabel;
+    public Menu loginMenu;
 
 
     //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy klientem)
@@ -103,4 +102,26 @@ public class mainPageController {
         loadPage("homePage.fxml");
     }
 
+
+    //zmienianie napisu w zaleznosci od tego czy jestesmy zalogowani czy nie
+    public void setLoginLabel(String username){
+        loginLabel.setText("Witaj, " + username);
+        loginMenu.getItems().clear();
+        MenuItem userDataItem = new MenuItem("Dane użytkownika");
+        userDataItem.setOnAction(actionEvent -> loadPage("userDataPage.fxml"));
+        MenuItem orderHistoryItem = new MenuItem("Historia zamówień");
+        orderHistoryItem.setOnAction(actionEvent -> loadPage("previousOrdersPage.fxml"));
+        MenuItem logoutItem = new MenuItem("Wyloguj");
+        logoutItem.setOnAction(actionEvent -> onLogoutButton());
+        loginMenu.getItems().addAll(userDataItem, orderHistoryItem, logoutItem);
+
+    }
+
+    public void onLogoutButton(){
+        loginLabel.setText("LOGOWANIE");
+        loginMenu.getItems().clear();
+        loginMenu.getItems().addAll(ClientSelectButton, AdminSelectButton);
+        loadPage("mainPage.fxml");
+
+    }
 }

@@ -68,15 +68,15 @@
                      </font></Label>
                </graphic>
             </Menu>
-            <Menu mnemonicParsing="false">
+            <Menu fx:id="loginMenu" mnemonicParsing="false">
                <graphic>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" style="-fx-padding: 5;" text="LOGOWANIE">
+                  <Label fx:id="loginLabel" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" style="-fx-padding: 5;" text="LOGOWANIE">
                      <font>
                         <Font name="Bodoni MT" size="12.0" />
                      </font></Label>
                </graphic>
                <items>
-                  <MenuItem fx:id="ClientSelectButton" mnemonicParsing="false" onAction="#onClientSelectButton" text="KLIENT"  />
+                  <MenuItem fx:id="ClientSelectButton" mnemonicParsing="false" onAction="#onClientSelectButton" text="KLIENT" />
                   <MenuItem fx:id="AdminSelectButton" mnemonicParsing="false" onAction="#onAdminSelectButton" text="ADMIN" />
                </items>
             </Menu>
