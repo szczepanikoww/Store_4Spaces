@@ -9,12 +9,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import store.Customer;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class mainPageController {
-
 
     public Label HomeMenuButton;
     public Label SmartphonesMenuButton;
@@ -27,6 +27,9 @@ public class mainPageController {
     public Label CartMenuButton;
     public Label loginLabel;
     public Menu loginMenu;
+
+
+
 
 
     //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy klientem)
@@ -125,4 +128,5 @@ public class mainPageController {
         loadPage("homePage.fxml");
 
     }
+
 }

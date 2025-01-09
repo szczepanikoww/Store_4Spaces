@@ -134,6 +134,7 @@ public class LoginPageController {
     }
 
 
+
     //public void initialize() {
       //  Image Logo = new Image(getClass().getResource("/images/logo.jpg").toExternalForm());
        // LoginLogoImageView.setImage(Logo);

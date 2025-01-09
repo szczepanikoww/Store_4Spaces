@@ -75,9 +75,8 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
-                <Button fx:id="SaveChangesButton" layoutX="27.0" layoutY="146.0" onAction="#onSaveChangesButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Zapisz zmiany" />
-                <Button fx:id="ClearFormButton" layoutX="78.0" layoutY="185.0" onAction="#onClearFormAction" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Wyczyść" />
-                <Button fx:id="CloseWindowButton" layoutX="35.0" layoutY="225.0" onAction="#onCloseWindowButton" style="-fx-background-color: #333; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Zamknij okno" />
+                <Button fx:id="SaveChangesButton" layoutX="26.0" layoutY="163.0" onAction="#onSaveChangesButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Zapisz zmiany" />
+                <Button fx:id="ClearFormButton" layoutX="77.0" layoutY="200.0" onAction="#onClearFormAction" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Wyczyść" />
          </children></AnchorPane>
    </right>
 </BorderPane>

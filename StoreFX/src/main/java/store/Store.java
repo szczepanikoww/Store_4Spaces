@@ -11,6 +11,11 @@ public class Store {
     private ArrayList<Product> products = new ArrayList<Product>();
 
 
+    static{
+        Admin admin = new Admin(1, "admin", "admin");
+        admins.add(admin);
+    }
+
     //Constructor
     public Store(ArrayList<Admin> admins, ArrayList<Customer> customers, Inventory inventory, ArrayList<Order> orders, ArrayList<Invoice> invoices, ArrayList<Product> products) {
         this.admins = admins;

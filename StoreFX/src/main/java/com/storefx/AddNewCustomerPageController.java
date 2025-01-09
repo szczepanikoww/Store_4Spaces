@@ -2,6 +2,8 @@ package com.storefx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -18,6 +20,13 @@ public class AddNewCustomerPageController {
     public TextField userName, Name, Surname, Email, PhoneNumber, Country, City, Street, NumberOnStreet, PostalCode;
     public CheckBox RegulaminCheckBox, ZgodaCheckBox;
     public Button CreateAccountButton, CancelCreatingAccountButton;
+
+
+
+
+
+
+
 
     public void showError(String message){
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -60,6 +69,7 @@ public class AddNewCustomerPageController {
             }
         }catch (Exception e){
             showError("Musisz zaznaczyć wymagane zgody");
+            e.printStackTrace();
         }
     }
 
@@ -67,4 +77,6 @@ public class AddNewCustomerPageController {
         Stage stage = (Stage) CancelCreatingAccountButton.getScene().getWindow();
         stage.close();
     }
+
+
 }

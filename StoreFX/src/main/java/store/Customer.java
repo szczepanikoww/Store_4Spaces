@@ -65,6 +65,10 @@ public class Customer extends User{
     public String getPassword() {
         return this.getUserPassword();
     }
+    public String getCustomerPhoneNumber() {
+        return CustomerPhoneNumber;
+
+    }
 
     public String getDetails() {
         return "Customer{" +
@@ -75,4 +79,6 @@ public class Customer extends User{
                 ", CustomerAddress=" + CustomerAddress +
                 '}';
     }
+
+
 }

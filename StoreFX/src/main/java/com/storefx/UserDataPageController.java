@@ -2,11 +2,15 @@ package com.storefx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import store.Address;
 import store.Customer;
+import store.Store;
+
+import java.io.IOException;
 
 public class UserDataPageController {
     @FXML
@@ -17,15 +21,26 @@ public class UserDataPageController {
                     newNumberOnStreet, newPostalCode;
 
     @FXML
-    public Button CloseWindowButton, SaveChangesButton, ClearFormButton;
+    public Button SaveChangesButton, ClearFormButton;
 
     private Customer aktCustomer;
 
     public void initialize(){
     }
 
-    public void onCloseWindowButton(ActionEvent actionEvent) {
+    public void setCustomerData(Customer customer){
+        currentUserName.setText(customer.getUserName());
+        currentName.setText(customer.getCustomerName());
+        currentSurname.setText(customer.getCustomerSurname());
+        currentEmail.setText(customer.getCustomerEmail());
+        currentPhoneNumber.setText(customer.getCustomerPhoneNumber());
+        currentCountry.setText(customer.getCustomerAddress().getCountry());
+        currentCity.setText(customer.getCustomerAddress().getCity());
+        currentStreet.setText(customer.getCustomerAddress().getStreet());
+        currentNumberOnStreet.setText(String.valueOf(customer.getCustomerAddress().getNumberOnStreet()));
+        currentPostalCode.setText(customer.getCustomerAddress().getPostalCode());
     }
+
 
     public void onSaveChangesButton(ActionEvent actionEvent) {
         String userName = (newUserName.getText() == null || newUserName.getText().isEmpty()) ? currentUserName.getText() : newUserName.getText();
@@ -75,4 +90,6 @@ public class UserDataPageController {
         newNumberOnStreet.clear();
         newPostalCode.clear();
     }
+
+
 }
