@@ -36,6 +36,7 @@ public class mainPageController {
             Parent root = loader.load();
             LoginPageController controller = loader.getController();
             controller.setUserType(userType);
+            controller.setMainController(this);
 
             Stage stage = new Stage();
             stage.setTitle("Logowanie - 4Spaces - " + userType);
@@ -121,7 +122,7 @@ public class mainPageController {
         loginLabel.setText("LOGOWANIE");
         loginMenu.getItems().clear();
         loginMenu.getItems().addAll(ClientSelectButton, AdminSelectButton);
-        loadPage("mainPage.fxml");
+        loadPage("homePage.fxml");
 
     }
 }

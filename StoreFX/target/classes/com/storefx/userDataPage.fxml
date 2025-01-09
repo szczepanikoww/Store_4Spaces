@@ -2,74 +2,82 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.UserDataPageController">
-   <top>
-      <AnchorPane prefHeight="98.0" prefWidth="772.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="808.0" style="-fx-background-color: #F9F9F9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.UserDataPageController">
+    <center>
+        <GridPane hgap="15" prefHeight="421.0" prefWidth="619.0" style="-fx-padding: 20;" vgap="10" BorderPane.alignment="CENTER">
+            <!-- Kolumny z aktualnymi i nowymi danymi -->
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="150.0" />
+                <ColumnConstraints maxWidth="275.0" minWidth="182.79999999999998" prefWidth="275.0" />
+                <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="126.60000000000002" prefWidth="200.0" />
+            </columnConstraints>
+            <!-- Nagłówki kolumn -->
+            <children>
+                <Label style="-fx-font-family: 'Unispace'; -fx-font-size: 14px; -fx-text-fill: #555;" text="Aktualne dane:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label style="-fx-font-family: 'Unispace'; -fx-font-size: 14px; -fx-text-fill: #555;" text="Nowe dane:" GridPane.columnIndex="2" />
+                <!-- Wiersze z danymi -->
+                <Label text="Nazwa użytkownika:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="currentUserName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="newUserName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
+                <Label text="Imię:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="currentName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="newName" prefHeight="26.0" prefWidth="152.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+
+                <Label text="Nazwisko:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="currentSurname" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="newSurname" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
+                <Label text="Adres email:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="currentEmail" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="newEmail" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+                <Label text="Nr telefonu:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="currentPhoneNumber" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField fx:id="newPhoneNumber" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+                <Label text="Kraj zamieszkania:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <TextField fx:id="currentCountry" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <TextField fx:id="newCountry" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+
+                <Label text="Miejscowość:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <TextField fx:id="currentCity" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <TextField fx:id="newCity" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+
+                <Label text="Ulica:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <TextField fx:id="currentStreet" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <TextField fx:id="newStreet" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+
+                <Label text="Nr domu/mieszkania:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <TextField fx:id="currentNumberOnStreet" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <TextField fx:id="newNumberOnStreet" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+
+                <Label text="Kod pocztowy:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                <TextField fx:id="currentPostalCode" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <TextField fx:id="newPostalCode" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+            </children>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </center>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="241.0" layoutY="23.0" text="Dane użytkownika">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </top>
-   <bottom>
-      <AnchorPane prefHeight="69.0" prefWidth="710.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button id="CloseWindowButton" fx:id="CloseWindowButton" onAction="#onCloseWindowButton" layoutX="320.0" layoutY="15.0" mnemonicParsing="false" text="Zamknij okno">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-   </bottom>
-   <center>
-      <AnchorPane prefHeight="469.0" prefWidth="772.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="32.0" layoutY="34.0" text="Nazwa użytkownika" />
-            <Label layoutX="33.0" layoutY="61.0" text="Imię" />
-            <Label layoutX="32.0" layoutY="89.0" text="Nazwisko" />
-            <Label layoutX="26.0" layoutY="119.0" text="Adres email" />
-            <Label layoutX="32.0" layoutY="224.0" text="Miejscowość" />
-            <Label layoutX="32.0" layoutY="258.0" text="Ulica" />
-            <Label layoutX="37.0" layoutY="194.0" text="Kraj zamieszkania" />
-            <Label layoutX="34.0" layoutY="287.0" text="Nr domu/mieszkania" />
-            <Label layoutX="35.0" layoutY="321.0" text="Kod pocztowy" />
-             <TextField id="currentUserName" fx:id="currentUserName" editable="false" layoutX="207.0" layoutY="30.0" />
-             <TextField id="currentName" fx:id="currentName" editable="false" layoutX="207.0" layoutY="57.0" />
-             <TextField id="currentSurname" fx:id="currentSurname" editable="false" layoutX="207.0" layoutY="85.0" />
-             <TextField id="currentEmail" fx:id="currentEmail" editable="false" layoutX="207.0" layoutY="115.0" />
-             <TextField id="currentCountry" fx:id="currentCountry" editable="false" layoutX="207.0" layoutY="190.0" />
-             <TextField id="currentCity" fx:id="currentCity" editable="false" layoutX="207.0" layoutY="220.0" />
-             <TextField id="currentStreet" fx:id="currentStreet" editable="false" layoutX="207.0" layoutY="254.0" />
-             <TextField id="currentNumberOnStreet" fx:id="currentNumberOnStreet" editable="false" layoutX="207.0" layoutY="283.0" />
-             <TextField id="currentPostalCode" fx:id="currentPostalCode" editable="false" layoutX="207.0" layoutY="317.0" />
-             <Line endX="-14.0" endY="312.0" layoutX="434.0" layoutY="57.0" startX="-14.0" startY="-45.0" />
-            <Text layoutX="535.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wprowadź zmiany">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-             <TextField id="newUserName" fx:id="newUserName" layoutX="517.0" layoutY="30.0" />
-             <TextField id="newName" fx:id="newName" layoutX="517.0" layoutY="57.0" />
-             <TextField id="newSurname" fx:id="newSurname" layoutX="517.0" layoutY="85.0" />
-             <TextField id="newEmail" fx:id="newEmail" layoutX="517.0" layoutY="115.0" />
-             <TextField id="newCountry" fx:id="newCountry" layoutX="517.0" layoutY="190.0" />
-             <TextField id="newCity" fx:id="newCity" layoutX="517.0" layoutY="220.0" />
-             <TextField id="newStreet" fx:id="newStreet" layoutX="517.0" layoutY="254.0" />
-             <TextField id="newNumberOnStreet" fx:id="newNumberOnStreet" layoutX="518.0" layoutY="283.0" />
-             <TextField id="newPostalCode" fx:id="newPostalCode" layoutX="517.0" layoutY="317.0" />
-             <Button id="SaveChangesButton" fx:id="SaveChangesButton" onAction="#onSaveChangesButton" layoutX="473.0" layoutY="370.0" mnemonicParsing="false" text="Zapisz zmiany" />
-            <Button id="ClearFormButton" fx:id="ClearFormButton" onAction="#onClearFormAction" layoutX="637.0" layoutY="370.0" mnemonicParsing="false" text="Wyczyść" />
-            <Label layoutX="42.0" layoutY="152.0" text="Nr telefonu" />
-            <TextField id="currentPhoneNumber" fx:id="currentPhoneNumber" layoutX="207.0" layoutY="148.0" />
-            <TextField id="newPhoneNumber" fx:id="newPhoneNumber" layoutX="518.0" layoutY="148.0" />
-         </children>
-      </AnchorPane>
-   </center>
+                <Button fx:id="SaveChangesButton" layoutX="27.0" layoutY="146.0" onAction="#onSaveChangesButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Zapisz zmiany" />
+                <Button fx:id="ClearFormButton" layoutX="78.0" layoutY="185.0" onAction="#onClearFormAction" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Wyczyść" />
+                <Button fx:id="CloseWindowButton" layoutX="35.0" layoutY="225.0" onAction="#onCloseWindowButton" style="-fx-background-color: #333; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 14px;" text="Zamknij okno" />
+         </children></AnchorPane>
+   </right>
 </BorderPane>

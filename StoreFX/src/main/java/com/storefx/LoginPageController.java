@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -27,15 +24,26 @@ public class LoginPageController {
     public TextField LoginTextField;
     public PasswordField PasswordField;
     public Button LoginButton, CancelLoginButton;
+    public Button signInButton;
+    public Label noAccountLabel;
 
     private List<Admin> admins = Store.getAdmins();
     private List<Customer> customers = Store.getCustomers();
     private String userType;
+    private mainPageController mainController;
 
 
 
     public void setUserType(String userType) {
         this.userType = userType;
+        if("Admin".equals(userType)){
+            signInButton.setVisible(false);
+            noAccountLabel.setVisible(false);
+        }
+    }
+
+    public void setMainController(mainPageController mainController) {
+        this.mainController = mainController;
     }
 
 
@@ -54,61 +62,41 @@ public class LoginPageController {
         //zrobilem to w kontrolerze mainPageController
         //w zaleznosci od wyboru, przekazujemy odpowiedni typ uzytkownika do tej klasy (userType i metoda setUserType)
 
+        boolean loginSuccessful = false;
         if ("Admin".equals(userType)){
-            boolean loginSuccessful = false;
             for(Admin a: admins)
             {
                 if(a.getLogin().equals(login) && a.getPassword().equals(password))
                 {
                     //logowanie admina
                     System.out.println("Zalogowano admina");
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
-                        Parent root = loader.load();
-                        mainPageController controller = loader.getController();
-                        controller.setLoginLabel(login);
-
-                        Stage stage = (Stage) LoginButton.getScene().getWindow();
-                        stage.setScene(new Scene(root));
-                        loginSuccessful = true;
-                        break;
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
+                    mainController.setLoginLabel(login);
+                    loginSuccessful = true;
+                    break;
                     }
                 }
-            if (!loginSuccessful){
-                showError("Niepoprawne dane logowania");
-            }
         }
         else if ("Klient".equals(userType)){
-            boolean loginSuccessful = false;
             for(Customer c: customers)
             {
                 if(c.getLogin().equals(login) && c.getPassword().equals(password))
                 {
                     //logowanie klienta
                     System.out.printf("Zalogowano klienta");
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
-                        Parent root = loader.load();
-                        mainPageController controller = loader.getController();
-                        controller.setLoginLabel(login);
-
-                        Stage stage = (Stage) LoginButton.getScene().getWindow();
-                        stage.setScene(new Scene(root));
-                        loginSuccessful = true;
-                        break;
-
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
+                    mainController.setLoginLabel(login);
+                    loginSuccessful = true;
                     break;
                 }
             }
-            if(!loginSuccessful){
-                showError("Niepoprawne dane logowania");
-            }
+        }
+        if(!loginSuccessful)
+        {
+            showError("Niepoprawny login lub hasło");
+        }
+        else
+        {
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            stage.close();
         }
 
 
@@ -126,6 +114,23 @@ public class LoginPageController {
     public void onCancelLoginButton(ActionEvent actionEvent) {
         Stage stage = (Stage) CancelLoginButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void onSignInButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addNewCustomerPage.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Rejestracja");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            Stage loginStage = (Stage) signInButton.getScene().getWindow();
+            loginStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
