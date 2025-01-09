@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.storefx.AddNewCustomerPageController" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="mainVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.storefx.AddNewCustomerPageController" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="74.0" prefWidth="640.0">
          <children>
@@ -17,17 +17,17 @@
       </AnchorPane>
       <AnchorPane prefHeight="622.0" prefWidth="818.0">
          <children>
-            <PasswordField fx:id="UserPassword" id="UserPassword" layoutX="294.0" layoutY="61.0" prefHeight="25.0" prefWidth="240.0" />
-            <TextField fx:id="userName" id="userName" layoutX="294.0" layoutY="32.0" prefHeight="25.0" prefWidth="240.0" />
-            <TextField fx:id="Name" id="Name" layoutX="294.0" layoutY="194.0" prefHeight="25.0" prefWidth="240.0" />
-            <TextField fx:id="Surname" id="Surname" layoutX="294.0" layoutY="232.0" prefHeight="25.0" prefWidth="240.0" />
+            <PasswordField fx:id="UserPassword" layoutX="294.0" layoutY="61.0" prefHeight="25.0" prefWidth="240.0" />
+            <TextField fx:id="userName" layoutX="294.0" layoutY="32.0" prefHeight="25.0" prefWidth="240.0" />
+            <TextField fx:id="Name" layoutX="294.0" layoutY="194.0" prefHeight="25.0" prefWidth="240.0" />
+            <TextField fx:id="Surname" layoutX="294.0" layoutY="232.0" prefHeight="25.0" prefWidth="240.0" />
             <Label layoutX="34.0" layoutY="65.0" text="Hasło" />
             <Label layoutX="34.0" layoutY="93.0" prefHeight="30.0" prefWidth="480.0" text="Hasło musi zawierać conajmniej 8 znaków, jedną duża literę, jedną cyfrę i znak specjalny" />
             <Separator layoutX="41.0" layoutY="125.0" prefHeight="0.0" prefWidth="738.0" />
             <Label layoutX="42.0" layoutY="198.0" text="Imię" />
             <Label layoutX="40.0" layoutY="236.0" text="Nazwisko" />
-            <TextField fx:id="Email" id="Email" layoutX="294.0" layoutY="265.0" prefHeight="25.0" prefWidth="240.0" />
-            <TextField fx:id="PhoneNumber" id="PhoneNumber" layoutX="294.0" layoutY="300.0" prefHeight="25.0" prefWidth="240.0" />
+            <TextField fx:id="Email" layoutX="294.0" layoutY="265.0" prefHeight="25.0" prefWidth="240.0" />
+            <TextField fx:id="PhoneNumber" layoutX="294.0" layoutY="300.0" prefHeight="25.0" prefWidth="240.0" />
             <Label layoutX="39.0" layoutY="269.0" text="Adres e-mail" />
             <Label layoutX="42.0" layoutY="304.0" text="Nr telefonu" />
             <Separator layoutX="27.0" layoutY="340.0" prefHeight="10.0" prefWidth="762.0" />
@@ -42,27 +42,28 @@
                </font>
             </Label>
             <Label layoutX="28.0" layoutY="391.0" text="Kraj" />
-            <TextField fx:id="Country" id="Country" layoutX="294.0" layoutY="387.0" prefHeight="25.0" prefWidth="235.0" />
-            <TextField fx:id="City" id="City" layoutX="294.0" layoutY="424.0" prefHeight="25.0" prefWidth="235.0" />
-            <TextField fx:id="Street" id="Street" layoutX="294.0" layoutY="459.0" prefHeight="25.0" prefWidth="235.0" />
-            <TextField fx:id="NumberOnStreet" id="NumberOnStreet" layoutX="294.0" layoutY="492.0" prefHeight="25.0" prefWidth="235.0" />
-            <TextField fx:id="PostalCode" id="PostalCode" layoutX="294.0" layoutY="524.0" prefHeight="25.0" prefWidth="235.0" />
+            <TextField fx:id="Country" layoutX="294.0" layoutY="387.0" prefHeight="25.0" prefWidth="235.0" />
+            <TextField fx:id="City" layoutX="294.0" layoutY="424.0" prefHeight="25.0" prefWidth="235.0" />
+            <TextField fx:id="Street" layoutX="294.0" layoutY="459.0" prefHeight="25.0" prefWidth="235.0" />
+            <TextField fx:id="NumberOnStreet" layoutX="294.0" layoutY="492.0" prefHeight="25.0" prefWidth="235.0" />
+            <TextField fx:id="PostalCode" layoutX="294.0" layoutY="524.0" prefHeight="25.0" prefWidth="235.0" />
             <Label layoutX="28.0" layoutY="428.0" text="Miasto" />
             <Label layoutX="27.0" layoutY="463.0" text="Ulica" />
             <Label layoutX="25.0" layoutY="492.0" text="Nr domu/Nr mieszkania" />
             <Label layoutX="28.0" layoutY="528.0" text="Kod pocztowy" />
             <Separator layoutX="20.0" layoutY="557.0" prefHeight="10.0" prefWidth="762.0" />
-            <CheckBox id="RegulaminCheckBox" fx:id="RegulaminCheckBox"layoutX="28.0" layoutY="567.0" mnemonicParsing="false" text="Oświadczam, że zapoznałem się z regulaminem sklepu" />
-            <CheckBox id="ZgodaCheckBox"  fx:id="ZgodaCheckBox" layoutX="28.0" layoutY="590.0" mnemonicParsing="false" text="Wyrażam zgodę na przetwarzanie moich danych osobowych" />
-         </children></AnchorPane>
+            <CheckBox fx:id="RegulaminCheckBox" layoutX="28.0" layoutY="567.0" mnemonicParsing="false" text="Oświadczam, że zapoznałem się z regulaminem sklepu" />
+            <CheckBox fx:id="ZgodaCheckBox" layoutX="28.0" layoutY="590.0" mnemonicParsing="false" text="Wyrażam zgodę na przetwarzanie moich danych osobowych" />
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="84.0" prefWidth="818.0">
          <children>
-            <Button id="CreateAccountButton" fx:id="CreateAccountButton" onAction="#onCreateAccountButton" layoutX="34.0" layoutY="26.0" mnemonicParsing="false" text="Utwórz konto">
+            <Button fx:id="CreateAccountButton" onAction="#onCreateAccountButton" layoutX="34.0" layoutY="26.0" mnemonicParsing="false" text="Utwórz konto">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button id="CancelCreatingAccountButton" fx:id="CancelCreatingAccountButton" onAction="#onCancelCreatingButton" layoutX="171.0" layoutY="26.0" mnemonicParsing="false" text="Anuluj">
+            <Button fx:id="CancelCreatingAccountButton" onAction="#onCancelCreatingButton" layoutX="171.0" layoutY="26.0" mnemonicParsing="false" text="Anuluj">
                <font>
                   <Font size="14.0" />
                </font>
