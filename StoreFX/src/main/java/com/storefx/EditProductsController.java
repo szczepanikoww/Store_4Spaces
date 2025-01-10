@@ -330,16 +330,19 @@ public class EditProductsController {
 
     public AnchorPane createProductPane(Product product) {
         AnchorPane productPane = new AnchorPane();
-        productPane.setPrefSize(200, 200);
+        productPane.setPrefSize(800, 200);
+        productPane.setStyle("-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
 
         Button deleteButton = new Button("Usuń produkt");
         deleteButton.setLayoutX(595);
         deleteButton.setLayoutY(149);
+        deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         deleteButton.setOnAction(event -> deleteProduct(product, productPane));
 
         Button editButton = new Button("Edytuj");
         editButton.setLayoutX(705);
         editButton.setLayoutY(149);
+        editButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         editButton.setOnAction(event -> editProduct(product));
 
         ImageView imageView = new ImageView(product.getImage());
@@ -347,33 +350,43 @@ public class EditProductsController {
         imageView.setFitWidth(200);
         imageView.setLayoutX(24);
         imageView.setLayoutY(25);
+        imageView.setStyle("-fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 5;");
 
         Label nameLabel = new Label("Nazwa produktu");
-        nameLabel.setLayoutX(260);
+        nameLabel.setLayoutX(200);
         nameLabel.setLayoutY(25);
+        nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
         Label quantityLabel = new Label("Ilość na magazynie");
-        quantityLabel.setLayoutX(260);
+        quantityLabel.setLayoutX(200);
         quantityLabel.setLayoutY(56);
+        quantityLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
         TextField nameTextField = new TextField(product.getProductName());
         nameTextField.setLayoutX(386);
         nameTextField.setLayoutY(21);
+        nameTextField.setPrefWidth(180);
+        nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
 
         TextField quantityTextField = new TextField(String.valueOf(product.getQuantity()));
         quantityTextField.setLayoutX(386);
         quantityTextField.setLayoutY(52);
+        quantityTextField.setPrefWidth(180);
+        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
 
         productPane.getChildren().addAll(deleteButton, editButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField);
 
         return productPane;
     }
 
+
     private void editProduct(Product product) {
 
     }
 
     private void deleteProduct(Product product, AnchorPane productPane) {
+        store.getInventory().removeProduct(product);
+        productVBox.getChildren().remove(productPane);
     }
 }
 
