@@ -108,17 +108,24 @@ public class mainPageController {
 
 
     //zmienianie napisu w zaleznosci od tego czy jestesmy zalogowani czy nie
-    public void setLoginLabel(String username){
+    public void setLoginLabel(String username, Customer customer){
         loginLabel.setText("Witaj, " + username);
         loginMenu.getItems().clear();
         MenuItem userDataItem = new MenuItem("Dane użytkownika");
-        userDataItem.setOnAction(actionEvent -> loadPage("userDataPage.fxml"));
+        userDataItem.setOnAction(actionEvent -> loadUserDataPage(customer));
         MenuItem orderHistoryItem = new MenuItem("Historia zamówień");
         orderHistoryItem.setOnAction(actionEvent -> loadPage("previousOrdersPage.fxml"));
         MenuItem logoutItem = new MenuItem("Wyloguj");
         logoutItem.setOnAction(actionEvent -> onLogoutButton());
         loginMenu.getItems().addAll(userDataItem, orderHistoryItem, logoutItem);
 
+    }
+    public void setLoginLabelAdmin(String username){
+        loginLabel.setText("Witaj, " + username);
+        loginMenu.getItems().clear();
+        MenuItem logoutItem = new MenuItem("Wyloguj");
+        logoutItem.setOnAction(actionEvent -> onLogoutButton());
+        loginMenu.getItems().addAll(logoutItem);
     }
 
     public void onLogoutButton(){
@@ -127,6 +134,19 @@ public class mainPageController {
         loginMenu.getItems().addAll(ClientSelectButton, AdminSelectButton);
         loadPage("homePage.fxml");
 
+    }
+
+    public void loadUserDataPage(Customer customer) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("userDataPage.fxml"));
+            Parent root = loader.load();
+            UserDataPageController controller = loader.getController();
+            controller.setCustomerData(customer);
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

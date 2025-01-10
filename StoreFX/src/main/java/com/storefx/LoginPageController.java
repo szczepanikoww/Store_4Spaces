@@ -70,7 +70,7 @@ public class LoginPageController {
                 {
                     //logowanie admina
                     System.out.println("Zalogowano admina");
-                    mainController.setLoginLabel(login);
+                    mainController.setLoginLabelAdmin(login);
                     loginSuccessful = true;
                     break;
                     }
@@ -83,7 +83,7 @@ public class LoginPageController {
                 {
                     //logowanie klienta
                     System.out.printf("Zalogowano klienta");
-                    mainController.setLoginLabel(login);
+                    mainController.setLoginLabel(login, c);
                     loginSuccessful = true;
                     break;
                 }

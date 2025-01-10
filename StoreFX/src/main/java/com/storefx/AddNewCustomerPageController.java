@@ -25,9 +25,6 @@ public class AddNewCustomerPageController {
 
 
 
-
-
-
     public void showError(String message){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
