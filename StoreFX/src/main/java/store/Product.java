@@ -64,11 +64,6 @@ public class Product {
         return "Product Name: " + ProductName + "\nProduct Price: " + ProductPrice + "\nProduct Quantity: " + ProductQuantity + "\nProduct Brand: " + ProductBrand;
     }
 
-    // other methods
-    public void updateProductQuantity(int quantity) {
-        ProductQuantity += quantity;
-    }
-
     public Image getImage() {
         return ProductImage;
     }

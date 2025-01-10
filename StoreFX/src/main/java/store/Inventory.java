@@ -17,6 +17,14 @@ public class Inventory {
         return productsList;
     }
 
+    public void updateProductQuantity(Product product, int i) {
+        for (Product p : productsList) {
+            if (p.getProductName() == product.getProductName()) {
+                p.setProductQuantity(p.getQuantity() + i);
+            }
+        }
+    }
+
 //    public void updateProduct(Product product) {
 //        for (Product p : productsList) {
 //            if (p.getProductID() == product.getProductID()) {

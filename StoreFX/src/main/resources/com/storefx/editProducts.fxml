@@ -89,6 +89,8 @@
                                      <Label fx:id="QuantityToEditLabel" layoutX="260.0" layoutY="56.0" text="Ilość na magazynie" />
                                      <TextField fx:id="ProductNameToEditTextField" layoutX="386.0" layoutY="21.0" />
                                      <TextField fx:id="QuantityToEditTextField" layoutX="386.0" layoutY="52.0" />
+                                    <Button id="AddOneButton"  layoutX="557.0" layoutY="52.0" mnemonicParsing="false" text="+" />
+                                    <Button id="DeleteOneButton"  layoutX="595.0" layoutY="52.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="28.0" text=" - " />
                                  </children>
                               </AnchorPane>
                            </children>

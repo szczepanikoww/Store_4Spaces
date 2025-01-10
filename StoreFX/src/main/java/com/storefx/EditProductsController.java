@@ -44,6 +44,7 @@ public class EditProductsController {
     public VBox productVBox;
 
     public LoginPageController loginController;
+    public TextField QuantityToEditTextField;
 
     // to przekazuje store z loginController do EditProductsController
     public void setStore(Store store) {
@@ -345,6 +346,18 @@ public class EditProductsController {
         editButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         editButton.setOnAction(event -> editProduct(product));
 
+        Button addOneButton = new Button("Usuń produkt");
+        addOneButton.setLayoutX(700);
+        addOneButton.setLayoutY(250);
+        addOneButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        addOneButton.setOnAction(event -> addOne(product));
+
+        Button removeOneButton = new Button("Edytuj");
+        removeOneButton.setLayoutX(700);
+        removeOneButton.setLayoutY(300);
+        removeOneButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        removeOneButton.setOnAction(event -> removeOne(product));
+
         ImageView imageView = new ImageView(product.getImage());
         imageView.setFitHeight(150);
         imageView.setFitWidth(200);
@@ -379,6 +392,16 @@ public class EditProductsController {
         return productPane;
     }
 
+    private void removeOne(Product product) {
+        store.getInventory().updateProductQuantity(product, -1);
+        refreshQuantity(product);
+    }
+
+    private void addOne(Product product) {
+        store.getInventory().updateProductQuantity(product, 1);
+        refreshQuantity(product);
+    }
+
 
     private void editProduct(Product product) {
 
@@ -387,6 +410,10 @@ public class EditProductsController {
     private void deleteProduct(Product product, AnchorPane productPane) {
         store.getInventory().removeProduct(product);
         productVBox.getChildren().remove(productPane);
+    }
+    
+    public void refreshQuantity(Product product){
+        QuantityToEditTextField.setText(String.valueOf(product.getQuantity()));
     }
 }
 
