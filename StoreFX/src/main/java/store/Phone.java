@@ -9,8 +9,11 @@ public class Phone extends Product {
     private String PhoneDisplay;
     private String PhoneBattery;
 
-    public Phone(int productID, String productName, double productPrice, int productQuantity, String productBrand, String phoneOS, String phoneProcessor, int phoneRAM, int phoneStorage, String phoneCamera, String phoneDisplay, String phoneBattery) {
-        super(productID, productName, productPrice, productQuantity, productBrand);
+    public Phone(){
+
+    }
+    public Phone(String productName, double productPrice, int productQuantity, String productBrand, String phoneOS, String phoneProcessor, int phoneRAM, int phoneStorage, String phoneCamera, String phoneDisplay, String phoneBattery) {
+        super(productName, productPrice, productQuantity, productBrand);
         this.PhoneOS = phoneOS;
         this.PhoneProcessor = phoneProcessor;
         this.PhoneRAM = phoneRAM;
@@ -20,6 +23,25 @@ public class Phone extends Product {
         this.PhoneBattery = phoneBattery;
     }
 
+    //settery do produktu
+    public void setPhoneName(String phoneName) {
+        super.setProductName(phoneName);
+    }
+    public void setPhonePrice(double phonePrice) {
+        super.setProductPrice(phonePrice);
+    }
+    public void setPhoneQuantity(int phoneQuantity) {
+        super.setProductQuantity(phoneQuantity);
+    }
+    public void setPhoneBrand(String phoneBrand) {
+        super.setProductBrand(phoneBrand);
+    }
+
+    public void setPhoneDescription(String phoneDescription) {
+        super.setProductDescription(phoneDescription);
+    }
+
+    //settery do telefonu
     public void setPhoneOS(String phoneOS) {
         this.PhoneOS = phoneOS;
     }
@@ -47,6 +69,11 @@ public class Phone extends Product {
     public void setPhoneBattery(String phoneBattery) {
         this.PhoneBattery = phoneBattery;
     }
+
+    public void setImage(String imagePath) {
+        javafx.scene.image.Image image = new javafx.scene.image.Image(imagePath);
+        super.setImage(image);
+}
 
     public String getPhoneOS() {
         return PhoneOS;

@@ -17,13 +17,13 @@ public class Inventory {
         productsList.remove(product);
     }
 
-    public void updateProduct(Product product) {
-        for (Product p : productsList) {
-            if (p.getProductID() == product.getProductID()) {
-                p.setProductName(product.getProductName());
-                p.setProductPrice(product.getPrice());
-                p.setProductQuantity(product.getQuantity());
-            }
-        }
-    }
+//    public void updateProduct(Product product) {
+//        for (Product p : productsList) {
+//            if (p.getProductID() == product.getProductID()) {
+//                p.setProductName(product.getProductName());
+//                p.setProductPrice(product.getPrice());
+//                p.setProductQuantity(product.getQuantity());
+//            }
+//        }
+//    }
 }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="799.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.EditProductsController">
+  <tabs>
+    <Tab text="Dodaj produkt">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="799.0">
+               <children>
+                   <ImageView id="ProductImage" fx:id="productImageView" fitHeight="134.0" fitWidth="135.0" layoutX="74.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
+                   <Button id="AddPhotoButton" fx:id="AddPhotoButton" layoutX="91.0" layoutY="178.0" mnemonicParsing="false" onAction="#selectPhoto" text="Dodaj zdjęcie" />
+                   <Label layoutX="328.0" layoutY="28.0" text="Podaj nazwę produtku" />
+                   <Label layoutX="328.0" layoutY="61.0" text="Wybierz kategorię produktu" />
+                   <ComboBox id="ProductCategoryComboBox" fx:id="ProductCategoryComboBox" layoutX="515.0" layoutY="57.0" prefWidth="150.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Telefon" />
+                                <String fx:value="Tablet" />
+                                <String fx:value="Laptop" />
+                                <String fx:value="Inny" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                   <TextField id="PrdouctNameTextField" fx:id="ProductNameTextField" layoutX="516.0" layoutY="24.0" />
+                   <TextArea id="ProductDescriptionTextArea" fx:id="ProductDescriptionTextArea" layoutX="35.0" layoutY="280.0" prefHeight="200.0" prefWidth="263.0" />
+                   <Label layoutX="35.0" layoutY="256.0" text="Wstaw opis produktu:" />
+                   <Label layoutX="328.0" layoutY="95.0" text="Podaj cenę" />
+                   <TextField id="ProductPriceTextField" fx:id="ProductPriceTextField" layoutX="516.0" layoutY="91.0" />
+                   <ProgressBar id="AddingProductProgressBar" fx:id="AddingProductProgressBar" layoutX="288.0" layoutY="535.0" prefWidth="200.0" progress="0.0" />
+                   <Label layoutX="328.0" layoutY="126.0" text="Ilość na magazynie" />
+                   <TextField id="ProductQuantityTextField" fx:id="ProductQuantityTextField" layoutX="516.0" layoutY="122.0" />
+                   <TextField id="ProductBrandTextField" fx:id="ProductBrandTextField" layoutX="516.0" layoutY="153.0" />
+                   <Label layoutX="328.0" layoutY="157.0" text="Marka produktu" />
+                   <Separator layoutX="316.0" layoutY="213.0" prefHeight="0.0" prefWidth="451.0" />
+                   <Label fx:id="OSLabel" layoutX="322.0" layoutY="265.0" text="System operacyjny" visible="false" />
+                   <Label fx:id="ParametryLabel" layoutX="320.0" layoutY="229.0" text="Parametry produktu" visible="false">
+                   <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="StorageLabel" layoutX="319.0" layoutY="300.0" text="Pamięć wewnętrzna" visible="false" />
+                  <Label fx:id="RAMLabel" layoutX="324.0" layoutY="336.0" text="Pamięć RAM" visible="false" />
+                  <Label fx:id="ScreenLabel" layoutX="324.0" layoutY="372.0" text="Przękątna ekranu" visible="false" />
+                  <Label fx:id="ProcessorLabel" layoutX="324.0" layoutY="406.0" text="Procesor" visible="false" />
+                  <Label fx:id="BatteryLabel" layoutX="322.0" layoutY="442.0" text="Pojemność Baterii" visible="false" />
+                   <TextField id="ProductOSTextField" fx:id="ProductOSTextField" layoutX="516.0" layoutY="261.0" visible="false" />
+                   <TextField id="ProductStorageTextField" fx:id="ProductStorageTextField" layoutX="516.0" layoutY="296.0" visible="false" />
+                   <TextField id="ProductRamTextField" fx:id="ProductRamTextField" layoutX="516.0" layoutY="332.0" visible="false" />
+                   <TextField id="ProductScreenTextField" fx:id="ProductScreenTextField" layoutX="516.0" layoutY="368.0" visible="false" />
+                   <TextField id="ProductProcessorTextField" fx:id="ProductProcessorTextField" layoutX="516.0" layoutY="402.0" visible="false" />
+                   <TextField id="ProductBatteryTextField" fx:id="ProductBatteryTextField" layoutX="516.0" layoutY="438.0" visible="false" />
+                   <Label id="LaptopGraphicCard" fx:id="LaptopGraphicCard" layoutX="324.0" layoutY="481.0" text="Karta graficzna" visible="false" />
+                   <TextField id="LaptopGraphicCardTextField" fx:id="LaptopGraphicCardTextField" layoutX="515.0" layoutY="477.0" visible="false" />
+                   <Label id="PhoneAparatLabel" fx:id="PhoneAparatLabel" layoutX="322.0" layoutY="481.0" text="Aparat (Mpix)" visible="false" />
+                   <TextField id="PhoneApartTextField" fx:id="PhoneApartTextField" layoutX="516.0" layoutY="477.0" visible="false" />
+                   <Button id="SaveProductButton" fx:id="SaveProductButton" layoutX="191.0" layoutY="575.0" mnemonicParsing="false" onAction="#onSaveProductButton" text="Zapisz">
+                   <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button id="CancelAddingProduct" fx:id="CancelAddingProductButton" layoutX="479.0" layoutY="578.0" mnemonicParsing="false" onAction="#onCancelAddingProductButton" text="Anuluj">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Edytuj produkty">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ScrollPane prefHeight="638.0" prefWidth="799.0">
+                     <content>
+                        <VBox fx:id="productVBox" prefHeight="636.0" prefWidth="798.0">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                     <Button fx:id="DeleteProductButton" layoutX="595.0" layoutY="149.0" mnemonicParsing="false" text="Usuń produkt" />
+                                     <Button fx:id="EditProductButton" layoutX="705.0" layoutY="149.0" mnemonicParsing="false" text="Edytuj" />
+                                     <ImageView fx:id="ProductToEditImageView" fitHeight="150.0" fitWidth="200.0" layoutX="24.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                                     <Label fx:id="ProductNameToEditLabel" layoutX="260.0" layoutY="25.0" text="Nazwa Produktu" />
+                                     <Label fx:id="QuantityToEditLabel" layoutX="260.0" layoutY="56.0" text="Ilość na magazynie" />
+                                     <TextField fx:id="ProductNameToEditTextField" layoutX="386.0" layoutY="21.0" />
+                                     <TextField fx:id="QuantityToEditTextField" layoutX="386.0" layoutY="52.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

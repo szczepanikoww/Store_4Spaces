@@ -10,8 +10,11 @@ public class Laptop extends Product{
     private String LaptopBattery;
 
     //Constructor
-    public Laptop(int productID, String productName, double productPrice, int productQuantity, String productBrand, String laptopOS, String laptopProcessor, int laptopRAM, int laptopStorage, String laptopGraphics, String laptopDisplay, String laptopBattery) {
-        super(productID, productName, productPrice, productQuantity, productBrand);
+
+    public Laptop() {
+    }
+    public Laptop(String productName, double productPrice, int productQuantity, String productBrand, String laptopOS, String laptopProcessor, int laptopRAM, int laptopStorage, String laptopGraphics, String laptopDisplay, String laptopBattery) {
+        super(productName, productPrice, productQuantity, productBrand);
         this.LaptopOS = laptopOS;
         this.LaptopProcessor = laptopProcessor;
         this.LaptopRAM = laptopRAM;
@@ -19,6 +22,24 @@ public class Laptop extends Product{
         this.LaptopGraphics = laptopGraphics;
         this.LaptopDisplay = laptopDisplay;
         this.LaptopBattery = laptopBattery;
+    }
+
+    //setters for product
+
+    public void setLaptopName(String laptopName) {
+        super.setProductName(laptopName);
+    }
+    public void setLaptopPrice(double laptopPrice) {
+        super.setProductPrice(laptopPrice);
+    }
+    public void setLaptopQuantity(int laptopQuantity) {
+        super.setProductQuantity(laptopQuantity);
+    }
+    public void setLaptopBrand(String laptopBrand) {
+        super.setProductBrand(laptopBrand);
+    }
+    public void setLaptopDescription(String laptopDescription) {
+        super.setProductDescription(laptopDescription);
     }
 
     //setters

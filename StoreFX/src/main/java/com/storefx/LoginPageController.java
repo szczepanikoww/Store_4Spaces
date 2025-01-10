@@ -47,6 +47,25 @@ public class LoginPageController {
     }
 
 
+    public void openEditsWindow(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editProducts.fxml"));
+            Parent root = loader.load();
+            EditProductsController controller = loader.getController();
+            controller.setMainController(this);
+
+            Stage stage = new Stage();
+            stage.setTitle("Zarządzanie Magazynem");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            Stage loginStage = (Stage) LoginButton.getScene().getWindow();
+            loginStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void onLoginButton(ActionEvent actionEvent) {
         String login = LoginTextField.getText();
         String password = PasswordField.getText();
@@ -72,6 +91,7 @@ public class LoginPageController {
                     System.out.println("Zalogowano admina");
                     mainController.setLoginLabelAdmin(login);
                     loginSuccessful = true;
+                    openEditsWindow();
                     break;
                     }
                 }

@@ -1,15 +1,19 @@
 package store;
 
-abstract class Product {
-    private int ProductID;
+import javafx.scene.image.Image;
+
+public class Product {
     private String ProductName; //można tutaj dać ProductModel zamiast ProductName
     private double ProductPrice;
     private int ProductQuantity;
     private String ProductBrand;
+    private Image ProductImage;
+    private String ProductDescription;
 
     //Constructor
-    public Product(int productID, String productName, double productPrice, int productQuantity, String productBrand) {
-        this.ProductID = productID;
+    public Product() {
+    }
+    public Product(String productName, double productPrice, int productQuantity, String productBrand) {
         this.ProductName = productName;
         this.ProductPrice = productPrice;
         this.ProductQuantity = productQuantity;
@@ -32,9 +36,12 @@ abstract class Product {
         this.ProductBrand = productBrand;
     }
 
-    //getters
-    public int getProductID() {
-        return ProductID;
+    public void setImage(Image productImage) {
+        this.ProductImage = productImage;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.ProductDescription = productDescription;
     }
 
     public String getProductName() {
@@ -54,7 +61,7 @@ abstract class Product {
     }
 
     public String getDetails() {
-        return "Product ID: " + ProductID + "\nProduct Name: " + ProductName + "\nProduct Price: " + ProductPrice + "\nProduct Quantity: " + ProductQuantity + "\nProduct Brand: " + ProductBrand;
+        return "Product Name: " + ProductName + "\nProduct Price: " + ProductPrice + "\nProduct Quantity: " + ProductQuantity + "\nProduct Brand: " + ProductBrand;
     }
 
     // other methods
@@ -62,4 +69,7 @@ abstract class Product {
         ProductQuantity += quantity;
     }
 
+    public Image getImage() {
+        return ProductImage;
+    }
 }
