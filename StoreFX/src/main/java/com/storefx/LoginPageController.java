@@ -17,6 +17,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class LoginPageController {
+
+    public Store store;
+    private String userType;
+    private mainPageController mainController;
+
     @FXML
     public ImageView LoginLogoImageView;
 
@@ -29,10 +34,12 @@ public class LoginPageController {
 
     private List<Admin> admins = Store.getAdmins();
     private List<Customer> customers = Store.getCustomers();
-    private String userType;
-    private mainPageController mainController;
 
-
+    //ta metoda przekazuje store utworzony w initialize() w mainPageController
+    public void setStore(Store store) {
+        this.store = store;
+        System.out.println("Store set in LoginPageController: " + store);
+    }
 
     public void setUserType(String userType) {
         this.userType = userType;
@@ -46,16 +53,17 @@ public class LoginPageController {
         this.mainController = mainController;
     }
 
-
+    //to otwiera okno edycji dla admina
     public void openEditsWindow(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("editProducts.fxml"));
             Parent root = loader.load();
             EditProductsController controller = loader.getController();
+            controller.setStore(store);
             controller.setMainController(this);
 
             Stage stage = new Stage();
-            stage.setTitle("Zarządzanie Magazynem");
+            stage.setTitle("Zarządzanie magazynem");
             stage.setScene(new Scene(root));
             stage.show();
 

@@ -1,5 +1,9 @@
 package store;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
+
 public class Phone extends Product {
     private String PhoneOS;
     private String PhoneProcessor;
@@ -12,7 +16,10 @@ public class Phone extends Product {
     public Phone(){
 
     }
-    public Phone(String productName, double productPrice, int productQuantity, String productBrand, String phoneOS, String phoneProcessor, int phoneRAM, int phoneStorage, String phoneCamera, String phoneDisplay, String phoneBattery) {
+    public Phone(String productName, double productPrice, int productQuantity, String productBrand,
+                 String phoneOS, String phoneProcessor, int phoneRAM, int phoneStorage,
+                 String phoneCamera, String phoneDisplay, String phoneBattery) {
+
         super(productName, productPrice, productQuantity, productBrand);
         this.PhoneOS = phoneOS;
         this.PhoneProcessor = phoneProcessor;
@@ -71,9 +78,18 @@ public class Phone extends Product {
     }
 
     public void setImage(String imagePath) {
-        javafx.scene.image.Image image = new javafx.scene.image.Image(imagePath);
-        super.setImage(image);
-}
+        try {
+            File file = new File(imagePath);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+                super.setImage(image);
+            } else {
+                System.out.println("Plik nie istnieje: " + file.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public String getPhoneOS() {
         return PhoneOS;

@@ -10,11 +10,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import store.Customer;
+import store.Phone;
+import store.Store;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class mainPageController {
+
+    public Store store;
 
     public Label HomeMenuButton;
     public Label SmartphonesMenuButton;
@@ -29,7 +33,22 @@ public class mainPageController {
     public Menu loginMenu;
 
 
+    //dodawanie produktow do inventory na start sklepu
+    public void initialize() {
+        store = new Store();
+        System.out.println(store);
+        Phone phone1 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
+        Phone phone2 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
+        Phone phone3 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
 
+        phone1.setImage("StoreFX/src/main/resources/images/s21.jpg");
+        phone2.setImage("StoreFX/src/main/resources/images/ip12.jpg");
+        phone3.setImage("StoreFX/src/main/resources/images/mi11.jpg");
+
+        store.getInventory().addProduct(phone1);
+        store.getInventory().addProduct(phone2);
+        store.getInventory().addProduct(phone3);
+    }
 
 
     //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy klientem)
@@ -39,6 +58,7 @@ public class mainPageController {
             Parent root = loader.load();
             LoginPageController controller = loader.getController();
             controller.setUserType(userType);
+            controller.setStore(store); // ustawia sklep w kontrolerze logowania
             controller.setMainController(this);
 
             Stage stage = new Stage();

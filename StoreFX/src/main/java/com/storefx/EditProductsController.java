@@ -11,51 +11,67 @@ import store.*;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class EditProductsController {
+
+    public Store store;
+
+    @FXML
+    public Label OSLabel, ParametryLabel, StorageLabel, RAMLabel, ScreenLabel, ProcessorLabel,
+                BatteryLabel, LaptopGraphicCard, PhoneAparatLabel;
+    @FXML
+    public TextField LaptopGraphicCardTextField, PhoneApartTextField, ProductNameTextField,
+                    ProductPriceTextField, ProductQuantityTextField, ProductBrandTextField,
+                    ProductOSTextField, ProductStorageTextField, ProductScreenTextField,
+                    ProductProcessorTextField, ProductBatteryTextField, ProductRamTextField;
+    @FXML
+    public ImageView productImageView;
+
+    @FXML
+    public Button AddPhotoButton, SaveProductButton, CancelAddingProductButton;
+
+    @FXML
+    public File selectedImageFile;
+
+    @FXML
+    public TextArea ProductDescriptionTextArea;
 
     @FXML
     public ComboBox<String> ProductCategoryComboBox;
 
     @FXML
-    public TextField LaptopGraphicCardTextField, PhoneApartTextField, ProductNameTextField, ProductPriceTextField;
+    public VBox productVBox;
 
-    @FXML
-    public Label LaptopGraphicCard, PhoneAparatLabel;
+    public LoginPageController loginController;
 
-    @FXML
-    public ImageView productImageView;
-    public Button AddPhotoButton;
-    public File selectedImageFile;
-    public TextField ProductQuantityTextField;
-    public TextField ProductBrandTextField;
-    public TextField ProductOSTextField;
-    public TextField ProductStorageTextField;
-    public TextField ProductScreenTextField;
-    public TextField ProductProcessorTextField;
-    public TextField ProductBatteryTextField;
-    public Button SaveProductButton;
-    public Button CancelAddingProductButton;
-    public TextField ProductRamTextField;
-    public Label OSLabel;
-    public Label ParametryLabel;
-    public Label StorageLabel;
-    public Label RAMLabel;
-    public Label ScreenLabel;
-    public Label ProcessorLabel;
-    public Label BatteryLabel;
-    public TextArea ProductDescriptionTextArea;
-
-    @FXML
-    private VBox productVBox;
-
-    private Store store;
-    private LoginPageController loginController;
+    // to przekazuje store z loginController do EditProductsController
+    public void setStore(Store store) {
+        this.store = store;
+        System.out.println("Store set in EditProductsController: " + store);
+        if (store != null) {
+            ArrayList<Product> products = store.getInventory().getProducts();
+            for (Product product : products) {
+                AnchorPane productPane = createProductPane(product);
+                productVBox.getChildren().add(productPane);
+            }
+        }
+    }
 
     @FXML
     public void initialize() {
         ProductCategoryComboBox.setOnAction(event -> handleCategoryChange());
         AddPhotoButton.setOnAction(event -> selectPhoto());
+
+        // to tu nie moze byc, bo cały czas jest store == null, dopiero pozniej zmienia sie na nie null
+//        if (store != null) {
+//            ArrayList<Product> products = store.getInventory().getProducts();
+//            for (Product product : products) {
+//                System.out.println(product.getProductName());
+//                AnchorPane productPane = createProductPane(product);
+//                productVBox.getChildren().add(productPane);
+//            }
+//        }
     }
 
     @FXML
@@ -127,7 +143,6 @@ public class EditProductsController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
         selectedImageFile = fileChooser.showOpenDialog(null);
         if (selectedImageFile != null) {
-            // Assuming you have an ImageView named productImageView to display the selected image
             productImageView.setImage(new Image(selectedImageFile.toURI().toString()));
         }
     }
@@ -160,8 +175,8 @@ public class EditProductsController {
                     System.out.println("Utworzono telefon z zdjęciem");
                 }
 
-                // Dodaj produkt do listy i wyświetl
-                // products.add(phone);
+                store.getInventory().addProduct(phone);
+
                 try {
                     AnchorPane productPane = createProductPane(phone);
                     productVBox.getChildren().add(productPane);
@@ -198,8 +213,8 @@ public class EditProductsController {
                     laptop.setImage(new Image(selectedImageFile.toURI().toString()));
                 }
 
-                // Dodaj produkt do listy i wyświetl
-                // productList.add(laptop);
+                store.getInventory().addProduct(laptop);
+
                 AnchorPane productPane = createProductPane(laptop);
                 productVBox.getChildren().add(productPane);
 
@@ -229,8 +244,7 @@ public class EditProductsController {
                     tablet.setImage(new Image(selectedImageFile.toURI().toString()));
                 }
 
-                // Dodaj produkt do listy i wyświetl
-                // productList.add(tablet);
+                store.getInventory().addProduct(tablet);
 
                 AnchorPane productPane = createProductPane(tablet);
                 productVBox.getChildren().add(productPane);
@@ -254,8 +268,7 @@ public class EditProductsController {
                     product.setImage(new Image(selectedImageFile.toURI().toString()));
                 }
 
-//                // Dodaj produkt do listy i wyświetl
-//                productList.add(product);
+                store.getInventory().addProduct(product);
 
                 AnchorPane productPane = createProductPane(product);
                 productVBox.getChildren().add(productPane);

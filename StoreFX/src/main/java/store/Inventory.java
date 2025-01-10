@@ -3,11 +3,7 @@ package store;
 import java.util.ArrayList;
 
 public class Inventory {
-    private ArrayList<Product> productsList;
-
-    public Inventory() {
-        productsList = new ArrayList<>();
-    }
+    private ArrayList<Product> productsList = new ArrayList<>();
 
     public void addProduct(Product product) {
         productsList.add(product);
@@ -15,6 +11,10 @@ public class Inventory {
 
     public void removeProduct(Product product) {
         productsList.remove(product);
+    }
+
+    public ArrayList<Product> getProducts() {
+        return productsList;
     }
 
 //    public void updateProduct(Product product) {
@@ -26,4 +26,5 @@ public class Inventory {
 //            }
 //        }
 //    }
+
 }
