@@ -370,6 +370,7 @@ public class EditProductsController {
     }
 
     private void editProduct(Product product) {
+
     }
 
     private void deleteProduct(Product product, AnchorPane productPane) {
