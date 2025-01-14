@@ -14,6 +14,7 @@ public class Phone extends Product {
     private String PhoneBattery;
 
     public Phone(){
+        this.setPhoneCategory("Phone");
 
     }
     public Phone(String productName, double productPrice, int productQuantity, String productBrand,
@@ -28,6 +29,7 @@ public class Phone extends Product {
         this.PhoneCamera = phoneCamera;
         this.PhoneDisplay = phoneDisplay;
         this.PhoneBattery = phoneBattery;
+        this.setPhoneCategory("Phone");
     }
 
     //settery do produktu
@@ -47,6 +49,12 @@ public class Phone extends Product {
     public void setPhoneDescription(String phoneDescription) {
         super.setProductDescription(phoneDescription);
     }
+
+    public void setPhoneCategory(String phoneCategory) {
+        super.setProductCategory(phoneCategory);
+    }
+
+
 
     //settery do telefonu
     public void setPhoneOS(String phoneOS) {
@@ -122,4 +130,6 @@ public class Phone extends Product {
     public String getDetails() {
         return super.getDetails() + "\nPhone OS: " + PhoneOS + "\nPhone Processor: " + PhoneProcessor + "\nPhone RAM: " + PhoneRAM + "\nPhone Storage: " + PhoneStorage + "\nPhone Camera: " + PhoneCamera + "\nPhone Display: " + PhoneDisplay + "\nPhone Battery: ";
     }
+
+
 }
