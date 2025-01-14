@@ -18,8 +18,8 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="250.0" minHeight="250.0" prefHeight="250.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="250.0" minHeight="250.0" prefHeight="250.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="290.0" minHeight="290.0" prefHeight="290.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="290.0" minHeight="290.0" prefHeight="290.0" vgrow="SOMETIMES" />
 
                     </rowConstraints>
                     <children>

@@ -61,7 +61,7 @@ public class Product {
     }
 
     public String getDetails() {
-        return "Product Name: " + ProductName + "\nProduct Price: " + ProductPrice + "\nProduct Quantity: " + ProductQuantity + "\nProduct Brand: " + ProductBrand;
+        return "\nProduct Quantity: " + ProductQuantity + "\nProduct Brand: " + ProductBrand;
     }
 
     public Image getImage() {
