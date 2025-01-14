@@ -81,4 +81,8 @@ public class Order {
         }
         return total;
     }
+
+    public void clearCart() {
+        products.clear();
+    }
 }
