@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import store.Customer;
 import store.Phone;
 import store.Store;
+import com.storefx.CartPageController;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class mainPageController {
     public Menu loginMenu;
 
     private LoginPageController loginPageController;
+    private CartPageController cartPageController;
 
 
     //dodawanie produktow do inventory na start sklepu
@@ -161,7 +163,7 @@ public class mainPageController {
             Pane newPane = loader.load();
             CartPageController controller = loader.getController();
             controller.setMainController(this);
-            controller.setStore(store);
+            controller.setStore(this.store);
             controller.setAktCustomer(aktCustomer);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);

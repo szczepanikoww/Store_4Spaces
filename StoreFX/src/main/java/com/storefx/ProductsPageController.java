@@ -19,6 +19,7 @@ public class ProductsPageController {
     public VBox productsVbox;
     public GridPane productsGrid;
     public Store store;
+    public Button addToCartButton;
 
     public void setStore(Store store){
         this.store = store;
@@ -94,12 +95,37 @@ public class ProductsPageController {
 
         Button addToCartButton = new Button("Add to cart");
         addToCartButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;");
-
+        addToCartButton.setOnAction(e -> onAddCartButton(product));
+        addToCartButton.setId("addToCartButton");
         vbox.getChildren().addAll(imageView, nameLabel, detailsLabel, priceLabel, addToCartButton);
 
         return vbox;
 
     }
 
+    public void removeVbox(VBox vbox){
+        productsGrid.getChildren().remove(vbox);
+    }
+
+    public void onAddCartButton(Product product){
+        store.getCart().addProduct(product,1);
+        product.setProductQuantity(product.getQuantity()-1);
+        if(product.getQuantity() > 0) {
+            refreshQuantity(product);
+        }else if(product.getQuantity() == 1){
+            removeVbox(productsVbox);
+        }
+    }
+
+    public void refreshQuantity(Product product){
+        for(int i = 0; i < productsGrid.getChildren().size(); i++){
+            VBox vbox = (VBox) productsGrid.getChildren().get(i);
+            Label nameLabel = (Label) vbox.getChildren().get(1);
+            if(nameLabel.getText().equals(product.getProductName())){
+                Label detailsLabel = (Label) vbox.getChildren().get(2);
+                detailsLabel.setText(product.getDetails());
+            }
+        }
+    }
 
 }

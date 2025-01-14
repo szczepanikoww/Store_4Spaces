@@ -33,12 +33,13 @@ public class CartPageController {
     public Store store;
     public mainPageController mainPageController;
     public Customer aktCustomer;
+    Map<Product, Integer> productsInCart;
 
     public void setStore(Store store) {
         this.store = store;
+        System.out.println("Store set in EditProductsController: " + store);
+        this.productsInCart = store.getCart().getProductsInCart();
     }
-
-    Map<Product, Integer> productsInCart = store.getCart().getProductsInCart();
 
     public void setAktCustomer(Customer customer) {
         this.aktCustomer = customer;
