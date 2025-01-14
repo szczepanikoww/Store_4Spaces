@@ -1,6 +1,7 @@
 package store;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Inventory {
     private ArrayList<Product> productsList = new ArrayList<>();
@@ -19,7 +20,7 @@ public class Inventory {
 
     public void updateProductQuantity(Product product, int i) {
         for (Product p : productsList) {
-            if (p.getProductName() == product.getProductName()) {
+            if (Objects.equals(p.getProductName(), product.getProductName())) {
                 p.setProductQuantity(p.getQuantity() + i);
             }
         }

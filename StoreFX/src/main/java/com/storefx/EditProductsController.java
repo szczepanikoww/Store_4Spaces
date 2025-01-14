@@ -2,19 +2,29 @@ package com.storefx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import store.*;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.IOException;
+import java.security.cert.PolicyNode;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditProductsController {
-
+    public EditSingleProduct editSingleProduct;
     public Store store;
 
     @FXML
@@ -44,7 +54,16 @@ public class EditProductsController {
     public VBox productVBox;
 
     public LoginPageController loginController;
-    public TextField QuantityToEditTextField;
+    @FXML
+    public TextField quantityTextField, cenaTextField;
+    @FXML
+    public VBox usersVBox;
+
+    private Map<Product, TextField> quantityTextFieldMap = new HashMap<>();
+    private Map<Product, TextField> cenaTextFieldMap = new HashMap<>();
+    private Map<Product, ImageView> imageViewMap = new HashMap<>();
+
+
 
     // to przekazuje store z loginController do EditProductsController
     public void setStore(Store store) {
@@ -56,6 +75,12 @@ public class EditProductsController {
                 AnchorPane productPane = createProductPane(product);
                 productVBox.getChildren().add(productPane);
             }
+
+            ArrayList<Customer> customers = store.getCustomers();
+            for (Customer customer : customers) {
+                AnchorPane userPane = createUserPane(customer);
+                usersVBox.getChildren().add(userPane);
+            }
         }
     }
 
@@ -63,16 +88,6 @@ public class EditProductsController {
     public void initialize() {
         ProductCategoryComboBox.setOnAction(event -> handleCategoryChange());
         AddPhotoButton.setOnAction(event -> selectPhoto());
-
-        // to tu nie moze byc, bo cały czas jest store == null, dopiero pozniej zmienia sie na nie null
-//        if (store != null) {
-//            ArrayList<Product> products = store.getInventory().getProducts();
-//            for (Product product : products) {
-//                System.out.println(product.getProductName());
-//                AnchorPane productPane = createProductPane(product);
-//                productVBox.getChildren().add(productPane);
-//            }
-//        }
     }
 
     @FXML
@@ -346,16 +361,16 @@ public class EditProductsController {
         editButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         editButton.setOnAction(event -> editProduct(product));
 
-        Button addOneButton = new Button("Usuń produkt");
-        addOneButton.setLayoutX(700);
-        addOneButton.setLayoutY(250);
-        addOneButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        Button addOneButton = new Button("+");
+        addOneButton.setLayoutX(660);
+        addOneButton.setLayoutY(52);
+        addOneButton.setStyle("-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         addOneButton.setOnAction(event -> addOne(product));
 
-        Button removeOneButton = new Button("Edytuj");
+        Button removeOneButton = new Button("-");
         removeOneButton.setLayoutX(700);
-        removeOneButton.setLayoutY(300);
-        removeOneButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        removeOneButton.setLayoutY(52);
+        removeOneButton.setStyle("-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         removeOneButton.setOnAction(event -> removeOne(product));
 
         ImageView imageView = new ImageView(product.getImage());
@@ -366,30 +381,99 @@ public class EditProductsController {
         imageView.setStyle("-fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 5;");
 
         Label nameLabel = new Label("Nazwa produktu");
-        nameLabel.setLayoutX(200);
+        nameLabel.setLayoutX(300);
         nameLabel.setLayoutY(25);
         nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
         Label quantityLabel = new Label("Ilość na magazynie");
-        quantityLabel.setLayoutX(200);
+        quantityLabel.setLayoutX(300);
         quantityLabel.setLayoutY(56);
         quantityLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
+        Label cenaLabel = new Label("Cena");
+        cenaLabel.setLayoutX(300);
+        cenaLabel.setLayoutY(83);
+        cenaLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
         TextField nameTextField = new TextField(product.getProductName());
-        nameTextField.setLayoutX(386);
+        nameTextField.setLayoutX(450);
         nameTextField.setLayoutY(21);
+        nameTextField.setPrefWidth(180);
+        nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;-fx-editable: false;");
+
+        TextField quantityTextField = new TextField(String.valueOf(product.getQuantity()));
+        quantityTextField.setId("quantityTextField");
+        quantityTextField.setLayoutX(450);
+        quantityTextField.setLayoutY(52);
+        quantityTextField.setPrefWidth(180);
+        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
+
+        TextField cenaTextField = new TextField(String.valueOf(product.getPrice()));
+        cenaTextField.setId("cenaTextField");
+        cenaTextField.setLayoutX(450);
+        cenaTextField.setLayoutY(83);
+        cenaTextField.setPrefWidth(180);
+        cenaTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
+
+        productPane.getChildren().addAll(deleteButton, editButton, addOneButton, removeOneButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField, cenaTextField, cenaLabel);
+        quantityTextFieldMap.put(product, quantityTextField);
+        cenaTextFieldMap.put(product, cenaTextField);
+        imageViewMap.put(product, imageView);
+        return productPane;
+    }
+
+
+    public AnchorPane createUserPane(Customer customer) {
+        AnchorPane userPane = new AnchorPane();
+        userPane.setPrefSize(900, 100);
+        userPane.setStyle("-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
+
+        Label nameLabel = new Label("Imię");
+        nameLabel.setLayoutX(50);
+        nameLabel.setLayoutY(25);
+        nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
+        TextField nameTextField = new TextField(customer.getCustomerName());
+        nameTextField.setLayoutX(50);
+        nameTextField.setLayoutY(50);
         nameTextField.setPrefWidth(180);
         nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
 
-        TextField quantityTextField = new TextField(String.valueOf(product.getQuantity()));
-        quantityTextField.setLayoutX(386);
-        quantityTextField.setLayoutY(52);
-        quantityTextField.setPrefWidth(180);
-        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+        Label surnameLabel = new Label("Nazwisko");
+        surnameLabel.setLayoutX(250);
+        surnameLabel.setLayoutY(25);
+        surnameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
-        productPane.getChildren().addAll(deleteButton, editButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField);
+        TextField surnameTextField = new TextField(customer.getCustomerSurname());
+        surnameTextField.setLayoutX(250);
+        surnameTextField.setLayoutY(50);
+        surnameTextField.setPrefWidth(180);
+        surnameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
 
-        return productPane;
+        Label usernameLabel = new Label("Nazwa użytkownika");
+        usernameLabel.setLayoutX(450);
+        usernameLabel.setLayoutY(25);
+        usernameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
+        TextField usernameTextField = new TextField(customer.getLogin());
+        usernameTextField.setLayoutX(450);
+        usernameTextField.setLayoutY(50);
+        usernameTextField.setPrefWidth(180);
+        usernameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+
+        Button deleteButton = new Button("Usuń użytkownika");
+        deleteButton.setLayoutX(700);
+        deleteButton.setLayoutY(38);
+        deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        deleteButton.setOnAction(event -> deleteUser(customer, userPane));
+
+        userPane.getChildren().addAll(nameLabel, surnameLabel, usernameLabel, nameTextField, surnameTextField, usernameTextField, deleteButton);
+        return userPane;
+    }
+
+    private void deleteUser(Customer customer, AnchorPane userPane) {
+        store.getCustomers().remove(customer);
+        usersVBox.getChildren().remove(userPane);
     }
 
     private void removeOne(Product product) {
@@ -404,8 +488,38 @@ public class EditProductsController {
 
 
     private void editProduct(Product product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editSingleProduct.fxml"));
+            Parent root = loader.load();
 
+            EditSingleProduct controller = loader.getController();
+            controller.setProduct(product);
+            controller.setStore(store);
+            controller.setMainController(this);
+
+            Stage stage = new Stage();
+            stage.setTitle("Edytuj produkt");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
+
+    public void updateProductPane(Product product) {
+    TextField quantityTextField = quantityTextFieldMap.get(product);
+    TextField cenaTextField = cenaTextFieldMap.get(product);
+    ImageView imageView = imageViewMap.get(product);
+    if (quantityTextField != null) {
+        quantityTextField.setText(String.valueOf(product.getQuantity()));
+    }
+    if (cenaTextField != null) {
+        cenaTextField.setText(String.valueOf(product.getPrice()));
+    }
+    if(imageView != null){
+        imageView.setImage(product.getImage());
+    }
+}
 
     private void deleteProduct(Product product, AnchorPane productPane) {
         store.getInventory().removeProduct(product);
@@ -413,7 +527,8 @@ public class EditProductsController {
     }
     
     public void refreshQuantity(Product product){
-        QuantityToEditTextField.setText(String.valueOf(product.getQuantity()));
+        TextField quantityTextField = quantityTextFieldMap.get(product);
+        quantityTextField.setText(String.valueOf(product.getQuantity()));
     }
 }
 
