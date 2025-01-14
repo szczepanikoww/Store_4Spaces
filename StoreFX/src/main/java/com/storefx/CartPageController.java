@@ -47,11 +47,11 @@ public class CartPageController {
 
 
     //ta metoda to chyba nie tutaj ale nie jestem pewien
-    public void addProductToCart(String productName, int quantity) {
-        store.getCart().addProduct(productName, quantity);
-    }
+    //public void addProductToCart(String productName, int quantity) {
+    //    store.getCart().addProduct(productName, quantity);
+    //}
 
-    public void goToOrder(ActionEvent actionEvent) {
+    public void goToOrder(ActionEvent actionEvent) throws FileNotFoundException {
         showSuccess("Zamówienie zostało złożone pomyślnie");
         Order order = new Order(1, store.getCustomers().get(0), store.getCart().getProducts(), store.getCart().getTotalPrice(), new Date());
         store.getOrders().add(order);
@@ -104,7 +104,7 @@ public class CartPageController {
         twoColTable2.addCell(getCell10fLeft("Firma: ", true));
         twoColTable2.addCell(getCell10fLeft("Store 4Spaces", false));
         twoColTable2.addCell(getCell10fLeft("Imię i nazwisko: ", true));
-        twoColTable2.addCell(getCell10fLeft(, false));
+        twoColTable2.addCell(getCell10fLeft("cos tu ma byc", false));
 
         document.add(twoColTable2);
 
@@ -112,7 +112,7 @@ public class CartPageController {
         twoColTable3.addCell(getCell10fLeft("Adres: ", true));
         twoColTable3.addCell(getCell10fLeft("30-059 Kraków, al. Adama Mickiewicza 30 ", false));
         twoColTable3.addCell(getCell10fLeft("Adres: ", true));
-        twoColTable3.addCell(getCell10fLeft(, false));
+        twoColTable3.addCell(getCell10fLeft("tutaj tez", false));
 
         document.add(twoColTable3);
 
@@ -121,7 +121,7 @@ public class CartPageController {
         twoColTable4.addCell(getCell10fLeft("Adres email: ", true));
         twoColTable4.addCell(getCell10fLeft("store4spaces@email.com", false));
         twoColTable4.addCell(getCell10fLeft("Adres email: ", true));
-        twoColTable4.addCell(getCell10fLeft(, false));
+        twoColTable4.addCell(getCell10fLeft("...", false));
 
         document.add(twoColTable4);
 
@@ -129,7 +129,7 @@ public class CartPageController {
         twoColTable5.addCell(getCell10fLeft("Nr telefonu: ", true));
         twoColTable5.addCell(getCell10fLeft("+48 515 626 989", false));
         twoColTable5.addCell(getCell10fLeft("Nr telefonu: ", true));
-        twoColTable5.addCell(getCell10fLeft(, false));
+        twoColTable5.addCell(getCell10fLeft("...", false));
 
         document.add(twoColTable5.setMarginBottom(10f));
 

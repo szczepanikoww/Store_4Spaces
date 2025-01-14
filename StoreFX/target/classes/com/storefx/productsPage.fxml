@@ -54,7 +54,7 @@
                                         <Insets top="5.0" />
                                     </VBox.margin>
                                 </Label>
-                                <Button style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;" text="Dodaj do koszyka" />
+                                <Button fx:id="addToCartButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;" text="Dodaj do koszyka" />
                             </children>
                         </VBox>
                     </children>

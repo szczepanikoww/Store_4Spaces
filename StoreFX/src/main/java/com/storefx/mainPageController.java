@@ -74,6 +74,7 @@ public class mainPageController {
         store.getCustomers().add(customer1);
         store.getCustomers().add(customer2);
 
+
     }
     public void setLoginPageController(LoginPageController loginPageController){
         this.loginPageController = loginPageController;
@@ -131,6 +132,7 @@ public class mainPageController {
             ScrollPane newPane = loader.load();
             ProductsPageController controller = loader.getController();
             controller.setProducts(store.getInventory().getProducts(), category);
+            controller.setStore(this.store);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){

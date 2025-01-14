@@ -85,4 +85,12 @@ public class Order {
     public void clearCart() {
         products.clear();
     }
+
+    public Object getDate() {
+        return orderDate;
+    }
+
+    public int getId() {
+        return OrderID;
+    }
 }

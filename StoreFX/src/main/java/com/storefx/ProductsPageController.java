@@ -11,13 +11,20 @@ import store.Product;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import store.Store;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class ProductsPageController {
     public VBox productsVbox;
     public GridPane productsGrid;
+    public Button addToCartButton;
+
+    public Store store;
+
+    public void setStore(Store store) {this.store = store;}
 
     public void setProducts(List<Product> products, String category) {
         productsGrid.getChildren().clear();
@@ -90,6 +97,8 @@ public class ProductsPageController {
 
         Button addToCartButton = new Button("Add to cart");
         addToCartButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;");
+        addToCartButton.setId("addToCartButton");
+        addToCartButton.setOnAction(event -> onAddToCartButton(product));
 
         vbox.getChildren().addAll(imageView, nameLabel, detailsLabel, priceLabel, addToCartButton);
 
@@ -98,4 +107,12 @@ public class ProductsPageController {
     }
 
 
+
+
+    public void onAddToCartButton(Product product) {
+        store.getCart().addProduct(product, 1);
+        product.setProductQuantity(product.getQuantity()-1);
+        store.getCart().showMap();
+
+    }
 }

@@ -51,4 +51,10 @@ public class Cart {
         return 0;
     }
 
+    public void showMap() {
+        for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
+            System.out.println(entry.getKey().getProductName() + " " + entry.getValue());
+        }
+    }
+
 }
