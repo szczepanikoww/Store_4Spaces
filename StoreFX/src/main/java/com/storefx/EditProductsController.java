@@ -3,6 +3,7 @@ package com.storefx;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,7 +17,10 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditProductsController {
     public EditSingleProduct editSingleProduct;
@@ -52,6 +56,14 @@ public class EditProductsController {
     public TextField QuantityToEditTextField;
     public Label CenaLabel;
     public TextField CenaTextField;
+    @FXML
+    public TextField quantityTextField, cenaTextField;
+
+    private Map<Product, TextField> quantityTextFieldMap = new HashMap<>();
+    private Map<Product, TextField> cenaTextFieldMap = new HashMap<>();
+    private Map<Product, ImageView> imageViewMap = new HashMap<>();
+
+
 
     // to przekazuje store z loginController do EditProductsController
     public void setStore(Store store) {
@@ -351,6 +363,7 @@ public class EditProductsController {
 
         Button removeOneButton = new Button("-");
         removeOneButton.setLayoutX(660);
+
         removeOneButton.setLayoutY(100);
         removeOneButton.setStyle("-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         removeOneButton.setOnAction(event -> removeOne(product));
@@ -384,19 +397,23 @@ public class EditProductsController {
         nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;-fx-editable: false;");
 
         TextField quantityTextField = new TextField(String.valueOf(product.getQuantity()));
+        quantityTextField.setId("quantityTextField");
         quantityTextField.setLayoutX(386);
         quantityTextField.setLayoutY(52);
         quantityTextField.setPrefWidth(180);
         quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
 
         TextField cenaTextField = new TextField(String.valueOf(product.getPrice()));
+        cenaTextField.setId("cenaTextField");
         quantityTextField.setLayoutX(386);
         quantityTextField.setLayoutY(83);
         quantityTextField.setPrefWidth(180);
         quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
 
         productPane.getChildren().addAll(deleteButton, editButton, addOneButton, removeOneButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField, cenaTextField, cenaLabel);
-
+        quantityTextFieldMap.put(product, quantityTextField);
+        cenaTextFieldMap.put(product, cenaTextField);
+        imageViewMap.put(product, imageView);
         return productPane;
     }
 
@@ -428,9 +445,22 @@ public class EditProductsController {
         }catch(IOException e){
             e.printStackTrace();
         }
-        
-        refreshProductInfo(product);
     }
+
+    public void updateProductPane(Product product) {
+    TextField quantityTextField = quantityTextFieldMap.get(product);
+    TextField cenaTextField = cenaTextFieldMap.get(product);
+    ImageView imageView = imageViewMap.get(product);
+    if (quantityTextField != null) {
+        quantityTextField.setText(String.valueOf(product.getQuantity()));
+    }
+    if (cenaTextField != null) {
+        cenaTextField.setText(String.valueOf(product.getPrice()));
+    }
+    if(imageView != null){
+        imageView.setImage(product.getImage());
+    }
+}
 
     private void deleteProduct(Product product, AnchorPane productPane) {
         store.getInventory().removeProduct(product);
@@ -438,12 +468,8 @@ public class EditProductsController {
     }
     
     public void refreshQuantity(Product product){
-        QuantityToEditTextField.setText(String.valueOf(product.getQuantity()));
-    }
-    
-    public void refreshProductInfo(Product product){
-        QuantityToEditTextField.setText(String.valueOf(product.getQuantity()));
-        CenaTextField.setText(String.valueOf(product.getPrice()));
+        TextField quantityTextField = quantityTextFieldMap.get(product);
+        quantityTextField.setText(String.valueOf(product.getQuantity()));
     }
 }
 

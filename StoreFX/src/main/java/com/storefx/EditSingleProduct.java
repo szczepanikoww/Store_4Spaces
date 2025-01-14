@@ -66,7 +66,7 @@ public class EditSingleProduct {
                 product.setImage(new Image(selectedImageFile.toURI().toString()));
                 System.out.println("Utworzono telefon z zdjęciem");
             }
-
+            editproducts.updateProductPane(product);
             showSucces("Pomyślnie zapisano zmiany");
         }catch (Exception e){
             showError("Nie udało się zapisać zmian");
