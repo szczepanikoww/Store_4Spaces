@@ -362,15 +362,14 @@ public class EditProductsController {
         editButton.setOnAction(event -> editProduct(product));
 
         Button addOneButton = new Button("+");
-        addOneButton.setLayoutX(620);
-        addOneButton.setLayoutY(100);
+        addOneButton.setLayoutX(660);
+        addOneButton.setLayoutY(52);
         addOneButton.setStyle("-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         addOneButton.setOnAction(event -> addOne(product));
 
         Button removeOneButton = new Button("-");
-        removeOneButton.setLayoutX(660);
-
-        removeOneButton.setLayoutY(100);
+        removeOneButton.setLayoutX(700);
+        removeOneButton.setLayoutY(52);
         removeOneButton.setStyle("-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         removeOneButton.setOnAction(event -> removeOne(product));
 
@@ -382,39 +381,39 @@ public class EditProductsController {
         imageView.setStyle("-fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 5;");
 
         Label nameLabel = new Label("Nazwa produktu");
-        nameLabel.setLayoutX(200);
+        nameLabel.setLayoutX(300);
         nameLabel.setLayoutY(25);
         nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
         Label quantityLabel = new Label("Ilość na magazynie");
-        quantityLabel.setLayoutX(200);
+        quantityLabel.setLayoutX(300);
         quantityLabel.setLayoutY(56);
         quantityLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
         Label cenaLabel = new Label("Cena");
-        nameLabel.setLayoutX(200);
-        nameLabel.setLayoutY(120);
-        nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+        cenaLabel.setLayoutX(300);
+        cenaLabel.setLayoutY(83);
+        cenaLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
         TextField nameTextField = new TextField(product.getProductName());
-        nameTextField.setLayoutX(386);
+        nameTextField.setLayoutX(450);
         nameTextField.setLayoutY(21);
         nameTextField.setPrefWidth(180);
         nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;-fx-editable: false;");
 
         TextField quantityTextField = new TextField(String.valueOf(product.getQuantity()));
         quantityTextField.setId("quantityTextField");
-        quantityTextField.setLayoutX(386);
+        quantityTextField.setLayoutX(450);
         quantityTextField.setLayoutY(52);
         quantityTextField.setPrefWidth(180);
         quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
 
         TextField cenaTextField = new TextField(String.valueOf(product.getPrice()));
         cenaTextField.setId("cenaTextField");
-        quantityTextField.setLayoutX(386);
-        quantityTextField.setLayoutY(83);
-        quantityTextField.setPrefWidth(180);
-        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
+        cenaTextField.setLayoutX(450);
+        cenaTextField.setLayoutY(83);
+        cenaTextField.setPrefWidth(180);
+        cenaTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
 
         productPane.getChildren().addAll(deleteButton, editButton, addOneButton, removeOneButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField, cenaTextField, cenaLabel);
         quantityTextFieldMap.put(product, quantityTextField);
@@ -464,7 +463,7 @@ public class EditProductsController {
 
         Button deleteButton = new Button("Usuń użytkownika");
         deleteButton.setLayoutX(700);
-        deleteButton.setLayoutY(25);
+        deleteButton.setLayoutY(38);
         deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         deleteButton.setOnAction(event -> deleteUser(customer, userPane));
 

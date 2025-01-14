@@ -42,6 +42,10 @@ public class EditSingleProduct {
 
     public void setProduct(Product product){
         this.product = product;
+        newProductDescriptionTextArea.setText(product.getProductDescription());
+        newProductImageView.setImage(product.getImage());
+        newProductPrice.setText(String.valueOf(product.getPrice()));
+        newProductQuantity.setText(String.valueOf(product.getQuantity()));
     }
 
     public void clearForm(){
@@ -53,18 +57,15 @@ public class EditSingleProduct {
 
     public void saveChanges(ActionEvent actionEvent) {
         try {
-            if(newProductPrice.getText().isEmpty()){
-                product.setProductPrice(Double.parseDouble(newProductPrice.getText()));
-            }
-            if(newProductQuantity.getText().isEmpty()){
-                product.setProductQuantity(Integer.parseInt(newProductQuantity.getText()));
-            }
+            product.setProductPrice(Double.parseDouble(newProductPrice.getText()));
+            product.setProductQuantity(Integer.parseInt(newProductQuantity.getText()));
             if(newProductDescriptionTextArea.getText().isEmpty()){
                 product.setProductDescription(newProductDescriptionTextArea.getText());
+            }else {
+                product.setProductDescription(product.getProductDescription());
             }
             if (selectedImageFile != null) {
                 product.setImage(new Image(selectedImageFile.toURI().toString()));
-                System.out.println("Utworzono telefon z zdjęciem");
             }
             editproducts.updateProductPane(product);
             showSucces("Pomyślnie zapisano zmiany");
