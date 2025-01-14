@@ -42,14 +42,32 @@ public class mainPageController {
         Phone phone1 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
         Phone phone2 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
         Phone phone3 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
+        Phone phone4 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
+        Phone phone5 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
+        Phone phone6 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
+        Phone phone7 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
+        Phone phone8 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
+        Phone phone9 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
 
         phone1.setImage("StoreFX/src/main/resources/images/s21.jpg");
         phone2.setImage("StoreFX/src/main/resources/images/ip12.jpg");
         phone3.setImage("StoreFX/src/main/resources/images/mi11.jpg");
+        phone4.setImage("StoreFX/src/main/resources/images/s21.jpg");
+        phone5.setImage("StoreFX/src/main/resources/images/ip12.jpg");
+        phone6.setImage("StoreFX/src/main/resources/images/mi11.jpg");
+        phone7.setImage("StoreFX/src/main/resources/images/s21.jpg");
+        phone8.setImage("StoreFX/src/main/resources/images/ip12.jpg");
+        phone9.setImage("StoreFX/src/main/resources/images/mi11.jpg");
 
         store.getInventory().addProduct(phone1);
         store.getInventory().addProduct(phone2);
         store.getInventory().addProduct(phone3);
+        store.getInventory().addProduct(phone4);
+        store.getInventory().addProduct(phone5);
+        store.getInventory().addProduct(phone6);
+        store.getInventory().addProduct(phone7);
+        store.getInventory().addProduct(phone8);
+        store.getInventory().addProduct(phone9);
     }
     public void setLoginPageController(LoginPageController loginPageController){
         this.loginPageController = loginPageController;
@@ -105,6 +123,8 @@ public class mainPageController {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             ScrollPane newPane = loader.load();
+            ProductsPageController controller = loader.getController();
+            controller.setProducts(store.getInventory().getProducts());
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){
