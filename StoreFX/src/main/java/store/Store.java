@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Store {
     private static ArrayList<Admin> admins = new ArrayList<Admin>();
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
-    private Inventory inventory;
+    private static Inventory inventory;
     private ArrayList<Order> orders = new ArrayList<Order>();
     private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
 
@@ -60,6 +60,7 @@ public class Store {
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Store!");
+        System.out.println(inventory.getProducts());
     }
 
     //myślałem, żeby dodać to co było w projekcie z Samochodami czyli to, żeby dodać tych listenerów itp ale nie wiem czy to będzie nam potrzebne
