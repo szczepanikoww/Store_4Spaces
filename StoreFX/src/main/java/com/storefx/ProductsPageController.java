@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 
 import java.util.List;
 
-import static javafx.scene.layout.Priority.SOMETIMES;
 
 public class ProductsPageController {
     public VBox productsVbox;
@@ -24,25 +23,57 @@ public class ProductsPageController {
     public void setStore(Store store){
         this.store = store;
     }
-    public void setProducts(List<Product> products){
+    public void setProducts(List<Product> products, String category){
         productsGrid.getChildren().clear();
         int column = 0;
         int row = 0;
-        for(Product product : products){
-            VBox productVbox = createProductsVbox(product);
-            productsGrid.add(productVbox, column, row);
-            column++;
-            if(column == 4){
-                column = 0;
-                row++;
+        for (Product product : products) {
+            if ("Phone".equals(category) && "Phone".equals(product.getProductCategory())) {
+                VBox productVbox = createProductsVbox(product);
+                productsGrid.add(productVbox, column, row);
+                column++;
+                if (column == 4) {
+                    column = 0;
+                    row++;
+                }
             }
+            if ("Laptop".equals(category) && "Laptop".equals(product.getProductCategory())) {
+                VBox productVbox = createProductsVbox(product);
+                productsGrid.add(productVbox, column, row);
+                column++;
+                if (column == 4) {
+                    column = 0;
+                    row++;
+                }
+
+            }
+            if ("Tablet".equals(category) && "Tablet".equals(product.getProductCategory())) {
+                VBox productVbox = createProductsVbox(product);
+                productsGrid.add(productVbox, column, row);
+                column++;
+                if (column == 4) {
+                    column = 0;
+                    row++;
+                }
+            }
+
+            if ("All".equals(category)) {
+                VBox productVbox = createProductsVbox(product);
+                productsGrid.add(productVbox, column, row);
+                column++;
+                if (column == 4) {
+                    column = 0;
+                    row++;
+                }
+
+            }
+
         }
+
 
     }
 
-
-
-    public VBox createProductsVbox(Product product){
+    public VBox createProductsVbox(Product product) {
         VBox vbox = new VBox();
         vbox.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #E0E0E0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);");
         vbox.setAlignment(Pos.TOP_CENTER);
@@ -69,9 +100,6 @@ public class ProductsPageController {
         return vbox;
 
     }
-
-
-
 
 
 }

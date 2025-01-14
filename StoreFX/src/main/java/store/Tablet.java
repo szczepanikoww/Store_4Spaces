@@ -11,6 +11,7 @@ public class Tablet extends Product{
     //Constructor
 
     public Tablet(){
+        this.setTabletCategory("Tablet");
 
     }
     public Tablet(String productName, double productPrice, int productQuantity, String productBrand, String tabletOS, String tabletProcessor, int tabletRAM, int tabletStorage, String tabletBattery, double tabletScreenSize) {
@@ -21,6 +22,7 @@ public class Tablet extends Product{
         this.TabletStorage = tabletStorage;
         this.TabletBattery = tabletBattery;
         this.TabletScreenSize = tabletScreenSize;
+        this.setTabletCategory("Tablet");
     }
 
     //setters for product
@@ -38,6 +40,9 @@ public class Tablet extends Product{
     }
     public void setTabletDescription(String tabletDescription) {
         super.setProductDescription(tabletDescription);
+    }
+    public void setTabletCategory(String tabletCategory) {
+        super.setProductCategory(tabletCategory);
     }
     //setters
     public void setTabletOS(String tabletOS) {
@@ -88,6 +93,8 @@ public class Tablet extends Product{
     public String getDetails() {
         return super.getDetails() + "\nTablet OS: " + TabletOS + "\nTablet Processor: " + TabletProcessor + "\nTablet RAM: " + TabletRAM + "\nTablet Storage: " + TabletStorage + "\nTablet Battery: " + TabletBattery;
     }
+
+
 
 
 }

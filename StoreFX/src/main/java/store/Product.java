@@ -9,6 +9,7 @@ public class Product {
     private String ProductBrand;
     private Image ProductImage;
     private String ProductDescription;
+    private String ProductCategory;
 
     //Constructor
     public Product() {
@@ -44,6 +45,11 @@ public class Product {
         this.ProductDescription = productDescription;
     }
 
+    public void setProductCategory(String productCategory) {
+        this.ProductCategory = productCategory;
+    }
+
+
     public String getProductName() {
         return ProductName;
     }
@@ -70,5 +76,9 @@ public class Product {
 
     public String getProductDescription() {
         return ProductDescription;
+    }
+
+    public String getProductCategory() {
+        return ProductCategory;
     }
 }

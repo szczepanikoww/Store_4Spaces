@@ -126,13 +126,13 @@ public class mainPageController {
     }
 
     //ladowanie strony ze scrollem
-    public void loadPageWithScroll(String fxmlFile){
+    public void loadPageWithScroll(String fxmlFile, String category){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             ScrollPane newPane = loader.load();
             ProductsPageController controller = loader.getController();
+            controller.setProducts(store.getInventory().getProducts(), category);
             controller.setStore(store);
-            controller.setProducts(store.getInventory().getProducts());
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){
@@ -141,16 +141,16 @@ public class mainPageController {
     }
 
     public void onSmartphonesMenuButton() {
-        loadPageWithScroll("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml", "Phone");
     }
     public void onTabletsMenuButton() {
-        loadPageWithScroll("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml", "Tablet");
     }
     public void onLaptopsMenuButton() {
-        loadPageWithScroll("productsPage.fxml");
+        loadPageWithScroll("productsPage.fxml", "Laptop");
     }
     public void onAllMenuButton() {
-        loadPageWithScroll("productsPage.fxml");
+       loadPageWithScroll("productsPage.fxml", "All");
     }
 
     // zmieniłem tu zeby przekazywlo store do cartPageController

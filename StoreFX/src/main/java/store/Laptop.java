@@ -12,6 +12,7 @@ public class Laptop extends Product{
     //Constructor
 
     public Laptop() {
+        this.setLaptopCategory("Laptop");
     }
     public Laptop(String productName, double productPrice, int productQuantity, String productBrand, String laptopOS, String laptopProcessor, int laptopRAM, int laptopStorage, String laptopGraphics, String laptopDisplay, String laptopBattery) {
         super(productName, productPrice, productQuantity, productBrand);
@@ -22,6 +23,7 @@ public class Laptop extends Product{
         this.LaptopGraphics = laptopGraphics;
         this.LaptopDisplay = laptopDisplay;
         this.LaptopBattery = laptopBattery;
+        this.setLaptopCategory("Laptop");
     }
 
     //setters for product
@@ -74,6 +76,10 @@ public class Laptop extends Product{
         this.LaptopBattery = laptopBattery;
     }
 
+    public void setLaptopCategory(String laptopCategory) {
+        super.setProductCategory(laptopCategory);
+    }
+
     //getters
 
     public String getLaptopOS() {
@@ -107,5 +113,6 @@ public class Laptop extends Product{
     public String getDetails() {
         return super.getDetails() +  "\nLaptop OS: " + LaptopOS + "\nLaptop Processor: " + LaptopProcessor + "\nLaptop RAM: " + LaptopRAM + "\nLaptop Storage: " + LaptopStorage + "\nLaptop Graphics: " + LaptopGraphics + "\nLaptop Display: " + LaptopDisplay + "\nLaptop Battery: " + LaptopBattery;
     }
+
 
 }
