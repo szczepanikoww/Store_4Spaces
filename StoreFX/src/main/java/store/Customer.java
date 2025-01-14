@@ -1,11 +1,15 @@
 package store;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Customer extends User{
     private String CustomerName;
     private String CustomerSurname;
     private String CustomerEmail;
     private String CustomerPhoneNumber;
     private Address CustomerAddress;
+    private ArrayList<Order> previousOrders;
 
     //Constructor
     public Customer(int userID, String userName, String userPassword, String customerName, String customerSurname, String customerEmail, String customerPhoneNumber, Address customerAddress) {
@@ -15,6 +19,7 @@ public class Customer extends User{
         CustomerEmail = customerEmail;
         CustomerPhoneNumber = customerPhoneNumber;
         CustomerAddress = customerAddress;
+        previousOrders = new ArrayList<Order>();
     }
 
     //setters
@@ -80,4 +85,7 @@ public class Customer extends User{
                 '}';
     }
 
+    public ArrayList<Order> getPreviousOrders() {
+        return previousOrders;
+    }
 }

@@ -64,5 +64,9 @@ public class Store {
         System.out.println(inventory.getProducts());
     }
 
+    public Order getCart() {
+            return Order;
+    }
+
     //myślałem, żeby dodać to co było w projekcie z Samochodami czyli to, żeby dodać tych listenerów itp ale nie wiem czy to będzie nam potrzebne
 }

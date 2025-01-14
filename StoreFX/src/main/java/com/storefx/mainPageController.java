@@ -130,9 +130,21 @@ public class mainPageController {
     public void onAllMenuButton() {
         loadPageWithScroll("productsPage.fxml");
     }
+
+    // zmieniłem tu zeby przekazywlo store do cartPageController
     public void onCartMenuButton() {
         System.out.println("Cart dziala");
-        loadPage("cartPage.fxml");
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("cartPage.fxml"));
+            Pane newPane = loader.load();
+            CartPageController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setStore(store);
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(newPane);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
     public void onHomeMenuButton() {
         loadPage("homePage.fxml");
