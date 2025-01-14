@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.displayInfoController">
+                <children>
+                    <ImageView id="ProductImage" fx:id="productImageView" fitHeight="134.0" fitWidth="135.0" layoutX="74.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
+                    <Label layoutX="328.0" layoutY="28.0" text="Nazwa produktu" />
+                    <Label layoutX="328.0" layoutY="61.0" text="Kategoria Produktu" />
+                    <TextField id="ProductCategoryTextField" fx:id="ProductCategoryTextField" layoutX="516.0" layoutY="57.0" style="-fx-editable: false;"/>
+                    <TextField id="PrdouctNameTextField" fx:id="ProductNameTextField" layoutX="516.0" layoutY="24.0" style="-fx-editable: false;"/>
+                    <TextArea id="ProductDescriptionTextArea" fx:id="ProductDescriptionTextArea" layoutX="35.0" layoutY="280.0" prefHeight="200.0" prefWidth="263.0" style="-fx-editable: false;"/>
+                    <Label layoutX="35.0" layoutY="256.0" text="Opis produktu:" style="-fx-editable: false;"/>
+                    <Label layoutX="328.0" layoutY="95.0" text="Cena" />
+                    <TextField id="ProductPriceTextField" fx:id="ProductPriceTextField" layoutX="516.0" layoutY="91.0" style="-fx-editable: false;" />
+                    <Label layoutX="328.0" layoutY="126.0" text="Ilość na magazynie" />
+                    <TextField id="ProductQuantityTextField" fx:id="ProductQuantityTextField" layoutX="516.0" layoutY="122.0" style="-fx-editable: false;"/>
+                    <TextField id="ProductBrandTextField" fx:id="ProductBrandTextField" layoutX="516.0" layoutY="153.0" style="-fx-editable: false;"/>
+                    <Label layoutX="328.0" layoutY="157.0" text="Marka produktu" />
+                    <Separator layoutX="316.0" layoutY="213.0" prefHeight="0.0" prefWidth="451.0" />
+                    <Label fx:id="OSLabel" layoutX="322.0" layoutY="265.0" text="System operacyjny" style="-fx-editable: false;"/>
+                    <Label fx:id="ParametryLabel" layoutX="320.0" layoutY="229.0" text="Parametry produktu" >
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="StorageLabel" layoutX="319.0" layoutY="300.0" text="Pamięć wewnętrzna" style="-fx-editable: false;"/>
+                    <Label fx:id="RAMLabel" layoutX="324.0" layoutY="336.0" text="Pamięć RAM" />
+                    <Label fx:id="ScreenLabel" layoutX="324.0" layoutY="372.0" text="Przękątna ekranu"/>
+                    <Label fx:id="ProcessorLabel" layoutX="324.0" layoutY="406.0" text="Procesor"/>
+                    <Label fx:id="BatteryLabel" layoutX="322.0" layoutY="442.0" text="Pojemność Baterii"   />
+                    <TextField id="ProductOSTextField" fx:id="ProductOSTextField" layoutX="516.0" layoutY="261.0"  style="-fx-editable: false;" />
+                    <TextField id="ProductStorageTextField" fx:id="ProductStorageTextField" layoutX="516.0" layoutY="296.0"  style="-fx-editable: false;" />
+                    <TextField id="ProductRamTextField" fx:id="ProductRamTextField" layoutX="516.0" layoutY="332.0"  style="-fx-editable: false;" />
+                    <TextField id="ProductScreenTextField" fx:id="ProductScreenTextField" layoutX="516.0" layoutY="368.0" style="-fx-editable: false;"/>
+                    <TextField id="ProductProcessorTextField" fx:id="ProductProcessorTextField" layoutX="516.0" layoutY="402.0"  style="-fx-editable: false;" />
+                    <TextField id="ProductBatteryTextField" fx:id="ProductBatteryTextField" layoutX="516.0" layoutY="438.0"  style="-fx-editable: false;" />
+                    <Label id="LaptopGraphicCard" fx:id="LaptopGraphicCard" layoutX="324.0" layoutY="481.0" text="Karta graficzna"  visible="false" style="-fx-editable: false;"/>
+                    <TextField id="LaptopGraphicCardTextField" fx:id="LaptopGraphicCardTextField" layoutX="515.0" layoutY="477.0"  visible="false" style="-fx-editable: false;"/>
+                    <Label id="PhoneAparatLabel" fx:id="PhoneAparatLabel" layoutX="322.0" layoutY="481.0" text="Aparat (Mpix)"  visible="false" style="-fx-editable: false;"/>
+                    <TextField id="PhoneApartTextField" fx:id="PhoneApartTextField" layoutX="516.0" layoutY="477.0"  visible="false" style="-fx-editable: false;"/>
+                </children></AnchorPane>

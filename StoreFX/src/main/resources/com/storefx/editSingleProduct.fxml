@@ -22,7 +22,7 @@
         <children>
             <Label layoutX="30.0" layoutY="199.0" text="Zmień opis produktu" />
             <TextArea fx:id="newProductDescriptionTextArea" layoutX="30.0" layoutY="236.0" prefHeight="142.0" prefWidth="285.0" />
-            <Button fx:id="ChangeImageButton" layoutX="135.0" layoutY="161.0" mnemonicParsing="false" text="Zmień zdjęcie" />
+            <Button fx:id="ChangeImageButton"  onAction="#changePhoto" layoutX="135.0" layoutY="161.0" mnemonicParsing="false" text="Zmień zdjęcie" />
             <ImageView fx:id="newProductImageView" fitHeight="142.0" fitWidth="159.0" layoutX="100.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="380.0" layoutY="142.0" text="Zmień cenę" />
             <Separator layoutX="344.0" layoutY="25.0" orientation="VERTICAL" prefHeight="365.0" prefWidth="3.0" />

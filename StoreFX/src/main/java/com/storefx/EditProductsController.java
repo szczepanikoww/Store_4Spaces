@@ -2,19 +2,24 @@ package com.storefx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import store.*;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditProductsController {
-
+    public EditSingleProduct editSingleProduct;
     public Store store;
 
     @FXML
@@ -45,6 +50,8 @@ public class EditProductsController {
 
     public LoginPageController loginController;
     public TextField QuantityToEditTextField;
+    public Label CenaLabel;
+    public TextField CenaTextField;
 
     // to przekazuje store z loginController do EditProductsController
     public void setStore(Store store) {
@@ -63,16 +70,6 @@ public class EditProductsController {
     public void initialize() {
         ProductCategoryComboBox.setOnAction(event -> handleCategoryChange());
         AddPhotoButton.setOnAction(event -> selectPhoto());
-
-        // to tu nie moze byc, bo cały czas jest store == null, dopiero pozniej zmienia sie na nie null
-//        if (store != null) {
-//            ArrayList<Product> products = store.getInventory().getProducts();
-//            for (Product product : products) {
-//                System.out.println(product.getProductName());
-//                AnchorPane productPane = createProductPane(product);
-//                productVBox.getChildren().add(productPane);
-//            }
-//        }
     }
 
     @FXML
@@ -346,16 +343,16 @@ public class EditProductsController {
         editButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         editButton.setOnAction(event -> editProduct(product));
 
-        Button addOneButton = new Button("Usuń produkt");
-        addOneButton.setLayoutX(700);
-        addOneButton.setLayoutY(250);
-        addOneButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        Button addOneButton = new Button("+");
+        addOneButton.setLayoutX(620);
+        addOneButton.setLayoutY(100);
+        addOneButton.setStyle("-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         addOneButton.setOnAction(event -> addOne(product));
 
-        Button removeOneButton = new Button("Edytuj");
-        removeOneButton.setLayoutX(700);
-        removeOneButton.setLayoutY(300);
-        removeOneButton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        Button removeOneButton = new Button("-");
+        removeOneButton.setLayoutX(660);
+        removeOneButton.setLayoutY(100);
+        removeOneButton.setStyle("-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
         removeOneButton.setOnAction(event -> removeOne(product));
 
         ImageView imageView = new ImageView(product.getImage());
@@ -375,19 +372,30 @@ public class EditProductsController {
         quantityLabel.setLayoutY(56);
         quantityLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
 
+        Label cenaLabel = new Label("Cena");
+        nameLabel.setLayoutX(200);
+        nameLabel.setLayoutY(120);
+        nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
         TextField nameTextField = new TextField(product.getProductName());
         nameTextField.setLayoutX(386);
         nameTextField.setLayoutY(21);
         nameTextField.setPrefWidth(180);
-        nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+        nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;-fx-editable: false;");
 
         TextField quantityTextField = new TextField(String.valueOf(product.getQuantity()));
         quantityTextField.setLayoutX(386);
         quantityTextField.setLayoutY(52);
         quantityTextField.setPrefWidth(180);
-        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
 
-        productPane.getChildren().addAll(deleteButton, editButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField);
+        TextField cenaTextField = new TextField(String.valueOf(product.getPrice()));
+        quantityTextField.setLayoutX(386);
+        quantityTextField.setLayoutY(83);
+        quantityTextField.setPrefWidth(180);
+        quantityTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4; -fx-editable: false;");
+
+        productPane.getChildren().addAll(deleteButton, editButton, addOneButton, removeOneButton, imageView, nameLabel, quantityLabel, nameTextField, quantityTextField, cenaTextField, cenaLabel);
 
         return productPane;
     }
@@ -404,7 +412,24 @@ public class EditProductsController {
 
 
     private void editProduct(Product product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editSingleProduct.fxml"));
+            Parent root = loader.load();
 
+            EditSingleProduct controller = loader.getController();
+            controller.setProduct(product);
+            controller.setStore(store);
+            controller.setMainController(this);
+
+            Stage stage = new Stage();
+            stage.setTitle("Edytuj produkt");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        refreshProductInfo(product);
     }
 
     private void deleteProduct(Product product, AnchorPane productPane) {
@@ -414,6 +439,11 @@ public class EditProductsController {
     
     public void refreshQuantity(Product product){
         QuantityToEditTextField.setText(String.valueOf(product.getQuantity()));
+    }
+    
+    public void refreshProductInfo(Product product){
+        QuantityToEditTextField.setText(String.valueOf(product.getQuantity()));
+        CenaTextField.setText(String.valueOf(product.getPrice()));
     }
 }
 

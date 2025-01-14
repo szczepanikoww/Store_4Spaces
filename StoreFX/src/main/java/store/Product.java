@@ -67,4 +67,8 @@ public class Product {
     public Image getImage() {
         return ProductImage;
     }
+
+    public String getProductDescription() {
+        return ProductDescription;
+    }
 }
