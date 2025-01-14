@@ -59,6 +59,10 @@ public class Customer extends User{
         return CustomerEmail;
     }
 
+    public String getCustomerAddressDetails() {
+        return CustomerAddress.getDetails();
+    }
+
     public Address getCustomerAddress() {
         return CustomerAddress;
     }

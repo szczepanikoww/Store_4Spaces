@@ -1,7 +1,6 @@
 package store;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Store {
     private static ArrayList<Admin> admins = new ArrayList<Admin>();
@@ -9,6 +8,7 @@ public class Store {
     private static Inventory inventory;
     private ArrayList<Order> orders = new ArrayList<Order>();
     private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
+    private Cart cart;
 
 
         public Store(){
@@ -17,6 +17,7 @@ public class Store {
             this.inventory = new Inventory();
             this.orders = new ArrayList<Order>();
             this.invoices = new ArrayList<Invoice>();
+            this.cart = new Cart();
         }
 
 //    static{
@@ -64,8 +65,8 @@ public class Store {
         System.out.println(inventory.getProducts());
     }
 
-    public Cart getCart() {
-            return new Cart();
+    public Cart getCart(){
+        return cart;
     }
 
     //myślałem, żeby dodać to co było w projekcie z Samochodami czyli to, żeby dodać tych listenerów itp ale nie wiem czy to będzie nam potrzebne

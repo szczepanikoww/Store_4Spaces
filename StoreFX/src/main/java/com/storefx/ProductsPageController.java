@@ -7,26 +7,24 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import store.Product;
-
+import store.Store;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import store.Store;
 
 import java.util.List;
-import java.util.Map;
 
 
 public class ProductsPageController {
     public VBox productsVbox;
     public GridPane productsGrid;
+    public Store store;
     public Button addToCartButton;
 
-    public Store store;
-
-    public void setStore(Store store) {this.store = store;}
-
-    public void setProducts(List<Product> products, String category) {
+    public void setStore(Store store){
+        this.store = store;
+    }
+    public void setProducts(List<Product> products, String category){
         productsGrid.getChildren().clear();
         int column = 0;
         int row = 0;
@@ -97,22 +95,37 @@ public class ProductsPageController {
 
         Button addToCartButton = new Button("Add to cart");
         addToCartButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 12px; -fx-cursor: hand;");
+        addToCartButton.setOnAction(e -> onAddCartButton(product));
         addToCartButton.setId("addToCartButton");
-        addToCartButton.setOnAction(event -> onAddToCartButton(product));
-
         vbox.getChildren().addAll(imageView, nameLabel, detailsLabel, priceLabel, addToCartButton);
 
         return vbox;
 
     }
 
-
-
-
-    public void onAddToCartButton(Product product) {
-        store.getCart().addProduct(product, 1);
-        product.setProductQuantity(product.getQuantity()-1);
-        store.getCart().showMap();
-
+    public void removeVbox(VBox vbox){
+        productsGrid.getChildren().remove(vbox);
     }
+
+    public void onAddCartButton(Product product){
+        store.getCart().addProduct(product,1);
+        product.setProductQuantity(product.getQuantity()-1);
+        if(product.getQuantity() > 0) {
+            refreshQuantity(product);
+        }else if(product.getQuantity() == 1){
+            removeVbox(productsVbox);
+        }
+    }
+
+    public void refreshQuantity(Product product){
+        for(int i = 0; i < productsGrid.getChildren().size(); i++){
+            VBox vbox = (VBox) productsGrid.getChildren().get(i);
+            Label nameLabel = (Label) vbox.getChildren().get(1);
+            if(nameLabel.getText().equals(product.getProductName())){
+                Label detailsLabel = (Label) vbox.getChildren().get(2);
+                detailsLabel.setText(product.getDetails());
+            }
+        }
+    }
+
 }

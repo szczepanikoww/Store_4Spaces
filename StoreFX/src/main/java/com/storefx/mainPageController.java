@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import store.Customer;
 import store.Phone;
 import store.Store;
+import com.storefx.CartPageController;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.io.IOException;
 public class mainPageController {
 
     public Store store;
+    public Customer aktCustomer;
 
     public Label HomeMenuButton;
     public Label SmartphonesMenuButton;
@@ -33,6 +35,7 @@ public class mainPageController {
     public Menu loginMenu;
 
     private LoginPageController loginPageController;
+    private CartPageController cartPageController;
 
 
     //dodawanie produktow do inventory na start sklepu
@@ -73,7 +76,6 @@ public class mainPageController {
         Customer customer2 = new Customer(2, "Klient2", "Klient2", "Adam", "Nowak", "adamnowak@wp.pl", "987654321", null);
         store.getCustomers().add(customer1);
         store.getCustomers().add(customer2);
-
 
     }
     public void setLoginPageController(LoginPageController loginPageController){
@@ -161,7 +163,8 @@ public class mainPageController {
             Pane newPane = loader.load();
             CartPageController controller = loader.getController();
             controller.setMainController(this);
-            controller.setStore(store);
+            controller.setStore(this.store);
+            controller.setAktCustomer(aktCustomer);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){
@@ -175,6 +178,7 @@ public class mainPageController {
 
     //zmienianie napisu w zaleznosci od tego czy jestesmy zalogowani czy nie
     public void setLoginLabel(String username, Customer customer){
+        this.aktCustomer = customer;
         loginLabel.setText("Witaj, " + username);
         loginMenu.getItems().clear();
         MenuItem userDataItem = new MenuItem("Dane użytkownika");

@@ -57,5 +57,9 @@ public class Address {
     public int getNumberOnStreet() {
         return numberOnStreet;
     }
+
+    public String getDetails(){
+        return country + " " + city + ", " + postalCode + ", " + street + " " + numberOnStreet;
+    }
     
 }
