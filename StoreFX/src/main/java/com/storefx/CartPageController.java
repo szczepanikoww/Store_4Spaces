@@ -45,6 +45,8 @@ public class CartPageController {
         this.mainPageController = mainController;
     }
 
+
+    //ta metoda to chyba nie tutaj ale nie jestem pewien
     public void addProductToCart(String productName, int quantity) {
         store.getCart().addProduct(productName, quantity);
     }
