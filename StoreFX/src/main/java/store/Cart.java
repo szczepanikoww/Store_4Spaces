@@ -50,12 +50,18 @@ public class Cart {
         productsInCart.clear();
     }
 
-    private double getProductPrice(Product product) {
+    public double getProductPrice(Product product) {
         // Implement this method to return the price of the product
         return 0;
     }
 
     public Map<Product, Integer> getProductsInCart() {
         return productsInCart;
+    }
+
+    public void updateProductQuantity(Product product, int delta) {
+        if (productsInCart.containsKey(product)) {
+            productsInCart.put(product, productsInCart.get(product) + delta);
+        }
     }
 }

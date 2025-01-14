@@ -18,10 +18,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import store.*;
 
 
 import java.io.FileNotFoundException;
+import java.security.cert.PolicyNode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -29,6 +35,8 @@ import java.util.Map;
 public class CartPageController {
     @FXML
     public Button goToOrder;
+    @FXML
+    public VBox cartVBox;
 
     public Store store;
     public mainPageController mainPageController;
@@ -39,6 +47,7 @@ public class CartPageController {
         this.store = store;
         System.out.println("Store set in EditProductsController: " + store);
         this.productsInCart = store.getCart().getProductsInCart();
+        populateCart();
     }
 
     public void setAktCustomer(Customer customer) {
@@ -47,6 +56,82 @@ public class CartPageController {
 
     public void setMainController(mainPageController mainController) {
         this.mainPageController = mainController;
+    }
+
+    private void populateCart() {
+        if(cartVBox != null){
+            cartVBox.getChildren().clear();
+            for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
+                addProductToCart(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    private void addProductToCart(Product product, int quantity) {
+        AnchorPane productPane = new AnchorPane();
+        productPane.setPrefSize(803, 167);
+
+        ImageView imageView = new ImageView(product.getImage());
+        imageView.setFitHeight(143);
+        imageView.setFitWidth(146);
+        imageView.setLayoutX(21);
+        imageView.setLayoutY(9);
+        imageView.setPickOnBounds(true);
+        imageView.setPreserveRatio(true);
+
+        Label nameLabel = new Label("Nazwa produktu");
+        nameLabel.setLayoutX(180);
+        nameLabel.setLayoutY(23);
+
+        Label quantityLabel = new Label("Ilość");
+        quantityLabel.setLayoutX(180);
+        quantityLabel.setLayoutY(64);
+
+        Label priceLabel = new Label("Cena");
+        priceLabel.setLayoutX(178);
+        priceLabel.setLayoutY(108);
+
+        TextField nameTextField = new TextField(product.getProductName());
+        nameTextField.setLayoutX(311);
+        nameTextField.setLayoutY(19);
+
+        TextField quantityTextField = new TextField(String.valueOf(quantity));
+        quantityTextField.setLayoutX(311);
+        quantityTextField.setLayoutY(60);
+
+        TextField priceTextField = new TextField(String.valueOf(store.getCart().getProductPrice(product)));
+        priceTextField.setLayoutX(311);
+        priceTextField.setLayoutY(104);
+
+        Button removeButton = new Button("Usuń z koszyka");
+        removeButton.setLayoutX(681);
+        removeButton.setLayoutY(129);
+        removeButton.setOnAction(event -> removeFromCart(product));
+
+        Button addButton = new Button("+");
+        addButton.setLayoutX(479);
+        addButton.setLayoutY(60);
+        addButton.setOnAction(event -> updateQuantity(product, 1));
+
+        Button subtractButton = new Button("-");
+        subtractButton.setLayoutX(513);
+        subtractButton.setLayoutY(60);
+        subtractButton.setOnAction(event -> updateQuantity(product, -1));
+
+        productPane.getChildren().addAll(imageView, nameLabel, quantityLabel, priceLabel, nameTextField, quantityTextField, priceTextField, removeButton, addButton, subtractButton);
+        cartVBox.getChildren().add(productPane);
+    }
+
+    private void removeFromCart(Product product) {
+        store.getCart().removeProduct(product, productsInCart.get(product));
+        populateCart();
+        product.setProductQuantity(product.getQuantity() + productsInCart.get(product));
+    }
+
+    private void updateQuantity(Product product, int delta) {
+        store.getCart().updateProductQuantity(product, delta);
+        populateCart();
+        product.setProductQuantity(product.getQuantity() - delta);
     }
 
     public void goToOrder(ActionEvent actionEvent) {
