@@ -32,6 +32,8 @@ public class mainPageController {
     public Label loginLabel;
     public Menu loginMenu;
 
+    private LoginPageController loginPageController;
+
 
     //dodawanie produktow do inventory na start sklepu
     public void initialize() {
@@ -49,6 +51,9 @@ public class mainPageController {
         store.getInventory().addProduct(phone2);
         store.getInventory().addProduct(phone3);
     }
+    public void setLoginPageController(LoginPageController loginPageController){
+        this.loginPageController = loginPageController;
+    }
 
 
     //otwieranie okna logowania (niezależnie od tego czy jesteśmy adminem czy klientem)
@@ -60,6 +65,7 @@ public class mainPageController {
             controller.setUserType(userType);
             controller.setStore(store); // ustawia sklep w kontrolerze logowania
             controller.setMainController(this);
+            this.loginPageController = controller;
 
             Stage stage = new Stage();
             stage.setTitle("Logowanie - 4Spaces - " + userType);
@@ -143,6 +149,9 @@ public class mainPageController {
     public void setLoginLabelAdmin(String username){
         loginLabel.setText("Witaj, " + username);
         loginMenu.getItems().clear();
+        MenuItem adminPageItem = new MenuItem("Panel admina");
+        adminPageItem.setOnAction(actionEvent -> loginPageController.openEditsWindow());
+        loginMenu.getItems().add(adminPageItem);
         MenuItem logoutItem = new MenuItem("Wyloguj");
         logoutItem.setOnAction(actionEvent -> onLogoutButton());
         loginMenu.getItems().addAll(logoutItem);
