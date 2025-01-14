@@ -50,6 +50,12 @@ public class mainPageController {
         store.getInventory().addProduct(phone1);
         store.getInventory().addProduct(phone2);
         store.getInventory().addProduct(phone3);
+
+        Customer customer1 = new Customer(1, "Klient", "Klient", "Jan", "Kowalski", "jankowaliski@wp.pl", "123456789", null);
+        Customer customer2 = new Customer(2, "Klient2", "Klient2", "Adam", "Nowak", "adamnowak@wp.pl", "987654321", null);
+        store.getCustomers().add(customer1);
+        store.getCustomers().add(customer2);
+
     }
     public void setLoginPageController(LoginPageController loginPageController){
         this.loginPageController = loginPageController;

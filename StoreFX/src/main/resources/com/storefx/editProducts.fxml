@@ -87,5 +87,20 @@
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab text="Użytkownicy">
+          <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                      <ScrollPane prefHeight="638.0" prefWidth="799.0">
+                          <content>
+                              <VBox fx:id="usersVBox" prefHeight="636.0" prefWidth="798.0">
+                                  <children>
+                                  </children>
+                              </VBox>
+                          </content>
+                      </ScrollPane>
+                  </children></AnchorPane>
+          </content>
+      </Tab>
   </tabs>
 </TabPane>

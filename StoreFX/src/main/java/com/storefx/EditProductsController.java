@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.cert.PolicyNode;
 import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,11 +54,10 @@ public class EditProductsController {
     public VBox productVBox;
 
     public LoginPageController loginController;
-    public TextField QuantityToEditTextField;
-    public Label CenaLabel;
-    public TextField CenaTextField;
     @FXML
     public TextField quantityTextField, cenaTextField;
+    @FXML
+    public VBox usersVBox;
 
     private Map<Product, TextField> quantityTextFieldMap = new HashMap<>();
     private Map<Product, TextField> cenaTextFieldMap = new HashMap<>();
@@ -74,6 +74,12 @@ public class EditProductsController {
             for (Product product : products) {
                 AnchorPane productPane = createProductPane(product);
                 productVBox.getChildren().add(productPane);
+            }
+
+            ArrayList<Customer> customers = store.getCustomers();
+            for (Customer customer : customers) {
+                AnchorPane userPane = createUserPane(customer);
+                usersVBox.getChildren().add(userPane);
             }
         }
     }
@@ -415,6 +421,60 @@ public class EditProductsController {
         cenaTextFieldMap.put(product, cenaTextField);
         imageViewMap.put(product, imageView);
         return productPane;
+    }
+
+
+    public AnchorPane createUserPane(Customer customer) {
+        AnchorPane userPane = new AnchorPane();
+        userPane.setPrefSize(900, 100);
+        userPane.setStyle("-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
+
+        Label nameLabel = new Label("Imię");
+        nameLabel.setLayoutX(50);
+        nameLabel.setLayoutY(25);
+        nameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
+        TextField nameTextField = new TextField(customer.getCustomerName());
+        nameTextField.setLayoutX(50);
+        nameTextField.setLayoutY(50);
+        nameTextField.setPrefWidth(180);
+        nameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+
+        Label surnameLabel = new Label("Nazwisko");
+        surnameLabel.setLayoutX(250);
+        surnameLabel.setLayoutY(25);
+        surnameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
+        TextField surnameTextField = new TextField(customer.getCustomerSurname());
+        surnameTextField.setLayoutX(250);
+        surnameTextField.setLayoutY(50);
+        surnameTextField.setPrefWidth(180);
+        surnameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+
+        Label usernameLabel = new Label("Nazwa użytkownika");
+        usernameLabel.setLayoutX(450);
+        usernameLabel.setLayoutY(25);
+        usernameLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #495057;");
+
+        TextField usernameTextField = new TextField(customer.getLogin());
+        usernameTextField.setLayoutX(450);
+        usernameTextField.setLayoutY(50);
+        usernameTextField.setPrefWidth(180);
+        usernameTextField.setStyle("-fx-background-color: #ffffff; -fx-border-color: #ced4da; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 4;");
+
+        Button deleteButton = new Button("Usuń użytkownika");
+        deleteButton.setLayoutX(700);
+        deleteButton.setLayoutY(25);
+        deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14; -fx-border-radius: 5; -fx-background-radius: 5;");
+        deleteButton.setOnAction(event -> deleteUser(customer, userPane));
+
+        userPane.getChildren().addAll(nameLabel, surnameLabel, usernameLabel, nameTextField, surnameTextField, usernameTextField, deleteButton);
+        return userPane;
+    }
+
+    private void deleteUser(Customer customer, AnchorPane userPane) {
+        store.getCustomers().remove(customer);
+        usersVBox.getChildren().remove(userPane);
     }
 
     private void removeOne(Product product) {
