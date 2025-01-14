@@ -7,7 +7,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import store.Product;
-
+import store.Store;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
@@ -19,7 +19,11 @@ import static javafx.scene.layout.Priority.SOMETIMES;
 public class ProductsPageController {
     public VBox productsVbox;
     public GridPane productsGrid;
+    public Store store;
 
+    public void setStore(Store store){
+        this.store = store;
+    }
     public void setProducts(List<Product> products){
         productsGrid.getChildren().clear();
         int column = 0;

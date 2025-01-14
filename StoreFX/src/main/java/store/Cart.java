@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<Product, Integer> productsInCart = new HashMap<Product, Integer>();
+    private Map<Product, Integer> productsInCart;
     private double totalPrice;
 
+    public Cart() {
+        productsInCart = new HashMap<Product, Integer>();
+        this.totalPrice = 0;
+    }
 
     public void addProduct(Product product, int quantity) {
         if(productsInCart.containsKey(product)){
@@ -51,4 +55,7 @@ public class Cart {
         return 0;
     }
 
+    public Map<Product, Integer> getProductsInCart() {
+        return productsInCart;
+    }
 }

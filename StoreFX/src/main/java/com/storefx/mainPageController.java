@@ -19,6 +19,7 @@ import java.io.IOException;
 public class mainPageController {
 
     public Store store;
+    public Customer aktCustomer;
 
     public Label HomeMenuButton;
     public Label SmartphonesMenuButton;
@@ -130,6 +131,7 @@ public class mainPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             ScrollPane newPane = loader.load();
             ProductsPageController controller = loader.getController();
+            controller.setStore(store);
             controller.setProducts(store.getInventory().getProducts());
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
@@ -160,6 +162,7 @@ public class mainPageController {
             CartPageController controller = loader.getController();
             controller.setMainController(this);
             controller.setStore(store);
+            controller.setAktCustomer(aktCustomer);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){
@@ -173,6 +176,7 @@ public class mainPageController {
 
     //zmienianie napisu w zaleznosci od tego czy jestesmy zalogowani czy nie
     public void setLoginLabel(String username, Customer customer){
+        this.aktCustomer = customer;
         loginLabel.setText("Witaj, " + username);
         loginMenu.getItems().clear();
         MenuItem userDataItem = new MenuItem("Dane użytkownika");

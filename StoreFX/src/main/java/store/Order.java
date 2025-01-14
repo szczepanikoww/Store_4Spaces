@@ -6,7 +6,7 @@ import java.util.Date;
 public class Order {
     private int OrderID;
     private Customer customer;
-    private ArrayList<Product> products = new ArrayList<Product>();
+    private ArrayList<Product> products;
     private double totalPrice;
     private Date orderDate;
 
@@ -84,5 +84,13 @@ public class Order {
 
     public void clearCart() {
         products.clear();
+    }
+
+    public Object getDate() {
+        return orderDate;
+    }
+
+    public String getId() {
+        return String.valueOf(OrderID);
     }
 }
