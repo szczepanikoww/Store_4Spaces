@@ -134,7 +134,7 @@ public class mainPageController {
             ScrollPane newPane = loader.load();
             ProductsPageController controller = loader.getController();
             controller.setProducts(store.getInventory().getProducts(), category);
-            controller.setStore(store);
+            controller.setStore(this.store);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){
