@@ -15,6 +15,7 @@ import com.storefx.CartPageController;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.*;
 
 public class mainPageController {
 
@@ -76,15 +77,16 @@ public class mainPageController {
         store.getInventory().addProduct(laptop3);
 
 
-        Customer customer1 = new Customer(1, "Klient", "Klient", "Jan", "Kowalski", "jankowaliski@wp.pl", "123456789", null);
-        Customer customer2 = new Customer(2, "Klient2", "Klient2", "Adam", "Nowak", "adamnowak@wp.pl", "987654321", null);
+        Address addressc1 = new Address("Polska", "Mickiewicza", "Kraków", "30-059", 17);
+        Address addressc2 = new Address("Polska", "Sienkiweicza", "Warszawa", "74-134", 78);
+        Customer customer1 = new Customer(1, "Klient", "Klient", "Jan", "Kowalski", "jankowaliski@wp.pl", "123456789", addressc1);
+        Customer customer2 = new Customer(2, "Klient2", "Klient2", "Adam", "Nowak", "adamnowak@wp.pl", "987654321", addressc2);
 
         Address addres1 = new Address("Polska", "Kazimierza", "Kraków", "30-000", 1);
         Customer customer3 = new Customer(3, "Klient3", "Klient3", "Jan", "Bączek", "janbaczek@email.com", "123456789", addres1);
         store.getCustomers().add(customer1);
         store.getCustomers().add(customer2);
         store.getCustomers().add(customer3);
-
 
     }
     public void setLoginPageController(LoginPageController loginPageController){

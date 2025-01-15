@@ -1,6 +1,7 @@
 package store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Store {
     private static ArrayList<Admin> admins = new ArrayList<Admin>();
