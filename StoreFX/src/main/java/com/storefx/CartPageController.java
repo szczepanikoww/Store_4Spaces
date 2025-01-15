@@ -69,7 +69,6 @@ public class CartPageController {
                 addProductToCart(entry.getKey(), entry.getValue());
             }
             sumTotal.setText(String.format("%.2f PLN", store.getCart().getTotalPrice()));
-
         }
     }
 
@@ -162,6 +161,7 @@ public class CartPageController {
             store.getCart().clearCart();
             showSuccess("Zamówienie zostało złożone pomyślnie");
             populateCart();
+            sumTotal.setText("0.00 PLN");
         } else {
             showError("Koszyk jest pusty");
         }
