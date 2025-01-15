@@ -7,7 +7,6 @@ public class Store {
     private static ArrayList<Customer> customers = new ArrayList<Customer>();
     private static Inventory inventory;
     private ArrayList<Order> orders = new ArrayList<Order>();
-    private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
     private Cart cart;
 
 
@@ -16,17 +15,15 @@ public class Store {
             admins.add(admin);
             this.inventory = new Inventory();
             this.orders = new ArrayList<Order>();
-            this.invoices = new ArrayList<Invoice>();
             this.cart = new Cart();
         }
 
     //Constructor
-    public Store(ArrayList<Admin> admins, ArrayList<Customer> customers, Inventory inventory, ArrayList<Order> orders, ArrayList<Invoice> invoices, ArrayList<Product> products) {
+    public Store(ArrayList<Admin> admins, ArrayList<Customer> customers, Inventory inventory, ArrayList<Order> orders, ArrayList<Product> products) {
         this.admins = admins;
         this.customers = customers;
         this.inventory = inventory;
         this.orders = orders;
-        this.invoices = invoices;
     }
 
     //getters
@@ -47,9 +44,6 @@ public class Store {
         return orders;
     }
 
-    public ArrayList<Invoice> getInvoices() {
-        return invoices;
-    }
 
     public ArrayList<Product> getProducts() {
         return inventory.getProducts();

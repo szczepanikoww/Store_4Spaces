@@ -7,8 +7,10 @@ module com.storefx {
     requires jdk.xml.dom;
     requires javafx.swing;
     requires org.apache.pdfbox;
+    requires junit;
 
 
     opens com.storefx to javafx.fxml;
     exports com.storefx;
+    exports store;
 }

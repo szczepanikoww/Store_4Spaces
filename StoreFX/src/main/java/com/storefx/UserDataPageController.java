@@ -68,6 +68,7 @@ public class UserDataPageController {
             aktCustomer.setCustomerSurname(surname);
             aktCustomer.setCustomerEmail(email);
             aktCustomer.setCustomerPhoneNumber(phoneNumber);
+            mainController.loadUserDataPage(aktCustomer);
         } catch (Exception e){
             showError("Błąd: " + e.getMessage());
         }

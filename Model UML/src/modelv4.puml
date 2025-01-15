@@ -1,5 +1,17 @@
 @startuml
 
+class Store {
+    - ArrayList<Admin> admin
+    - ArrayList<Customer> customer
+    - inventory: Inventory
+    - ArrayList<Order> orders
+    - Cart cart
+    + addProduct(product: Product): void
+    + removeProduct(product: Product): void
+    + updateProduct(product: Product): void
+    + getInventory(): Inventory
+}
+
 ' Klasa bazowa dla użytkowników
 abstract class User {
     - userID: int
@@ -14,7 +26,14 @@ class Admin extends User {
     + addProduct(product: Product): void
     + removeProduct(product: Product): void
     + updateProduct(product: Product): void
-    + manageInventory(inventory: Inventory): void
+}
+
+class Cart {
+    - Map<Product, Integer> products
+    + addProduct(product: Product): void
+    + removeProduct(product: Product): void
+    + getTotalPrice(): double
+    + updateProductQuantity(product: Product, quantity: int): void
 }
 
 ' Klasa reprezentująca klienta
@@ -27,7 +46,7 @@ class Customer extends User {
 }
 
 ' Klasa bazowa dla różnych rodzajów produktów
-abstract class Product {
+class Product {
     - productID: int
     - name: String
     - price: double
@@ -69,14 +88,6 @@ class Order {
     + calculateTotal(): double
 }
 
-' Klasa reprezentująca fakturę
-class Invoice {
-    - invoiceID: int
-    - order: Order
-    - totalAmount: double
-    - date: Date
-    + generateInvoice(): String
-}
 
 ' Klasa reprezentująca adres klienta
 class Address {
@@ -84,6 +95,7 @@ class Address {
     - city: String
     - postalCode: String
     - country: String
+    - NumberOfStreet: int
 }
 
 ' Klasa reprezentująca magazyn (Inventory)
@@ -92,12 +104,13 @@ class Inventory {
 }
 
 ' Relacje
-User "1" <|-- "1" Admin : extends
-User "1" <|-- "1" Customer : extends
+Store "1" o-- "1" Inventory : manages
+Store "1" o-- "1" Cart
+Store "1" o-- "0..*" User
+Store "1" o-- "0..*" Order
 Admin "1" o-- "1" Inventory : manages
 Customer "1" o-- "0..*" Order : places
 Order "1" o-- "0..*" Product : contains
-Order "1" o-- "1" Invoice : has
 Customer "1" *-- "1" Address : resides_at
 Inventory "1" o-- "0..*" Product : contains
 
