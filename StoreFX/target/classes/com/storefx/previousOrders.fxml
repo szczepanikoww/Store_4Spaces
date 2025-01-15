@@ -5,9 +5,9 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane prefHeight="602.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.PreviousOrdersController">
+<AnchorPane prefHeight="482.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.storefx.PreviousOrdersController">
    <children>
-      <VBox fx:id="orderVbox" prefHeight="602.0" prefWidth="841.0">
+      <VBox fx:id="orderVbox" prefHeight="482.0" prefWidth="835.0">
          <children>
             <AnchorPane prefHeight="101.0" prefWidth="841.0">
                <children>
@@ -16,27 +16,6 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="145.0" prefWidth="841.0">
-               <children>
-                  <Button layoutX="690.0" layoutY="94.0" mnemonicParsing="false" text="Pobierz Fakturę">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Label layoutX="39.0" layoutY="29.0" text="Data zamówienia">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="39.0" layoutY="63.0" text="Kwota zamówienia">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="204.0" layoutY="27.0" />
-                  <TextField layoutX="204.0" layoutY="61.0" />
                </children>
             </AnchorPane>
          </children>
