@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.security.cert.PolicyNode;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.Math.round;
@@ -41,6 +42,8 @@ public class CartPageController {
     public VBox cartVbox;
     @FXML
     public Label sumTotal;
+
+    private Map<Product, TextField> quantityInCart = new HashMap<>();
 
     public Store store;
     public mainPageController mainPageController;
@@ -127,6 +130,7 @@ public class CartPageController {
         subtractButton.setOnAction(event -> updateQuantity(product, -1));
 
         productPane.getChildren().addAll(imageView, nameLabel, quantityLabel, priceLabel, nameTextField, quantityTextField, priceTextField, removeButton, addButton, subtractButton);
+        quantityInCart.put(product, quantityTextField);
         cartVbox.getChildren().add(productPane);
     }
 
@@ -138,10 +142,16 @@ public class CartPageController {
     }
 
     private void updateQuantity(Product product, int delta) {
-        product.setProductQuantity(product.getQuantity() + delta);
-        store.getCart().updateProductQuantity(product, delta);
-        store.getCart().updateTotalPrice();
-        populateCart();
+        TextField quantityTextField = quantityInCart.get(product);
+        int quantity = Integer.parseInt(quantityTextField.getText());
+        if(quantity > 1){
+            product.setProductQuantity(product.getQuantity() + delta);
+            store.getCart().updateProductQuantity(product, delta);
+            store.getCart().updateTotalPrice();
+            populateCart();
+        }else if(quantity == 1){
+            store.getInventory().removeProduct(product);
+        }
     }
 
     public void goToOrder(ActionEvent actionEvent) {
