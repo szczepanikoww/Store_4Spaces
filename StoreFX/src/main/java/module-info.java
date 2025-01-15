@@ -6,6 +6,7 @@ module com.storefx {
     requires layout;
     requires jdk.xml.dom;
     requires javafx.swing;
+    requires org.apache.pdfbox;
 
 
     opens com.storefx to javafx.fxml;

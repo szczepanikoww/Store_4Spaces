@@ -13,12 +13,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import store.Customer;
 import store.Order;
 import store.Store;
 import javafx.embed.swing.SwingNode;
+import java.awt.Dimension;
 
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -96,18 +101,18 @@ public class PreviousOrdersController {
     public void createAndSetSwingContent(final SwingNode swingNode, String pdfFilePath) {
         SwingUtilities.invokeLater(() -> {
             try {
-                PdfDocument pdfDoc = new PdfDocument(new PdfReader(pdfFilePath));
-                Document document = new Document(pdfDoc);
-                JTextPane textPane = new JTextPane();
-                textPane.setContentType("text/html");
-                textPane.setText(document.toString());
-                JScrollPane scrollPane = new JScrollPane(textPane);
+                PDDocument document = PDDocument.load(new File(pdfFilePath));
+                PDFRenderer pdfRenderer = new PDFRenderer(document);
+                BufferedImage bufferedImage = pdfRenderer.renderImageWithDPI(0, 150); // Lower DPI to reduce size
+                ImageIcon imageIcon = new ImageIcon(bufferedImage);
+                JLabel label = new JLabel(imageIcon);
+                label.setPreferredSize(new Dimension(2000, 2000)); // Set preferred size
+                JScrollPane scrollPane = new JScrollPane(label);
                 swingNode.setContent(scrollPane);
-                pdfDoc.close();
+                document.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
-
 }
