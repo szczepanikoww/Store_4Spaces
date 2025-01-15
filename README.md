@@ -10,7 +10,7 @@ TODO:
 - w oknie miejsce na zdjęcie, nazwę, cenę, opis, kategorię, ilość. Po dodaniu produktu dodaje się do bazy danych i wyświetla
 - na stronie "wszystkie produkty"
 - [x] Usuwanie i edytowanie produktów: w oknie admina, lista produktów z przyciskiem usuń i edytuj (lista będzie w drugiej karcie)
-- [ ] Sortowanie produktów - w zakladce smartfony tylko telefony, tablety tylko tablety itd.
-- [ ] Dodanie do koszyka - przycisk dodaj do koszyka, zliczanie ilości produktów w koszyku, wyświetlanie ceny, usuwanie produktów z koszyka
+- [x] Sortowanie produktów - w zakladce smartfony tylko telefony, tablety tylko tablety itd.
+- [x] Dodanie do koszyka - przycisk dodaj do koszyka, zliczanie ilości produktów w koszyku, wyświetlanie ceny, usuwanie produktów z koszyka
 - [x] Przeglądanie i zarządzanie użytkownikami - lista użytkowników, przyciski usuń i edytuj dla admina
-- [ ] W koszyku dodać przyciski złóż zamówienie, który będzie usuwał produkty z koszyka, generował fakture i dodawał zamówienie do poprzenich zamówień użytkownika
+- [x] W koszyku dodać przyciski złóż zamówienie, który będzie usuwał produkty z koszyka, generował fakture i dodawał zamówienie do poprzenich zamówień użytkownika

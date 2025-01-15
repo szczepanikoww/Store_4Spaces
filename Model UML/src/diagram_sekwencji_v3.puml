@@ -23,6 +23,7 @@ c -> o : placeOrder()
     o -> i : removeProduct()
     i --> o : updateProductQuantity
     o --> c : Order confirmation
+    o --> c : Return Invoice
 
 
 @enduml

@@ -25,11 +25,4 @@ public class Admin extends User {
         inventory.removeProduct(product);
     }
 
-//    public void updateProduct(Product product) {
-//        inventory.updateProduct(product);
-//    }
-
-    public void manageInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
 }
