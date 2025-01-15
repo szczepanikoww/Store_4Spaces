@@ -85,6 +85,7 @@ public class mainPageController {
         store.getCustomers().add(customer2);
         store.getCustomers().add(customer3);
 
+
     }
     public void setLoginPageController(LoginPageController loginPageController){
         this.loginPageController = loginPageController;
