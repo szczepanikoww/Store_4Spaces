@@ -63,4 +63,13 @@ public class Cart {
             productsInCart.put(product, productsInCart.get(product) + delta);
         }
     }
+
+
+    public void updateTotalPrice() {
+        double totalPrice = 0.0;
+        for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
+            totalPrice += entry.getKey().getPrice() * entry.getValue();
+        }
+        this.totalPrice = totalPrice;
+    }
 }

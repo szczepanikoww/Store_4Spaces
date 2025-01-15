@@ -5,14 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import store.Address;
-import store.Customer;
-import store.Phone;
-import store.Store;
+import store.*;
 import com.storefx.CartPageController;
 
 import java.awt.event.ActionEvent;
@@ -43,35 +41,40 @@ public class mainPageController {
     public void initialize() {
         store = new Store();
         System.out.println(store);
+
+        //dodawanie produktow do inventory na start sklepu
         Phone phone1 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
         Phone phone2 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
         Phone phone3 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
-        Phone phone4 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
-        Phone phone5 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
-        Phone phone6 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
-        Phone phone7 = new Phone("Samsung Galaxy S21", 2999.99, 50, "Samsung", "Android", "Exynos 1200", 8, 128, "50", "6.6", "4000");
-        Phone phone8 = new Phone("iPhone 12", 3999.99, 50, "Apple", "iOS", "A14 Bionic", 8, 128, "50", "6.1", "2815");
-        Phone phone9 = new Phone("Xiaomi Mi 11", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 888", 8, 128, "50", "6.8", "4600");
+        Tablet tablet1 = new Tablet("Samsung Galaxy Tab S9", 2999.99, 50, "Samsung", "Android", "Snapdragon 865+", 8, 128, "5000mAh", 11);
+        Tablet tablet2 = new Tablet("iPad Pro 6th", 3999.99, 50, "Apple", "iOS", "A12Z Bionic", 8, 128, "9720mAh", 12.9);
+        Tablet tablet3 = new Tablet("Xiaomi Mi Pad 5", 2499.99, 50, "Xiaomi", "Android", "Snapdragon 860", 8, 128, "8720mAh", 11);
+        Laptop laptop1 = new Laptop("Dell XPS 13", 4999.99, 50, "Dell", "Windows", "Intel Core i7-1165G7", 16, 512, "13.4", "1920x1200", "52");
+        Laptop laptop2 = new Laptop("MacBook Pro 13", 6999.99, 50, "Apple", "macOS", "Apple M1", 16, 512, "13.3", "2560x1600", "58");
+        Laptop laptop3 = new Laptop("Asus ROG Zephyrus G14", 3999.99, 50, "Asus", "Windows", "AMD Ryzen 9 5900HS", 16, 512, "14", "2560x1440", "76");
+
 
         phone1.setImage("StoreFX/src/main/resources/images/s21.jpg");
         phone2.setImage("StoreFX/src/main/resources/images/ip12.jpg");
         phone3.setImage("StoreFX/src/main/resources/images/mi11.jpg");
-        phone4.setImage("StoreFX/src/main/resources/images/s21.jpg");
-        phone5.setImage("StoreFX/src/main/resources/images/ip12.jpg");
-        phone6.setImage("StoreFX/src/main/resources/images/mi11.jpg");
-        phone7.setImage("StoreFX/src/main/resources/images/s21.jpg");
-        phone8.setImage("StoreFX/src/main/resources/images/ip12.jpg");
-        phone9.setImage("StoreFX/src/main/resources/images/mi11.jpg");
+        tablet1.setImage(new Image(getClass().getResource("/images/tabs9.jpg").toExternalForm()));
+        tablet2.setImage(new Image(getClass().getResource("/images/ipadPro.jpeg").toExternalForm()));
+        tablet3.setImage(new Image(getClass().getResource("/images/miPad.png").toExternalForm()));
+        laptop1.setImage(new Image(getClass().getResource("/images/dellXps.jpg").toExternalForm()));
+        laptop2.setImage(new Image(getClass().getResource("/images/macBook13.jpg").toExternalForm()));
+        laptop3.setImage(new Image(getClass().getResource("/images/asus.jpg").toExternalForm()));
+
 
         store.getInventory().addProduct(phone1);
         store.getInventory().addProduct(phone2);
         store.getInventory().addProduct(phone3);
-        store.getInventory().addProduct(phone4);
-        store.getInventory().addProduct(phone5);
-        store.getInventory().addProduct(phone6);
-        store.getInventory().addProduct(phone7);
-        store.getInventory().addProduct(phone8);
-        store.getInventory().addProduct(phone9);
+        store.getInventory().addProduct(tablet1);
+        store.getInventory().addProduct(tablet2);
+        store.getInventory().addProduct(tablet3);
+        store.getInventory().addProduct(laptop1);
+        store.getInventory().addProduct(laptop2);
+        store.getInventory().addProduct(laptop3);
+
 
         Customer customer1 = new Customer(1, "Klient", "Klient", "Jan", "Kowalski", "jankowaliski@wp.pl", "123456789", null);
         Customer customer2 = new Customer(2, "Klient2", "Klient2", "Adam", "Nowak", "adamnowak@wp.pl", "987654321", null);
@@ -231,6 +234,8 @@ public class mainPageController {
             Parent root = loader.load();
             UserDataPageController controller = loader.getController();
             controller.setCustomerData(customer);
+            controller.setAktCustomer(aktCustomer);
+            controller.setMainController(this);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(root);
         } catch (IOException e) {

@@ -63,13 +63,15 @@ public class PreviousOrdersController {
         amountLabel.setLayoutY(63);
         amountLabel.setFont(new Font(14));
 
-        TextField dateField = new TextField(order.getOrderDate().toString());
+        Label dateField = new Label(order.getOrderDate().toString());
         dateField.setLayoutX(204);
         dateField.setLayoutY(27);
+        dateField.setStyle("-fx-font-weight: bold;");
 
-        TextField amountField = new TextField(String.valueOf(order.getTotalPrice()));
+        Label amountField = new Label(String.valueOf(order.getTotalPrice()));
         amountField.setLayoutX(204);
         amountField.setLayoutY(61);
+        amountField.setStyle("-fx-font-weight: bold;");
 
         Button invoiceButton = new Button("Pobierz Fakturę");
         invoiceButton.setLayoutX(690);

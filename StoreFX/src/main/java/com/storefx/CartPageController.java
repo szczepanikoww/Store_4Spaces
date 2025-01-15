@@ -133,16 +133,27 @@ public class CartPageController {
     private void removeFromCart(Product product) {
         product.setProductQuantity(product.getQuantity() + productsInCart.get(product));
         store.getCart().removeProduct(product, productsInCart.get(product));
+        store.getCart().updateTotalPrice();
         populateCart();
     }
 
     private void updateQuantity(Product product, int delta) {
-        product.setProductQuantity(product.getQuantity() - delta);
+        product.setProductQuantity(product.getQuantity() + delta);
         store.getCart().updateProductQuantity(product, delta);
+        store.getCart().updateTotalPrice();
         populateCart();
     }
 
     public void goToOrder(ActionEvent actionEvent) {
+        if(aktCustomer == null){
+            showError("Musisz być zalogowany, aby złożyć zamówienie");
+            return;
+        } else if (aktCustomer.getCustomerAddress() ==null || aktCustomer.getCustomerAddressDetails() == null || aktCustomer.getCustomerEmail() == null || aktCustomer.getCustomerPhoneNumber() == null){
+            showError("Uzupełnij dane adresowe w panelu użytkownika, aby złożyc zamówienie");
+            return;
+        }
+
+
         if (store.getCart() != null) {
             Order order;
             if (store.getOrders().isEmpty()) {
