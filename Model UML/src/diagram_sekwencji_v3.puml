@@ -1,38 +1,29 @@
 @startuml
 actor Customer as c
 participant Address as a
-participant Order as o
+participant Cart as o
 participant Inventory as i
 participant Product as p
 
 ' aktualizacja adresu, tworzenie zamowienia,
 ' blad o braku w magazynie
 
-c -> a : updateAddress(newAddress)
-a --> c : confirmation
+c -> a : new Address()
 
-c -> i : getAllProducts()
-i --> c : List<Product>
+c -> i : getProducts()
+i --> c : ArrayList<Product>
 
-c -> o : addProduct(product: Product)
-o -> p : updateQuantity(quantity: int)
-alt Stock available
-    p --> o : updated
-else Out of stock
-    p --> o : error("Not enough stock")
-    o --> c : error message
-end
+c -> o : addProduct()
+o -> p : setProductQuantity()
 
-c -> o : calculateTotal()
-o --> c : totalAmount
+
+c -> o : getTotalPrice()
+o --> c : totalPrice
 
 c -> o : placeOrder()
-alt All products available
-    o -> i : removeProduct(product: Product)
-    i --> o : updatedInventory
+    o -> i : removeProduct()
+    i --> o : updateProductQuantity
     o --> c : Order confirmation
-else Product unavailable
-    o --> c : Order failed
-end
+
 
 @enduml

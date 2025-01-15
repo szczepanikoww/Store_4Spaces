@@ -40,6 +40,7 @@ public class Customer extends User{
     }
 
     public void setCustomerPhoneNumber(String phoneNumber) {
+        this.CustomerPhoneNumber = phoneNumber;
     }
 
     public void setCustomerAddress(Address customerAddress) {

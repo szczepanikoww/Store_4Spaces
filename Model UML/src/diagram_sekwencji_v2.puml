@@ -1,11 +1,18 @@
 @startuml
 actor Customer as c
-participant Order as o
-participant Invoice as i
+participant Address as cust
 
-' tworzenie faktury
+c -> cust : new Address()
+cust --> c : Address updated confirmation
 
-c -> o : placeOrder()
-o -> i : generateInvoice()
-i --> c : Invoice details
+
+c -> cust : setCountry("Poland")
+c -> cust : setCity("Warsaw")
+c -> cust : setStreet("Marszalkowska")
+c -> cust : setNumberOfStreet("1")
+c -> cust : setPostalNumber("1")
+
+cust --> c : Address updated confirmation
+
+
 @enduml

@@ -59,7 +59,11 @@ public class UserDataPageController {
         String surname = (newSurname.getText() == null || newSurname.getText().isEmpty()) ? currentSurname.getText() : newSurname.getText();
         String email = (newEmail.getText() == null || newEmail.getText().isEmpty()) ? currentEmail.getText() : newEmail.getText();
         String phoneNumber = (newPhoneNumber.getText() == null || newPhoneNumber.getText().isEmpty()) ? currentPhoneNumber.getText() : newPhoneNumber.getText();
-
+        String country = (newCountry.getText() == null || newCountry.getText().isEmpty()) ? currentCountry.getText() : newCountry.getText();
+        String street = (newStreet.getText() == null || newStreet.getText().isEmpty()) ? currentStreet.getText() : newStreet.getText();
+        String city = (newCity.getText() == null || newCity.getText().isEmpty()) ? currentCity.getText() : newCity.getText();
+        String postalCode = (newPostalCode.getText() == null || newPostalCode.getText().isEmpty()) ? currentPostalCode.getText() : newPostalCode.getText();
+        int numberOnStreet = (newNumberOnStreet.getText() == null || newNumberOnStreet.getText().isEmpty()) ? Integer.parseInt(currentNumberOnStreet.getText()) : Integer.parseInt(newNumberOnStreet.getText());
 
 
         try{
@@ -68,25 +72,19 @@ public class UserDataPageController {
             aktCustomer.setCustomerSurname(surname);
             aktCustomer.setCustomerEmail(email);
             aktCustomer.setCustomerPhoneNumber(phoneNumber);
-            mainController.loadUserDataPage(aktCustomer);
-        } catch (Exception e){
-            showError("Błąd: " + e.getMessage());
-        }
-        try{
-        String country = newCountry.getText();
-        String street = newStreet.getText();
-        String city = newCity.getText();
-        String postalCode = newPostalCode.getText();
-        int numberOnStreet = Integer.parseInt(newNumberOnStreet.getText());
-        showSuccess("Dane zostały zaktualizowane");
-        mainController.loadUserDataPage(aktCustomer);
 
-        Address newAddress = new Address(country, street, city, postalCode, numberOnStreet);
-        aktCustomer.setCustomerAddress(newAddress);
-        } catch (NumberFormatException e) {
-        showError("Invalid number format: " + e.getMessage());
-         } catch (Exception e) {
-        showError("Error: " + e.getMessage());
+            aktCustomer.getCustomerAddress().setCity(city);
+            aktCustomer.getCustomerAddress().setCountry(country);
+            aktCustomer.getCustomerAddress().setStreet(street);
+            aktCustomer.getCustomerAddress().setPostalCode(postalCode);
+            aktCustomer.getCustomerAddress().setNumberOnStreet(numberOnStreet);
+            showSuccess("Dane zostały zaktualizowane");
+
+            mainController.loadUserDataPage(aktCustomer);
+            } catch (NumberFormatException e) {
+            showError("Error: " + e.getMessage());
+             } catch (Exception e) {
+            showError("Error: " + e.getMessage());
     }
 
 

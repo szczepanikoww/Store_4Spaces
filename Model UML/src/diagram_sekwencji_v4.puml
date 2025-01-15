@@ -1,13 +1,32 @@
 @startuml
 actor Customer as c
+participant Store as u
+participant Customer as a
+participant Address as ad
 participant Order as o
-participant Product as p
+participant Session as s
+
+c -> u : create account
+c -> a : new Customer()
+c -> a : addToArrayList()
+c -> ad : new Address()
+ad --> c : addressAdded
+
+a --> c : registrationSuccess
+
+c -> u : login (Customer)
+u -> a : check customer
+a -> u : confirmed customer
+u --> c : loginConfirmed
 
 
-' usuwanie produktu z zamowienia
+alt Failed login
+    u --> c : loginFailed
+end
 
-c -> o : removeProduct(product: Product)
-o -> p : updateQuantity(quantity: int)
-p --> o : stock updated
-o --> c : Product removed confirmation
+c -> o : viewOrderHistory
+o --> c : orderHistory
+
+c -> u : logout()
+u -> c : logoutSuccess
 @enduml

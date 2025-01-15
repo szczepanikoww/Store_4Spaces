@@ -2,22 +2,20 @@
 actor Customer as c
 participant Inventory as i
 participant Product as p
-participant Order as o
+participant Cart as o
 
-' twoerzenie zamowienia
+' Dodawanie do koszyka
 
-c -> i : getAllProducts()
-i --> c : List<Product>
+c -> i : getProducts()
+i --> c : ArrayList<Product>
 
-c -> o : addProduct(product: Product)
-o -> p : updateQuantity(quantity: int)
+c -> o : addProduct(product: Product, int quantity)
+o -> p : updateProductQuantity(Products product, int delta)
 p --> o : updated
 
-c -> o : calculateTotal()
+c -> o : getTotalPrice()
 o --> c : totalAmount
 
 c -> o : placeOrder()
-o -> i : removeProduct(product: Product)
-i --> o : updatedInventory
 
 @enduml

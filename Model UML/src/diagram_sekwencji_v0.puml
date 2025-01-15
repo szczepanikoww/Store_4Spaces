@@ -1,0 +1,11 @@
+@startuml
+actor Admin as a
+participant Inventory as i
+participant Product as p
+
+a -> p : createProduct(details)
+p --> a : Product created
+
+a -> i : addProduct(product, quantity)
+i --> a : Product added confirmation
+@endum
