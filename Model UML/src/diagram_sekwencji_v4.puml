@@ -4,7 +4,6 @@ participant Store as u
 participant Customer as a
 participant Address as ad
 participant Order as o
-participant Session as s
 
 c -> u : create account
 c -> a : new Customer()

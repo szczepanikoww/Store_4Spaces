@@ -5,8 +5,7 @@ participant Cart as o
 participant Inventory as i
 participant Product as p
 
-' aktualizacja adresu, tworzenie zamowienia,
-' blad o braku w magazynie
+
 
 c -> a : new Address()
 

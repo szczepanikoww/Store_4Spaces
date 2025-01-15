@@ -16,6 +16,6 @@ p --> o : updated
 c -> o : getTotalPrice()
 o --> c : totalAmount
 
-c -> o : placeOrder()
+c -> o : placeOrder
 
 @enduml
