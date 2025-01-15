@@ -145,12 +145,12 @@ public class CartPageController {
         TextField quantityTextField = quantityInCart.get(product);
         int quantity = Integer.parseInt(quantityTextField.getText());
         if(quantity > 1){
-            product.setProductQuantity(product.getQuantity() + delta);
+            product.setProductQuantity(product.getQuantity() - delta);
             store.getCart().updateProductQuantity(product, delta);
             store.getCart().updateTotalPrice();
             populateCart();
         }else if(quantity == 1){
-            store.getInventory().removeProduct(product);
+            removeFromCart(product);
         }
     }
 
