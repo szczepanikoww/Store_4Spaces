@@ -315,6 +315,7 @@ public class EditProductsController {
         ProductScreenTextField.clear();
         ProductProcessorTextField.clear();
         ProductBatteryTextField.clear();
+        ProductDescriptionTextArea.clear();
 
         if(ProductCategoryComboBox.getValue().equals("Phone")){
             PhoneApartTextField.clear();
