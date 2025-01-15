@@ -20,9 +20,14 @@ public class ProductsPageController {
     public GridPane productsGrid;
     public Store store;
     public Button addToCartButton;
+    public mainPageController mainPageController;
 
     public void setStore(Store store){
         this.store = store;
+    }
+
+    public void setMainController(mainPageController mainPageController) {
+        this.mainPageController = mainPageController;
     }
     public void setProducts(List<Product> products, String category){
         productsGrid.getChildren().clear();
@@ -112,8 +117,16 @@ public class ProductsPageController {
         product.setProductQuantity(product.getQuantity()-1);
         if(product.getQuantity() > 0) {
             refreshQuantity(product);
-        }else if(product.getQuantity() == 1){
+        }else if(product.getQuantity() == 0){
+            store.getInventory().removeProduct(product);
             removeVbox(productsVbox);
+            if(product.getProductCategory().equals("Phone")) {
+                mainPageController.loadPageWithScroll("productsPage.fxml", "Phone");
+            }else if(product.getProductCategory().equals("Laptop")){
+                mainPageController.loadPageWithScroll("productsPage.fxml", "Laptop");
+            }else if(product.getProductCategory().equals("Tablet")){
+                mainPageController.loadPageWithScroll("productsPage.fxml", "Tablet");
+            }
         }
     }
 

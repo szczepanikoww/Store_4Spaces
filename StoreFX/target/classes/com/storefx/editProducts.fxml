@@ -14,7 +14,7 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="799.0">
                <children>
                    <ImageView id="ProductImage" fx:id="productImageView" fitHeight="134.0" fitWidth="135.0" layoutX="74.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;" />
-                   <Button id="AddPhotoButton" fx:id="AddPhotoButton" layoutX="91.0" layoutY="178.0" mnemonicParsing="false" onAction="#selectPhoto" text="Dodaj zdjęcie" />
+                   <Button id="AddPhotoButton" fx:id="AddPhotoButton" layoutX="78.0" layoutY="184.0" mnemonicParsing="false" onAction="#selectPhoto" prefHeight="32.0" prefWidth="146.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 15px;" text="Dodaj zdjęcie" />
                    <Label layoutX="328.0" layoutY="28.0" text="Podaj nazwę produtku" />
                    <Label layoutX="328.0" layoutY="61.0" text="Wybierz kategorię produktu" />
                    <ComboBox id="ProductCategoryComboBox" fx:id="ProductCategoryComboBox" layoutX="515.0" layoutY="57.0" prefWidth="150.0">
@@ -32,7 +32,6 @@
                    <Label layoutX="35.0" layoutY="256.0" text="Wstaw opis produktu:" />
                    <Label layoutX="328.0" layoutY="95.0" text="Podaj cenę" />
                    <TextField id="ProductPriceTextField" fx:id="ProductPriceTextField" layoutX="516.0" layoutY="91.0" />
-                   <ProgressBar id="AddingProductProgressBar" fx:id="AddingProductProgressBar" layoutX="288.0" layoutY="535.0" prefWidth="200.0" progress="0.0" />
                    <Label layoutX="328.0" layoutY="126.0" text="Ilość na magazynie" />
                    <TextField id="ProductQuantityTextField" fx:id="ProductQuantityTextField" layoutX="516.0" layoutY="122.0" />
                    <TextField id="ProductBrandTextField" fx:id="ProductBrandTextField" layoutX="516.0" layoutY="153.0" />
@@ -59,13 +58,8 @@
                    <TextField id="LaptopGraphicCardTextField" fx:id="LaptopGraphicCardTextField" layoutX="515.0" layoutY="477.0" visible="false" />
                    <Label id="PhoneAparatLabel" fx:id="PhoneAparatLabel" layoutX="322.0" layoutY="481.0" text="Aparat (Mpix)" visible="false" />
                    <TextField id="PhoneApartTextField" fx:id="PhoneApartTextField" layoutX="516.0" layoutY="477.0" visible="false" />
-                   <Button id="SaveProductButton" fx:id="SaveProductButton" layoutX="191.0" layoutY="575.0" mnemonicParsing="false" onAction="#onSaveProductButton" text="Zapisz">
+                   <Button id="SaveProductButton" fx:id="SaveProductButton" layoutX="365.0" layoutY="570.0" mnemonicParsing="false" onAction="#onSaveProductButton" prefHeight="17.0" prefWidth="106.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-family: 'Unispace'; -fx-font-size: 18px;" text="Zapisz">
                    <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Button id="CancelAddingProduct" fx:id="CancelAddingProductButton" layoutX="479.0" layoutY="578.0" mnemonicParsing="false" onAction="#onCancelAddingProductButton" text="Anuluj">
-                     <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
