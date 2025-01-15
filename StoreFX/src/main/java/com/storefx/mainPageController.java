@@ -146,6 +146,7 @@ public class mainPageController {
             ProductsPageController controller = loader.getController();
             controller.setProducts(store.getInventory().getProducts(), category);
             controller.setStore(this.store);
+            controller.setMainController(this);
             centerPane.getChildren().clear();
             centerPane.getChildren().add(newPane);
         }catch (IOException e){
