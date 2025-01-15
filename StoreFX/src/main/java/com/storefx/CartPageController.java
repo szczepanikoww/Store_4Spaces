@@ -68,7 +68,7 @@ public class CartPageController {
             for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
                 addProductToCart(entry.getKey(), entry.getValue());
             }
-            sumTotal.setText(String.format("%.2f PLN", store.getCart().getTotalPrice()));
+            sumTotal.setText(String.format("%.2f PLN", store.getCart().updateTotalPrice()));
         }
     }
 

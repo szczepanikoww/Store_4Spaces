@@ -65,11 +65,13 @@ public class Cart {
     }
 
 
-    public void updateTotalPrice() {
+    public double updateTotalPrice() {
         double totalPrice = 0.0;
         for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
             totalPrice += entry.getKey().getPrice() * entry.getValue();
         }
         this.totalPrice = totalPrice;
+        return this.totalPrice;
     }
+
 }
