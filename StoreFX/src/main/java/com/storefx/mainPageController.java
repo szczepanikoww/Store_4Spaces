@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import store.Address;
 import store.Customer;
 import store.Phone;
 import store.Store;
@@ -74,8 +75,12 @@ public class mainPageController {
 
         Customer customer1 = new Customer(1, "Klient", "Klient", "Jan", "Kowalski", "jankowaliski@wp.pl", "123456789", null);
         Customer customer2 = new Customer(2, "Klient2", "Klient2", "Adam", "Nowak", "adamnowak@wp.pl", "987654321", null);
+
+        Address addres1 = new Address("Polska", "Kazimierza", "Kraków", "30-000", 1);
+        Customer customer3 = new Customer(3, "Klient3", "Klient3", "Jan", "Bączek", "janbaczek@email.com", "123456789", addres1);
         store.getCustomers().add(customer1);
         store.getCustomers().add(customer2);
+        store.getCustomers().add(customer3);
 
     }
     public void setLoginPageController(LoginPageController loginPageController){
@@ -175,7 +180,6 @@ public class mainPageController {
         loadPage("homePage.fxml");
     }
 
-
     //zmienianie napisu w zaleznosci od tego czy jestesmy zalogowani czy nie
     public void setLoginLabel(String username, Customer customer){
         this.aktCustomer = customer;
@@ -184,7 +188,19 @@ public class mainPageController {
         MenuItem userDataItem = new MenuItem("Dane użytkownika");
         userDataItem.setOnAction(actionEvent -> loadUserDataPage(customer));
         MenuItem orderHistoryItem = new MenuItem("Historia zamówień");
-        orderHistoryItem.setOnAction(actionEvent -> loadPage("previousOrdersPage.fxml"));
+        orderHistoryItem.setOnAction(actionEvent -> {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("previousOrders.fxml"));
+            Pane newPane = loader.load();
+            PreviousOrdersController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setStore(this.store, aktCustomer);
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(newPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    });
         MenuItem logoutItem = new MenuItem("Wyloguj");
         logoutItem.setOnAction(actionEvent -> onLogoutButton());
         loginMenu.getItems().addAll(userDataItem, orderHistoryItem, logoutItem);

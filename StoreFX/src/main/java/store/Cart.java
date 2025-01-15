@@ -51,8 +51,7 @@ public class Cart {
     }
 
     public double getProductPrice(Product product) {
-        // Implement this method to return the price of the product
-        return 0;
+        return product.getPrice();
     }
 
     public Map<Product, Integer> getProductsInCart() {

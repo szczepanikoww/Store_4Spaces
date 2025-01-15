@@ -5,6 +5,7 @@ module com.storefx {
     requires kernel;
     requires layout;
     requires jdk.xml.dom;
+    requires javafx.swing;
 
 
     opens com.storefx to javafx.fxml;

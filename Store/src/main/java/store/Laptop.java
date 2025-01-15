@@ -22,9 +22,9 @@ public class Laptop extends Product{
     }
 
     //setters
-    public void getModel() {
-        return super.getProductName();
-    }
+//    public void getModel() {
+//        return super.getProductName();
+//    }
     public void setLaptopOS(String laptopOS) {
         this.LaptopOS = laptopOS;
     }

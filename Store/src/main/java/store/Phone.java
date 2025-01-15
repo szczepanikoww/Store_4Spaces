@@ -77,6 +77,6 @@ public class Phone extends Product {
     }
 
     public String getDetails() {
-        return super.getDetails() + "\nPhone OS: " + PhoneOS + "\nPhone Processor: " + PhoneProcessor + "\nPhone RAM: " + PhoneRAM + "\nPhone Storage: " + PhoneStorage + "\nPhone Camera: " + PhoneCamera + "\nPhone Display: " + PhoneDisplay + "\nPhone Battery: "
+        return super.getDetails() + "\nPhone OS: " + PhoneOS + "\nPhone Processor: " + PhoneProcessor + "\nPhone RAM: " + PhoneRAM + "\nPhone Storage: " + PhoneStorage + "\nPhone Camera: " + PhoneCamera + "\nPhone Display: " + PhoneDisplay + "\nPhone Battery: ";
     }
 }

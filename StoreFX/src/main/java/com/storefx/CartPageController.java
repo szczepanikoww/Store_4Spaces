@@ -32,11 +32,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import static java.lang.Math.round;
+
 public class CartPageController {
     @FXML
     public Button goToOrder;
     @FXML
-    public VBox cartVBox;
+    public VBox cartVbox;
+    @FXML
+    public Label sumTotal;
 
     public Store store;
     public mainPageController mainPageController;
@@ -59,11 +63,13 @@ public class CartPageController {
     }
 
     private void populateCart() {
-        if(cartVBox != null){
-            cartVBox.getChildren().clear();
+        if (cartVbox != null) {
+            cartVbox.getChildren().clear();
             for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
                 addProductToCart(entry.getKey(), entry.getValue());
             }
+            sumTotal.setText(String.format("%.2f PLN", store.getCart().getTotalPrice()));
+
         }
     }
 
@@ -92,14 +98,17 @@ public class CartPageController {
         priceLabel.setLayoutY(108);
 
         TextField nameTextField = new TextField(product.getProductName());
+        nameTextField.setEditable(false);
         nameTextField.setLayoutX(311);
         nameTextField.setLayoutY(19);
 
         TextField quantityTextField = new TextField(String.valueOf(quantity));
+        quantityTextField.setEditable(false);
         quantityTextField.setLayoutX(311);
         quantityTextField.setLayoutY(60);
 
-        TextField priceTextField = new TextField(String.valueOf(store.getCart().getProductPrice(product)));
+        TextField priceTextField = new TextField(String.valueOf(product.getPrice() * quantity));
+        priceTextField.setEditable(false);
         priceTextField.setLayoutX(311);
         priceTextField.setLayoutY(104);
 
@@ -119,36 +128,55 @@ public class CartPageController {
         subtractButton.setOnAction(event -> updateQuantity(product, -1));
 
         productPane.getChildren().addAll(imageView, nameLabel, quantityLabel, priceLabel, nameTextField, quantityTextField, priceTextField, removeButton, addButton, subtractButton);
-        cartVBox.getChildren().add(productPane);
+        cartVbox.getChildren().add(productPane);
     }
 
     private void removeFromCart(Product product) {
+        product.setProductQuantity(product.getQuantity() + productsInCart.get(product));
         store.getCart().removeProduct(product, productsInCart.get(product));
         populateCart();
-        product.setProductQuantity(product.getQuantity() + productsInCart.get(product));
     }
 
     private void updateQuantity(Product product, int delta) {
+        product.setProductQuantity(product.getQuantity() - delta);
         store.getCart().updateProductQuantity(product, delta);
         populateCart();
-        product.setProductQuantity(product.getQuantity() - delta);
     }
 
     public void goToOrder(ActionEvent actionEvent) {
-        showSuccess("Zamówienie zostało złożone pomyślnie");
-        Order order = new Order(1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
-        store.getOrders().add(order);
-        aktCustomer.getPreviousOrders().add(order);
-        try{
-            generateInvoice(order);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
+        if (store.getCart() != null) {
+            Order order;
+            if (store.getOrders().isEmpty()) {
+                order = new Order(1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
+            } else {
+                order = new Order(store.getOrders().size() + 1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
+            }
+            store.getOrders().add(order);
+            aktCustomer.getPreviousOrders().add(order);
+            try {
+                generateInvoice(order);
+                System.out.println("Invoice generated");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            store.getCart().clearCart();
+            showSuccess("Zamówienie zostało złożone pomyślnie");
+            populateCart();
+        } else {
+            showError("Koszyk jest pusty");
         }
-        store.getCart().clearCart();
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Błąd");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void generateInvoice(Order order) throws FileNotFoundException {
-        String dest = "invoice.pdf";
+        String dest = "invoice" + order.getId() + ".pdf";
         PdfWriter pdfWriter = new PdfWriter(dest);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
@@ -159,7 +187,7 @@ public class CartPageController {
         float twocol150 = twocol + 150f;
         float twocolumnWidth[] = {twocol150, twocol};
         float threeColumnWidth[] = {threecol, threecol, threecol};
-        float fullwidth[] = {threecol + 3};
+        float fullwidth[] = {threecol, threecol, threecol};
         Paragraph onesp = new Paragraph("\n");
 
         Table table = new Table(twocolumnWidth);
@@ -189,16 +217,16 @@ public class CartPageController {
 
         Table twoColTable2 = new Table(twocolumnWidth);
         twoColTable2.addCell(getCell10fLeft("Firma: ", true));
-        twoColTable2.addCell(getCell10fLeft("Store 4Spaces", false));
         twoColTable2.addCell(getCell10fLeft("Imię i nazwisko: ", true));
+        twoColTable2.addCell(getCell10fLeft("Store 4Spaces", false));
         twoColTable2.addCell(getCell10fLeft(aktCustomer.getCustomerName() + " " + aktCustomer.getCustomerSurname(), false));
 
         document.add(twoColTable2);
 
         Table twoColTable3 = new Table(twocolumnWidth);
         twoColTable3.addCell(getCell10fLeft("Adres: ", true));
-        twoColTable3.addCell(getCell10fLeft("30-059 Kraków, al. Adama Mickiewicza 30 ", false));
         twoColTable3.addCell(getCell10fLeft("Adres: ", true));
+        twoColTable3.addCell(getCell10fLeft("30-059 Kraków, al. Adama Mickiewicza 30 ", false));
         twoColTable3.addCell(getCell10fLeft(aktCustomer.getCustomerAddressDetails(), false));
 
         document.add(twoColTable3);
@@ -206,16 +234,16 @@ public class CartPageController {
 
         Table twoColTable4 = new Table(twocolumnWidth);
         twoColTable4.addCell(getCell10fLeft("Adres email: ", true));
-        twoColTable4.addCell(getCell10fLeft("store4spaces@email.com", false));
         twoColTable4.addCell(getCell10fLeft("Adres email: ", true));
+        twoColTable4.addCell(getCell10fLeft("store4spaces@email.com", false));
         twoColTable4.addCell(getCell10fLeft(aktCustomer.getCustomerEmail(), false));
 
         document.add(twoColTable4);
 
         Table twoColTable5 = new Table(twocolumnWidth);
         twoColTable5.addCell(getCell10fLeft("Nr telefonu: ", true));
-        twoColTable5.addCell(getCell10fLeft("+48 515 626 989", false));
         twoColTable5.addCell(getCell10fLeft("Nr telefonu: ", true));
+        twoColTable5.addCell(getCell10fLeft("+48 515 626 989", false));
         twoColTable5.addCell(getCell10fLeft(aktCustomer.getCustomerPhoneNumber(), false));
 
         document.add(twoColTable5.setMarginBottom(10f));
@@ -233,7 +261,7 @@ public class CartPageController {
         productsTable.setBackgroundColor(Color.GRAY, 0.7f);
 
         productsTable.addCell(new Cell().add("Produkt").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
-        productsTable.addCell(new Cell().add("Ilość").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+        productsTable.addCell(new Cell().add("Ilosc").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
         productsTable.addCell(new Cell().add("Cena").setBold().setFontColor(Color.WHITE).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
 
         try {
@@ -255,25 +283,25 @@ public class CartPageController {
         totalTable.addCell(new Cell().add("").setBold().setTextAlignment(TextAlignment.RIGHT));
         totalTable.addCell(new Cell().add("Total:").setBold().setTextAlignment(TextAlignment.RIGHT));
         totalTable.addCell(new Cell().add(String.valueOf(store.getCart().getTotalPrice())).setTextAlignment(TextAlignment.RIGHT));
-        document.add(totalTable);
+        document.add(totalTable.setBorder(Border.NO_BORDER));
 
         document.close();
 
     }
 
-    static Cell getHeaderTextCell(String text){
+    static Cell getHeaderTextCell(String text) {
         return new Cell().add(text).setBold().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
     }
 
-    static Cell getHeaderTextCellValue(String textValue){
+    static Cell getHeaderTextCellValue(String textValue) {
         return new Cell().add(textValue).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
     }
 
-    static Cell getBillingandShippingCell(String text){
+    static Cell getBillingandShippingCell(String text) {
         return new Cell().add(text).setFontSize(12f).setBold().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
     }
 
-    static Cell getCell10fLeft(String text, Boolean isBold){
+    static Cell getCell10fLeft(String text, Boolean isBold) {
         Cell myCell = new Cell().add(text).setFontSize(10f).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
         return isBold ? myCell.setBold() : myCell;
     }

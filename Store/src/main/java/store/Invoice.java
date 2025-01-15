@@ -41,7 +41,7 @@ public class Invoice {
     }
 
     // other methods
-    public String generateInvoice() {
-        return "Invoice ID: " + InvoiceID + "\nOrder ID: " + order.getOrderID() + "\nDate of Invoice: " + dateOfInvoice + "\n" + order.getDetails();
-    }
+//    public String generateInvoice() {
+//        return "Invoice ID: " + InvoiceID + "\nOrder ID: " + order.getOrderID() + "\nDate of Invoice: " + dateOfInvoice + "\n" + order.getDetails();
+//    }
 }

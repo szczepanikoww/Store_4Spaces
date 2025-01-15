@@ -61,9 +61,9 @@ public class Order {
         return orderDate;
     }
 
-    public String getDetails() {
-        return "Order ID: " + OrderID + "\nCustomer: " + customer.getDetails() + "\nTotal Price: " + totalPrice + "\nOrder Date: " + orderDate;
-    }
+//    public String getDetails() {
+//        return "Order ID: " + OrderID + "\nCustomer: " + customer.getDetails() + "\nTotal Price: " + totalPrice + "\nOrder Date: " + orderDate;
+//    }
 
     //other methods
     public void addProduct(Product product) {
