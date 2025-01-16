@@ -63,8 +63,15 @@ public class UserDataPageController {
         String street = (newStreet.getText() == null || newStreet.getText().isEmpty()) ? currentStreet.getText() : newStreet.getText();
         String city = (newCity.getText() == null || newCity.getText().isEmpty()) ? currentCity.getText() : newCity.getText();
         String postalCode = (newPostalCode.getText() == null || newPostalCode.getText().isEmpty()) ? currentPostalCode.getText() : newPostalCode.getText();
-        int numberOnStreet = (newNumberOnStreet.getText() == null || newNumberOnStreet.getText().isEmpty()) ? Integer.parseInt(currentNumberOnStreet.getText()) : Integer.parseInt(newNumberOnStreet.getText());
+        int numberOnStreet;
 
+        try{
+            numberOnStreet = (newNumberOnStreet.getText() == null || newNumberOnStreet.getText().isEmpty()) ? Integer.parseInt(currentNumberOnStreet.getText()) : Integer.parseInt(newNumberOnStreet.getText());
+
+        }catch (NumberFormatException e){
+            showError("Należy podać poprawne dane dla numeru domu/mieszkania");
+            return;
+        }
 
         try{
             aktCustomer.setUserName(userName);

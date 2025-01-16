@@ -10,6 +10,7 @@ public class Product {
     private Image ProductImage;
     private String ProductDescription;
     private String ProductCategory;
+    private boolean hidden;
 
     //Constructor
     public Product() {
@@ -31,7 +32,7 @@ public class Product {
     }
 
     public void setProductQuantity(int productQuantity) {
-        this.ProductQuantity = productQuantity;
+            this.ProductQuantity = productQuantity;
     }
     public void setProductBrand (String productBrand) {
         this.ProductBrand = productBrand;
@@ -80,6 +81,13 @@ public class Product {
 
     public String getProductCategory() {
         return ProductCategory;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 
 }

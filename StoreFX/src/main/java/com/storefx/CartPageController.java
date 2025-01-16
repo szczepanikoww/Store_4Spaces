@@ -83,86 +83,87 @@ public class CartPageController {
     }
 
     private void addProductToCart(Product product, int quantity) {
-        AnchorPane productPane = new AnchorPane();
-        productPane.setPrefSize(803, 167);
+            AnchorPane productPane = new AnchorPane();
+            productPane.setPrefSize(803, 167);
 
-        ImageView imageView = new ImageView(product.getImage());
-        imageView.setFitHeight(143);
-        imageView.setFitWidth(146);
-        imageView.setLayoutX(21);
-        imageView.setLayoutY(9);
-        imageView.setPickOnBounds(true);
-        imageView.setPreserveRatio(true);
+            ImageView imageView = new ImageView(product.getImage());
+            imageView.setFitHeight(143);
+            imageView.setFitWidth(146);
+            imageView.setLayoutX(21);
+            imageView.setLayoutY(9);
+            imageView.setPickOnBounds(true);
+            imageView.setPreserveRatio(true);
 
-        Label nameLabel = new Label("Nazwa produktu");
-        nameLabel.setLayoutX(180);
-        nameLabel.setLayoutY(23);
+            Label nameLabel = new Label("Nazwa produktu");
+            nameLabel.setLayoutX(180);
+            nameLabel.setLayoutY(23);
 
-        Label quantityLabel = new Label("Ilość");
-        quantityLabel.setLayoutX(180);
-        quantityLabel.setLayoutY(64);
+            Label quantityLabel = new Label("Ilość");
+            quantityLabel.setLayoutX(180);
+            quantityLabel.setLayoutY(64);
 
-        Label priceLabel = new Label("Cena");
-        priceLabel.setLayoutX(178);
-        priceLabel.setLayoutY(108);
+            Label priceLabel = new Label("Cena");
+            priceLabel.setLayoutX(178);
+            priceLabel.setLayoutY(108);
 
-        TextField nameTextField = new TextField(product.getProductName());
-        nameTextField.setEditable(false);
-        nameTextField.setLayoutX(311);
-        nameTextField.setLayoutY(19);
+            TextField nameTextField = new TextField(product.getProductName());
+            nameTextField.setEditable(false);
+            nameTextField.setLayoutX(311);
+            nameTextField.setLayoutY(19);
 
-        TextField quantityTextField = new TextField(String.valueOf(quantity));
-        quantityTextField.setEditable(false);
-        quantityTextField.setLayoutX(311);
-        quantityTextField.setLayoutY(60);
+            TextField quantityTextField = new TextField(String.valueOf(quantity));
+            quantityTextField.setEditable(false);
+            quantityTextField.setLayoutX(311);
+            quantityTextField.setLayoutY(60);
 
         TextField priceTextField = new TextField(String.format("%.2f", product.getPrice() * quantity));
         priceTextField.setEditable(false);
         priceTextField.setLayoutX(311);
         priceTextField.setLayoutY(104);
 
-        Button removeButton = new Button("Usuń z koszyka");
-        removeButton.setLayoutX(681);
-        removeButton.setLayoutY(129);
-        removeButton.setOnAction(event -> removeFromCart(product));
+            Button removeButton = new Button("Usuń z koszyka");
+            removeButton.setLayoutX(681);
+            removeButton.setLayoutY(129);
+            removeButton.setOnAction(event -> removeFromCart(product));
 
-        Button addButton = new Button("+");
-        addButton.setLayoutX(479);
-        addButton.setLayoutY(60);
-        addButton.setOnAction(event -> updateQuantity(product, 1));
+            Button addButton = new Button("+");
+            addButton.setLayoutX(479);
+            addButton.setLayoutY(60);
+            addButton.setOnAction(event -> updateQuantity(product, 1));
 
-        Button subtractButton = new Button("-");
-        subtractButton.setLayoutX(513);
-        subtractButton.setLayoutY(60);
-        subtractButton.setOnAction(event -> updateQuantity(product, -1));
+            Button subtractButton = new Button("-");
+            subtractButton.setLayoutX(513);
+            subtractButton.setLayoutY(60);
+            subtractButton.setOnAction(event -> updateQuantity(product, -1));
 
-        productPane.getChildren().addAll(imageView, nameLabel, quantityLabel, priceLabel, nameTextField, quantityTextField, priceTextField, removeButton, addButton, subtractButton);
-        quantityInCart.put(product, quantityTextField);
-        cartVbox.getChildren().add(productPane);
+            productPane.getChildren().addAll(imageView, nameLabel, quantityLabel, priceLabel, nameTextField, quantityTextField, priceTextField, removeButton, addButton, subtractButton);
+            quantityInCart.put(product, quantityTextField);
+            cartVbox.getChildren().add(productPane);
+
     }
 
     private void removeFromCart(Product product) {
+        product.setHidden(false);
         product.setProductQuantity(product.getQuantity() + productsInCart.get(product));
         store.getCart().removeProduct(product, productsInCart.get(product));
         store.getCart().updateTotalPrice();
         populateCart();
+
     }
 
     private void updateQuantity(Product product, int delta) {
         TextField quantityTextField = quantityInCart.get(product);
         int quantity = Integer.parseInt(quantityTextField.getText());
-        if(quantity > 1){
+        if(quantity + delta > 0 && product.getQuantity() >= delta){
             product.setProductQuantity(product.getQuantity() - delta);
             store.getCart().updateProductQuantity(product, delta);
             store.getCart().updateTotalPrice();
+            product.setHidden(false);
             populateCart();
-        }else if(quantity == 1 && delta == -1){
+        }else if(quantity + delta == 0){
             removeFromCart(product);
-        }else if(quantity == 1 && delta == 1){
-            product.setProductQuantity(product.getQuantity() - delta);
-            store.getCart().updateProductQuantity(product, delta);
-            store.getCart().updateTotalPrice();
-            populateCart();
+        }else {
+            showError("Brak wystarczającej ilości produktu " + product.getProductName() + " na stanie");
         }
     }
 
