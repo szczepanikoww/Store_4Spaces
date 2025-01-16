@@ -180,7 +180,7 @@ public class CartPageController {
         if (store.getCart() != null) {
             Order aktOrder;
             if (store.getOrders().isEmpty()) {
-                aktOrder = new Order(1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
+                aktOrder = new Order(1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().updateTotalPrice(), new Date());
             } else {
                 aktOrder = new Order(store.getOrders().size() + 1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
             }
@@ -321,7 +321,7 @@ public class CartPageController {
         productsTable.setBackgroundColor(Color.GRAY, 0.7f);
         totalTable.addCell(new Cell().add("").setBold().setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         totalTable.addCell(new Cell().add("Total:").setBold().setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
-        totalTable.addCell(new Cell().add(String.format("%.2f", store.getCart().updateTotalPrice())).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        totalTable.addCell(new Cell().add(String.format("%.2f", order.getTotalPrice())).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(totalTable.setBorder(Border.NO_BORDER));
 
         document.close();
