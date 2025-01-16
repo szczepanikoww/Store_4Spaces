@@ -15,9 +15,9 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -26,8 +26,14 @@ import javafx.scene.layout.VBox;
 import store.*;
 
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.cert.PolicyNode;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +50,7 @@ public class CartPageController {
     public Label sumTotal;
 
     private Map<Product, TextField> quantityInCart = new HashMap<>();
+    public Map<Order, String> invoices = new HashMap<>();
 
     public Store store;
     public mainPageController mainPageController;
@@ -109,7 +116,7 @@ public class CartPageController {
         quantityTextField.setLayoutX(311);
         quantityTextField.setLayoutY(60);
 
-        TextField priceTextField = new TextField(String.valueOf(product.getPrice() * quantity));
+        TextField priceTextField = new TextField(String.format("%.2f", product.getPrice() * quantity));
         priceTextField.setEditable(false);
         priceTextField.setLayoutX(311);
         priceTextField.setLayoutY(104);
@@ -145,12 +152,17 @@ public class CartPageController {
         TextField quantityTextField = quantityInCart.get(product);
         int quantity = Integer.parseInt(quantityTextField.getText());
         if(quantity > 1){
-            product.setProductQuantity(product.getQuantity() + delta);
+            product.setProductQuantity(product.getQuantity() - delta);
             store.getCart().updateProductQuantity(product, delta);
             store.getCart().updateTotalPrice();
             populateCart();
-        }else if(quantity == 1){
-            store.getInventory().removeProduct(product);
+        }else if(quantity == 1 && delta == -1){
+            removeFromCart(product);
+        }else if(quantity == 1 && delta == 1){
+            product.setProductQuantity(product.getQuantity() - delta);
+            store.getCart().updateProductQuantity(product, delta);
+            store.getCart().updateTotalPrice();
+            populateCart();
         }
     }
 
@@ -165,22 +177,23 @@ public class CartPageController {
 
 
         if (store.getCart() != null) {
-            Order order;
+            Order aktOrder;
             if (store.getOrders().isEmpty()) {
-                order = new Order(1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
+                aktOrder = new Order(1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
             } else {
-                order = new Order(store.getOrders().size() + 1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
+                aktOrder = new Order(store.getOrders().size() + 1, aktCustomer, new ArrayList<>(productsInCart.keySet()), store.getCart().getTotalPrice(), new Date());
             }
-            store.getOrders().add(order);
-            aktCustomer.getPreviousOrders().add(order);
+            store.getOrders().add(aktOrder);
+            aktCustomer.getPreviousOrders().add(aktOrder);
             try {
-                generateInvoice(order);
+                generateInvoice(aktOrder);
                 System.out.println("Invoice generated");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            invoices.put(aktOrder, "invoice" + aktOrder.getId() + ".pdf");
             store.getCart().clearCart();
-            showSuccess("Zamówienie zostało złożone pomyślnie");
+            showSuccess("Zamówienie zostało złożone pomyślnie", aktOrder);
             populateCart();
             sumTotal.setText("0.00 PLN");
         } else {
@@ -214,10 +227,14 @@ public class CartPageController {
         Table table = new Table(twocolumnWidth);
         table.addCell(new Cell().add("Faktura").setFontSize(20f).setBorder(Border.NO_BORDER).setBold());
         Table nestedTable = new Table(new float[]{twocol / 2, twocol / 2});
+
         nestedTable.addCell(getHeaderTextCell("Data:"));
-        nestedTable.addCell(getHeaderTextCellValue(order.getDate().toString()));
+        LocalDateTime orderDate = order.getOrderDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        nestedTable.addCell(getHeaderTextCellValue(orderDate.format(formatter)));
+
         nestedTable.addCell(getHeaderTextCell("Numer faktury:"));
-        nestedTable.addCell(getHeaderTextCellValue(String.valueOf("FKTR" + order.getId())));
+        nestedTable.addCell(getHeaderTextCellValue("FKTR" + order.getId()));
 
         table.addCell(new Cell().add(nestedTable).setBorder(Border.NO_BORDER));
 
@@ -289,7 +306,7 @@ public class CartPageController {
             for (Map.Entry<Product, Integer> entry : productsInCart.entrySet()) {
                 productsTable.addCell(new Cell().add(entry.getKey().getProductName()).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
                 productsTable.addCell(new Cell().add(String.valueOf(entry.getValue())).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
-                productsTable.addCell(new Cell().add(String.valueOf((entry.getKey().getPrice()) * entry.getValue())).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
+                productsTable.addCell(new Cell().add(String.format("%.2f", (entry.getKey().getPrice()) * entry.getValue())).setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -301,9 +318,9 @@ public class CartPageController {
 
         Table totalTable = new Table(threeColumnWidth);
         productsTable.setBackgroundColor(Color.GRAY, 0.7f);
-        totalTable.addCell(new Cell().add("").setBold().setTextAlignment(TextAlignment.RIGHT));
-        totalTable.addCell(new Cell().add("Total:").setBold().setTextAlignment(TextAlignment.RIGHT));
-        totalTable.addCell(new Cell().add(String.valueOf(store.getCart().getTotalPrice())).setTextAlignment(TextAlignment.RIGHT));
+        totalTable.addCell(new Cell().add("").setBold().setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        totalTable.addCell(new Cell().add("Total:").setBold().setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+        totalTable.addCell(new Cell().add(String.format("%.2f", store.getCart().updateTotalPrice())).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
         document.add(totalTable.setBorder(Border.NO_BORDER));
 
         document.close();
@@ -327,12 +344,37 @@ public class CartPageController {
         return isBold ? myCell.setBold() : myCell;
     }
 
-    public void showSuccess(String message) {
+    public void showSuccess(String message, Order order) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Sukces");
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
+
+        ButtonType download = new ButtonType("Pobierz fakturę", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().add(download);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == download) {
+                openPdfInWindow(invoices.get(order));
+            }
+        });
+    }
+
+    public void openPdfInWindow(String pdfFilePath) {
+        try{
+            File pdfFile = new File(pdfFilePath);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    System.out.println("Z niewiadomych przyczyn nie można otworzyć pliku pdf.");
+                }
+            } else {
+                System.out.println("Plik nie istnieje: " + pdfFilePath);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

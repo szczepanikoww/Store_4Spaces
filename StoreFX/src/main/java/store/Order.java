@@ -41,10 +41,6 @@ public class Order {
     }
 
     //getters
-    public int getOrderID() {
-        return OrderID;
-    }
-
     public Customer getCustomer() {
         return customer;
     }

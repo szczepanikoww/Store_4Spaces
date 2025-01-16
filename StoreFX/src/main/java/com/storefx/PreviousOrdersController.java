@@ -20,11 +20,15 @@ import store.Order;
 import store.Store;
 import javafx.embed.swing.SwingNode;
 import java.awt.Dimension;
+import java.awt.Desktop;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PreviousOrdersController {
@@ -63,12 +67,14 @@ public class PreviousOrdersController {
         amountLabel.setLayoutY(63);
         amountLabel.setFont(new Font(14));
 
-        Label dateField = new Label(order.getOrderDate().toString());
+        LocalDateTime orderDate = order.getOrderDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        Label dateField = new Label(orderDate.format(formatter));
         dateField.setLayoutX(204);
         dateField.setLayoutY(27);
         dateField.setStyle("-fx-font-weight: bold;");
 
-        Label amountField = new Label(String.valueOf(order.getTotalPrice()));
+        Label amountField = new Label(String.format("%.2f", order.getTotalPrice()));
         amountField.setLayoutX(204);
         amountField.setLayoutY(61);
         amountField.setStyle("-fx-font-weight: bold;");
@@ -87,34 +93,19 @@ public class PreviousOrdersController {
     }
 
     public void openPdfInWindow(String pdfFilePath) {
-        Stage stage = new Stage();
-        SwingNode swingNode = new SwingNode();
-
-        createAndSetSwingContent(swingNode, pdfFilePath);
-
-        StackPane pane = new StackPane();
-        pane.getChildren().add(swingNode);
-
-        stage.setScene(new Scene(pane, 800, 600));
-        stage.setTitle("Invoice PDF");
-        stage.show();
-    }
-
-    public void createAndSetSwingContent(final SwingNode swingNode, String pdfFilePath) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                PDDocument document = PDDocument.load(new File(pdfFilePath));
-                PDFRenderer pdfRenderer = new PDFRenderer(document);
-                BufferedImage bufferedImage = pdfRenderer.renderImageWithDPI(0, 150); // Lower DPI to reduce size
-                ImageIcon imageIcon = new ImageIcon(bufferedImage);
-                JLabel label = new JLabel(imageIcon);
-                label.setPreferredSize(new Dimension(2000, 2000)); // Set preferred size
-                JScrollPane scrollPane = new JScrollPane(label);
-                swingNode.setContent(scrollPane);
-                document.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            File pdfFile = new File(pdfFilePath);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    System.out.println("Desktop is not supported. Cannot open PDF.");
+                }
+            } else {
+                System.out.println("File does not exist: " + pdfFilePath);
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
