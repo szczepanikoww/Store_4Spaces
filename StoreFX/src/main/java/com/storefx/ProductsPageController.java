@@ -30,7 +30,16 @@ public class ProductsPageController {
         this.mainPageController = mainPageController;
     }
     public void refeshView(){
-        setProducts(store.getProducts(), "All");
+        if(mainPageController.getCategoryView().equals("Phone")){
+            setProducts(store.getProducts(), "Phone");
+        }else if(mainPageController.getCategoryView().equals("Laptop") ) {
+            setProducts(store.getProducts(), "Laptop");
+        }else if(mainPageController.getCategoryView().equals("Tablet")) {
+            setProducts(store.getProducts(), "Tablet");
+        }else if(mainPageController.getCategoryView().equals("All")) {
+            setProducts(store.getProducts(), "All");
+        }
+
     }
     public void setProducts(List<Product> products, String category){
         productsGrid.getChildren().clear();

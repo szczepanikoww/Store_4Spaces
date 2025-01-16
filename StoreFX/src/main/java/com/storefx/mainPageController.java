@@ -1,21 +1,16 @@
 package com.storefx;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import store.*;
-import com.storefx.CartPageController;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.*;
 
 public class mainPageController {
 
@@ -36,6 +31,7 @@ public class mainPageController {
 
     private LoginPageController loginPageController;
     private CartPageController cartPageController;
+    private String categoryView;
 
 
     //dodawanie produktow do inventory na start sklepu
@@ -91,6 +87,13 @@ public class mainPageController {
     }
     public void setLoginPageController(LoginPageController loginPageController){
         this.loginPageController = loginPageController;
+    }
+
+    public void setCategoryView(String categoryView) {
+        this.categoryView = categoryView;
+    }
+    public String getCategoryView() {
+        return categoryView;
     }
 
 
@@ -156,15 +159,19 @@ public class mainPageController {
 
     public void onSmartphonesMenuButton() {
         loadPageWithScroll("productsPage.fxml", "Phone");
+        setCategoryView("Phone");
     }
     public void onTabletsMenuButton() {
         loadPageWithScroll("productsPage.fxml", "Tablet");
+        setCategoryView("Tablet");
     }
     public void onLaptopsMenuButton() {
         loadPageWithScroll("productsPage.fxml", "Laptop");
+        setCategoryView("Laptop");
     }
     public void onAllMenuButton() {
        loadPageWithScroll("productsPage.fxml", "All");
+        setCategoryView("All");
     }
 
     // zmieniłem tu zeby przekazywlo store do cartPageController
