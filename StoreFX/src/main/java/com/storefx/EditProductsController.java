@@ -279,6 +279,7 @@ public class EditProductsController {
                 int quantity = Integer.parseInt(ProductQuantityTextField.getText());
                 String brand = ProductBrandTextField.getText();
                 Product product = new Product(name, price, quantity, brand);
+                product.setProductCategory("All");
 
                 if (selectedImageFile != null) {
                     product.setImage(new Image(selectedImageFile.toURI().toString()));

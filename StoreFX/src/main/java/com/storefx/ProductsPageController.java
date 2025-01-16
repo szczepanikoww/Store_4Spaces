@@ -29,11 +29,18 @@ public class ProductsPageController {
     public void setMainController(mainPageController mainPageController) {
         this.mainPageController = mainPageController;
     }
+    public void refeshView(){
+        setProducts(store.getProducts(), "All");
+    }
     public void setProducts(List<Product> products, String category){
         productsGrid.getChildren().clear();
         int column = 0;
         int row = 0;
+
         for (Product product : products) {
+            if (product.isHidden()) {
+                continue;
+            }
             if ("Phone".equals(category) && "Phone".equals(product.getProductCategory())) {
                 VBox productVbox = createProductsVbox(product);
                 productsGrid.add(productVbox, column, row);
@@ -112,31 +119,27 @@ public class ProductsPageController {
         productsGrid.getChildren().remove(vbox);
     }
 
-    public void onAddCartButton(Product product){
-        store.getCart().addProduct(product,1);
-        product.setProductQuantity(product.getQuantity()-1);
-        if(product.getQuantity() > 0) {
+    public void onAddCartButton(Product product) {
+        store.getCart().addProduct(product, 1);
+        product.setProductQuantity(product.getQuantity() - 1);
+        if (product.getQuantity() > 0) {
             refreshQuantity(product);
-        }else if(product.getQuantity() == 0){
-            store.getInventory().removeProduct(product);
-            removeVbox(productsVbox);
-            if(product.getProductCategory().equals("Phone")) {
-                mainPageController.loadPageWithScroll("productsPage.fxml", "Phone");
-            }else if(product.getProductCategory().equals("Laptop")){
-                mainPageController.loadPageWithScroll("productsPage.fxml", "Laptop");
-            }else if(product.getProductCategory().equals("Tablet")){
-                mainPageController.loadPageWithScroll("productsPage.fxml", "Tablet");
+        } else if (product.getQuantity() == 0) {
+            product.setHidden(true);
+            refeshView();
+
             }
         }
-    }
+
 
     public void refreshQuantity(Product product){
         for(int i = 0; i < productsGrid.getChildren().size(); i++){
             VBox vbox = (VBox) productsGrid.getChildren().get(i);
             Label nameLabel = (Label) vbox.getChildren().get(1);
             if(nameLabel.getText().equals(product.getProductName())){
-                Label detailsLabel = (Label) vbox.getChildren().get(2);
-                detailsLabel.setText(product.getDetails());
+                    Label detailsLabel = (Label) vbox.getChildren().get(2);
+                    detailsLabel.setText(product.getDetails());
+
             }
         }
     }
